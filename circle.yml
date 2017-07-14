@@ -7,3 +7,6 @@ dependencies:
 test:
   override:
     - html5validator --root .
+    - python ./build/tests/filenames.py .
+    - python ./build/tests/existence.py .
+    - sh ./build/tests/line-endings.sh
