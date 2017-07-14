@@ -1,5 +1,13 @@
 import re, os, sys
 
+"""
+File Existence Check
+
+Errors:
+ - Linked file does not exist
+
+"""
+
 rIMG    = r"<img(?:.+?)src=\"(.+?)\"(?:.+?)>"
 rLINK   = r"<link(?:.+?)href=\"(.+?)\"(?:.+?)>"
 rSCRIPT = r"<script(?:.+?)src=\"(.+?)\"(?:.+?)>"
@@ -29,3 +37,5 @@ for root, dirs, files in os.walk(scandir):
             check(f.read(), rIMG)
             check(f.read(), rLINK)
             check(f.read(), rSCRIPT)
+
+sys.exit(ret)

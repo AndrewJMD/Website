@@ -26,7 +26,7 @@ except:
 ret = 0
 
 for root, dirs, files in os.walk(scandir):
-    if ".git" not in root:
+    if ".git" not in root and "/tests/" not in root:
         for file in files:
             if os.path.join(root,file).lower() != os.path.join(root,file):
                 print "Uppercase Characters:",os.path.join(root,file)
