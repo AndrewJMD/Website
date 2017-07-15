@@ -21,6 +21,7 @@ except:
 ret = 0
 
 def check(text, regex):
+    global ret
     matches = re.finditer(regex, text)
     for matchNum, match in enumerate(matches):
         matchNum = matchNum + 1
