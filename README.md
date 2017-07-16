@@ -5,4 +5,4 @@ The official website for MSI CompCamps.
 
 ## Vagrant Setup
 
-vagrant up
+`$ vagrant up`
