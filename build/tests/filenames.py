@@ -32,8 +32,10 @@ for root, dirs, files in os.walk(scandir):
                 print "Uppercase Characters:",os.path.join(root,file)
             for i in invalid_characters:
                 if i in file:
-                    print "Invalid Character ("+i+"):",os.path.join(root,file)
-                    ret = 1
+                    # Sass uses underscores for partials
+                    if not (i == "_" and file.endswith(".scss")):
+                        print "Invalid Character ("+i+"):",os.path.join(root,file)
+                        ret = 1
             for i in invalid_names:
                 if len(file.replace(i,"")) < 6 and "." in file:
                     print "Undescriptive name:",os.path.join(root,file)
