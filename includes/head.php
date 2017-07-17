@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CompCamps</title>
+    <title>
+      <?php echo isset($page_title) ? $page_title.' | CompCamps' : 'CompCamps' ?>
+    </title>
     <link rel="stylesheet" href="css/style.css">
   </head>

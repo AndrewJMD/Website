@@ -15,12 +15,12 @@ nav {
   margin-left: 50px;
 }
 
-nav ul li {
+nav li {
   display: inline-block;
   font-size: 1rem;
 }
 
-nav ul li a {
+nav a {
   display: block;
   padding: 35px 20px;
   color: $nav-link-color;

@@ -17,20 +17,20 @@ nav {
   vertical-align: middle;
   margin-left: 50px; }
 
-nav ul li {
+nav li {
   display: inline-block;
   font-size: 1rem; }
 
-nav ul li a {
+nav a {
   display: block;
   padding: 35px 20px;
   color: white;
   font: 1.5rem sans-serif;
   text-decoration: none;
   transition: background-color .3s; }
-  nav ul li a:hover {
+  nav a:hover {
     background-color: #6d4d41; }
-  nav ul li a:focus {
+  nav a:focus {
     outline: 0; }
 
 body {
