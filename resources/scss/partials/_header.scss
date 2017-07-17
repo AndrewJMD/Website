@@ -1,6 +1,8 @@
+/* Note: this CSS makes use of the font-size hack to remove inline-block gaps */
 header {
   background-color: $header-background-color;
   font-size: 0;
+  border-bottom: 3px solid $nav-link-hover-background-color;
 }
 
 #header-img {
@@ -34,5 +36,39 @@ nav a {
 
   &:focus {
     outline: 0;
+  }
+}
+
+@media only screen and (max-width: 1160px) {
+  #header-img {
+    display: block;
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  nav {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  nav a {
+    padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  nav li {
+    display: block;
+  }
+
+  nav a {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #header-img {
+    width: 100%;
   }
 }
