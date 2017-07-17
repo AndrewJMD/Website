@@ -1,0 +1,38 @@
+header {
+  background-color: $header-background-color;
+  font-size: 0;
+}
+
+#header-img {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 20px;
+}
+
+nav {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50px;
+}
+
+nav ul li {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+nav ul li a {
+  display: block;
+  padding: 35px 20px;
+  color: $nav-link-color;
+  font: $nav-link-font;
+  text-decoration: none;
+  transition: background-color .3s;
+
+  &:hover {
+    background-color: $nav-link-hover-background-color;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

@@ -3,4 +3,37 @@
   padding: 0;
   box-sizing: border-box; }
 
+header {
+  background-color: #B3A68C;
+  font-size: 0; }
+
+#header-img {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 20px; }
+
+nav {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50px; }
+
+nav ul li {
+  display: inline-block;
+  font-size: 1rem; }
+
+nav ul li a {
+  display: block;
+  padding: 35px 20px;
+  color: white;
+  font: 1.5rem sans-serif;
+  text-decoration: none;
+  transition: background-color .3s; }
+  nav ul li a:hover {
+    background-color: #6d4d41; }
+  nav ul li a:focus {
+    outline: 0; }
+
+body {
+  background-color: #DAD0C0; }
+
 /*# sourceMappingURL=style.css.map */

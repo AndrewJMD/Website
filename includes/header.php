@@ -1,6 +1,6 @@
   <body>
     <header>
-      <img src="img/logo.png">
+      <img id="header-img" src="img/logo.png">
       <nav>
         <ul>
           <li><a href="#">Home</a></li>

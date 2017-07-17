@@ -1,1 +1,7 @@
 @import 'partials/global';
+@import 'partials/vars';
+@import 'partials/header';
+
+body {
+  background-color: $background-color;
+}
