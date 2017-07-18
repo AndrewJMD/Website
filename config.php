@@ -15,11 +15,10 @@
   }
 
   function GetFromURL($tag,$default = "") {
-    if (isset($_REQUEST[$tag])) {
+    if (isset($_REQUEST[$tag]))
       return $_REQUEST[$tag];
-    } else {
-      return $default;
-    }
+    
+    return $default;
   }
 
   function HumanFilesize($bytes, $decimals = 2) {

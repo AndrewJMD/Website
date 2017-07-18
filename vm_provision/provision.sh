@@ -12,7 +12,7 @@
 ###
 
 # Variables
-DBHOST=localhost
+#DBHOST=localhost
 DBNAME=compcamps
 DBUSER=mentor
 DBPASSWD=admin
