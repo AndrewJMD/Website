@@ -75,4 +75,19 @@ nav a, #nav-handle {
 body {
   background-color: #DAD0C0; }
 
+/* code specific to the homepage banner */
+#home-banner {
+  background-image: url("../img/homebanner.png");
+  max-width: 1280px;
+  height: 400px; }
+
+/* reusable code for the banner */
+.banner {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; }
+
 /*# sourceMappingURL=style.css.map */
