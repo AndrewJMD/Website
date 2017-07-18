@@ -22,7 +22,7 @@ nav li {
   font-size: 1rem;
 }
 
-nav a {
+nav a, #nav-handle {
   display: block;
   padding: 35px 20px;
   color: $nav-link-color;
@@ -39,6 +39,11 @@ nav a {
   }
 }
 
+#nav-handle {
+  cursor: pointer;
+  display: none;
+}
+
 @media only screen and (max-width: 1160px) {
   #header-img {
     display: block;
@@ -52,18 +57,31 @@ nav a {
     text-align: center;
   }
 
-  nav a {
+  nav a, #nav-handle {
     padding: 15px;
   }
 }
 
 @media only screen and (max-width: 580px) {
+  nav ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .75s;
+  }
+  .showing {
+    // Bit of a hack to get the animation working.
+    max-height: 300px;
+  }
   nav li {
     display: block;
   }
 
   nav a {
     width: 100%;
+  }
+
+  #nav-handle {
+    display: block;
   }
 }
 

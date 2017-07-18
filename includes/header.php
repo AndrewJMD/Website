@@ -9,5 +9,6 @@
           <li><a href="#">Mentors</a></li>
           <li><a href="#">Register</a></li>
         </ul>
+        <div id="nav-handle">Menu</div>
       </nav>
     </header>

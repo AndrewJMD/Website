@@ -23,17 +23,21 @@ nav li {
   display: inline-block;
   font-size: 1rem; }
 
-nav a {
+nav a, #nav-handle {
   display: block;
   padding: 35px 20px;
   color: white;
   font: 1.5rem sans-serif;
   text-decoration: none;
   transition: background-color .3s; }
-  nav a:hover {
+  nav a:hover, #nav-handle:hover {
     background-color: #6d4d41; }
-  nav a:focus {
+  nav a:focus, #nav-handle:focus {
     outline: 0; }
+
+#nav-handle {
+  cursor: pointer;
+  display: none; }
 
 @media only screen and (max-width: 1160px) {
   #header-img {
@@ -46,14 +50,25 @@ nav a {
     display: block;
     text-align: center; }
 
-  nav a {
+  nav a, #nav-handle {
     padding: 15px; } }
 @media only screen and (max-width: 580px) {
+  nav ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .75s; }
+
+  .showing {
+    max-height: 300px; }
+
   nav li {
     display: block; }
 
   nav a {
-    width: 100%; } }
+    width: 100%; }
+
+  #nav-handle {
+    display: block; } }
 @media only screen and (max-width: 480px) {
   #header-img {
     width: 100%; } }
