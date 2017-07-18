@@ -28,7 +28,7 @@ def check(text, regex):
         if len(match.groups()) != 0:
             src = match.group(1)
             if "http" not in src:
-                if not os.path.isfile(src):
+                if not os.path.isfile(src) and not os.path.isfile(os.path.join(root,src)):
                     ret = 1
                     print "File not found:",os.path.join(root,file),src
 
