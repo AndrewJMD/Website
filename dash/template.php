@@ -446,7 +446,7 @@
 <!-- SlimScroll -->
 <script src="libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="libs/fastclick/lib/fastclick.js"></script>
+<script src="libs/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
 <script>
