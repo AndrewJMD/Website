@@ -1,0 +1,26 @@
+{
+  "Website" : {
+    "view-level" : "3",
+    "edit-level" : "1",
+    "children" : {
+      "Dashboard" : {
+        "icon" : "fa fa-dashboard",
+        "short" : "web-dash"
+      },
+      "Registrations" : {
+        "icon" : "fa fa-user-plus",
+        "short" : "registrations"
+      }
+    }
+  },
+  "Camps" : {
+    "view-level" : "7",
+    "edit-level" : "3",
+    "children" : {
+      "Schedule" : {
+        "icon" : "fa fa-calendar",
+        "short" : "schedule"
+      }
+    }
+  }
+}
