@@ -4,12 +4,9 @@
 
   $a = GetFromURL('a','campers');
 
-  if(file_exists("pages/$a.php"))
-  {
+  if (file_exists("pages/$a.php")) {
 
-  }
-  else
-  {
+  } else {
     include("pages/404.php");
     OutputPage();
     exit;

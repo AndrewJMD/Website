@@ -14,10 +14,10 @@
     const MYSQLERROR  = 50;
   }
 
-  function GetFromURL($tag,$default = "") {
+  function GetFromURL($tag, $default = "") {
     if (isset($_REQUEST[$tag]))
       return $_REQUEST[$tag];
-    
+
     return $default;
   }
 
