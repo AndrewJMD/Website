@@ -42,7 +42,16 @@ var footerSlideshow = new Vue({
         link: 'https://www.isc.ca/Pages/default.aspx',
         name: 'ISC'
       }
-    ]
+    ],
+    item: 0,
+    timer: null
+  },
+  computed: {
+    transformStyle: function() {
+      // We need to advance the slideshow 264px for every item.
+      var result = 'translateX(' + (-264 *this.item) + 'px)';
+      return result;
+    }
   },
   methods: {
     imgSrc: function (src) {
@@ -50,6 +59,32 @@ var footerSlideshow = new Vue({
     },
     imgAlt: function (name) {
       return name + ' Logo';
+    },
+    moveLeft: function() {
+      if (this.item > 0) {
+        this.item--;
+      } else {
+        this.item = this.logos.length - 1;
+      }
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    moveRight: function(clear) {
+      if (this.item >= (this.logos.length - 1)) {
+        this.item = 0;
+        return;
+      }
+      this.item++;
+      if (clear) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    }
+  },
+  mounted: function () {
+    if (window.innerWidth <= 580) {
+      var vm = this;
+      this.timer = setInterval(function() { vm.moveRight(false); }, 3000);
     }
   }
-})
+});
