@@ -82,9 +82,7 @@ var footerSlideshow = new Vue({
     }
   },
   mounted: function () {
-    if (window.innerWidth <= 580) {
-      var vm = this;
-      this.timer = setInterval(function() { vm.moveRight(false); }, 3000);
-    }
+    var vm = this;
+    this.timer = setInterval(function() { vm.moveRight(false); }, 3000);
   }
 });
