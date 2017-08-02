@@ -1,6 +1,7 @@
   <footer>
     <div id="slideshow">
-      <i @click="moveLeft" class="slideshow-button fa fa-2x fa-chevron-left"></i>
+      <i @click="moveLeft" class="slideshow-button fa fa-2x fa-chevron-left"
+        aria-label="Move image slider left"></i>
       <div id="slideshow-window">
         <div id="slideshow-items" :style="{ transform: transformStyle }">
           <div v-for="logo in logos" class="logo-container">
@@ -12,7 +13,8 @@
           </div>
         </div>
       </div>
-      <i @click="moveRight(true)" class="slideshow-button fa fa-2x fa-chevron-right"></i>
+      <i @click="moveRight(true)" class="slideshow-button fa fa-2x fa-chevron-right"
+        aria-label="Move image slider right"></i>
     </div>
   </footer>
   <script src="js/footerSlideshow.js"></script>

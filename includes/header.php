@@ -9,6 +9,6 @@
           <li><a href="#">Mentors</a></li>
           <li><a href="#">Register</a></li>
         </ul>
-        <div id="nav-handle"><i class="fa fa-bars"></i> Menu</div>
+        <div id="nav-handle"><i class="fa fa-bars" aria-hidden="true"></i> Menu</div>
       </nav>
     </header>
