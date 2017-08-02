@@ -16,9 +16,9 @@ and more flexability than object-fit -->
     <p>The topics covered over the course of the week long session include:</p>
     <br/>
     <ul>
-      <li>Core programming fundamentals (using C++)</li>
-      <li>Graphic design (using Adobe Photoshop)</li>
-      <li>Video production (using Adobe Premiere Pro)</li>
+      <li>Core programming fundamentals (C++)</li>
+      <li>Graphic design (Adobe Photoshop)</li>
+      <li>Video production (Adobe Premiere Pro)</li>
     </ul>
     <p>... and more!</p>
     <br/>
