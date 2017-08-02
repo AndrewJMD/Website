@@ -13,12 +13,12 @@ and more flexability than object-fit -->
     <div class="well">
       The MSI Computer Camps are a set of non-profit summer camps hosted at the University of Regina. The camps are dedicated to the education of youth in the rapidly changing computing industry.
     </div>
-    <p>The MSI Computer Camps are a set of summer camps dedicated to helping youth develop skills in computer related areas. The topics covered over the course of the week long session include:</p>
+    <p>The topics covered over the course of the week long session include:</p>
     <br/>
     <ul>
       <li>Core programming fundamentals (using C++)</li>
       <li>Graphic design (using Adobe Photoshop)</li>
-      <li>Video production (Adobe Premiere Pro)</li>
+      <li>Video production (using Adobe Premiere Pro)</li>
     </ul>
     <p>... and more!</p>
     <br/>
