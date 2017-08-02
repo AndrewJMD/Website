@@ -5,6 +5,8 @@
 
 body {
   background-color: $background-color;
+  font: $font;
+  color: $color;
 }
 
 /* code specific to the homepage banner */
@@ -22,4 +24,84 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+section {
+  background-color: $section-background-color;
+  font-size: 0;
+  max-width: 1280px;
+  margin: 10px auto;
+
+  a {
+    color: inherit;
+  }
+}
+
+.col-50 {
+  display: inline-block;
+  width: 50%;
+  font-size: 1rem;
+  vertical-align: top;
+}
+
+.home-section {
+  padding: 40px;
+  font-size: 1.25rem;
+
+  ul {
+    margin-left: 20px;
+  }
+}
+
+.well {
+  background-color: $well-background-color;
+  font-size: 1.1rem;
+  padding: 20px;
+  border-radius: .25rem;
+  line-height: 1.75rem;
+  margin-bottom: 20px;
+}
+
+.slideshow-image {
+  width: 454px;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+  padding: 10px;
+  border-radius: .75rem;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.twitter {
+  background-color: #1DA1F2;
+}
+
+.steam {
+  background-color: #171A21;
+}
+
+.facebook {
+  background-color: #3B5998;
+}
+
+@media only screen and (max-width: 1180px) {
+  .col-50 {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .slideshow-image {
+    width: 100%;
+  }
 }

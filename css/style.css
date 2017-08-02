@@ -39,7 +39,7 @@ nav a, #nav-handle {
   cursor: pointer;
   display: none; }
 
-@media only screen and (max-width: 1160px) {
+@media only screen and (max-width: 1180px) {
   #header-img {
     display: block;
     padding: 10px;
@@ -84,7 +84,8 @@ footer {
 .slideshow-button {
   display: none !important;
   vertical-align: middle;
-  cursor: pointer; }
+  cursor: pointer;
+  color: black; }
 
 @media only screen and (max-width: 580px) {
   #slideshow-items {
@@ -120,7 +121,9 @@ footer {
   #slideshow-items {
     transform: none !important; } }
 body {
-  background-color: #DAD0C0; }
+  background-color: #DAD0C0;
+  font: 1rem sans-serif;
+  color: white; }
 
 /* code specific to the homepage banner */
 #home-banner {
@@ -136,5 +139,64 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; }
+
+.text-center {
+  text-align: center; }
+
+section {
+  background-color: #B3A68C;
+  font-size: 0;
+  max-width: 1280px;
+  margin: 10px auto; }
+  section a {
+    color: inherit; }
+
+.col-50 {
+  display: inline-block;
+  width: 50%;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.home-section {
+  padding: 40px;
+  font-size: 1.25rem; }
+  .home-section ul {
+    margin-left: 20px; }
+
+.well {
+  background-color: #595245;
+  font-size: 1.1rem;
+  padding: 20px;
+  border-radius: .25rem;
+  line-height: 1.75rem;
+  margin-bottom: 20px; }
+
+.slideshow-image {
+  width: 454px; }
+
+.social-icons a {
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+  padding: 10px;
+  border-radius: .75rem; }
+  .social-icons a:focus {
+    outline: 0; }
+
+.twitter {
+  background-color: #1DA1F2; }
+
+.steam {
+  background-color: #171A21; }
+
+.facebook {
+  background-color: #3B5998; }
+
+@media only screen and (max-width: 1180px) {
+  .col-50 {
+    width: 100%; } }
+@media only screen and (max-width: 580px) {
+  .slideshow-image {
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
