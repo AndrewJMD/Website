@@ -6,13 +6,13 @@ new Vue({
   },
 
   mounted: function () {
-    setTimeout(this.next, 2000);
+    setTimeout(this.next, 2500);
   },
 
   methods: {
     next: function() {
       this.currentNumber += 1;
-      setTimeout(this.next, 2000);
+      setTimeout(this.next, 2500);
     }
   }
 });

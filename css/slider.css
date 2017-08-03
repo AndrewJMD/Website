@@ -1,0 +1,33 @@
+.slide-leave-active,
+.slide-enter-active {
+  transition: 1s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+}
+
+.slider-wrap{
+  overflow: hidden;
+  position: relative;
+  height: 341px;
+  width: 512px;
+  line-height: 256px;
+}
+
+.slider{
+  overflow: hidden;
+  position: relative;
+  height: 341px;
+  width: 512px;
+}
+
+.slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right:0;
+}
