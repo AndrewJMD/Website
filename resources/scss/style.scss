@@ -66,8 +66,18 @@ section {
   margin-bottom: 20px;
 }
 
-.slideshow-image {
-  width: 454px;
+.slider-container {
+  position: relative;
+  padding-bottom: 66.6015625%; /* ratio of image height to width */
+  height: 0;
+  overflow: hidden;
+}
+
+.slider-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .social-icons a {
@@ -100,8 +110,8 @@ section {
   }
 }
 
-@media only screen and (max-width: 580px) {
-  .slideshow-image {
+@media only screen and (max-width: 512px) {
+  .slider-image {
     width: 100%;
   }
 }

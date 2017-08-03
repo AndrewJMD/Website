@@ -29,13 +29,10 @@ and more flexability than object-fit -->
     </p>
   </div>
   <div class="col-50 home-section text-center">
-    <div id="slider" class="slider-wrap">
-      <transition-group tag="div" name="slide" class="slider">
-        <div v-for="number in [currentNumber]" v-bind:key="number" >
-          <img :src="images[Math.abs(currentNumber) % images.length]"/>
-        </div>
-      </transition-group>
-      Loading Slideshow...
+    <div id="slider">
+      <div class="slider-container">
+        <img class="slider-image" :src="images[Math.abs(currentNumber) % images.length]"/>
+      </div>
     </div>
     <h3>Connect With Us!</h3>
     <br/>
