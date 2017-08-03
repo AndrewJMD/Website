@@ -9,7 +9,6 @@
     <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Vue.js is currently the dev version. Download and replace with
     prod before running website in production. -->

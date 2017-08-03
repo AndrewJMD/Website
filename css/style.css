@@ -205,8 +205,5 @@ section {
 @media only screen and (max-width: 1180px) {
   .col-50 {
     width: 100%; } }
-@media only screen and (max-width: 512px) {
-  .slider-image {
-    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
