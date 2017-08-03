@@ -8,8 +8,8 @@
 
   abstract class Result
   {
-    const VALID       = 0;
-    const INVALID     = 1;
+    const INVALID     = 0;
+    const VALID       = 1;
     const CHANGE      = 2;
     const MYSQLERROR  = 50;
   }

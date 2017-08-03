@@ -1,10 +1,15 @@
 <?php
 
   require_once("../config.php");
+  require_once("../libs/session.php");
 
   GeneratePageDefaults();
 
   $a = GetFromURL('a','home');
+
+  if($_SESSION['id'] == -1 && $a != "login") {
+    header("Location: login");
+  }
 
   if (file_exists("pages/$a.php")) {
     include("pages/$a.php");
@@ -18,5 +23,5 @@
     include("template.php");
     exit;
   }
-  
+
 ?>

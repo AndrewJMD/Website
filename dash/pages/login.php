@@ -31,30 +31,65 @@
       </div>
       <div class="login-box-body">
         <p class="login-box-msg">Sign in</p>
-
-        <form action="#" method="post">
-          <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Username">
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <div class="form-group has-feedback">
+          <input type="text" id='username' class="form-control" placeholder="Username">
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" id='password' class="form-control" placeholder="Password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <button type="submit" onclick="javascript:submit()" class="btn btn-primary btn-block btn-flat">Sign In</button>
           </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <span id='response'></span>
           </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-            </div>
-          </div>
-        </form>
+        </div>
         <br/>
         <a href="#">Reset Password</a><br>
-
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      function submit() {
+        $.ajax({
+          url: "process.php",
+          type: "POST",
+          dataType: "json",
+          data: {"f" : "login", "username" : $("#username").val(), "password" : $("#password").val()},
+          success: function(data){
+            console.log(data);
+            switch (data.result) {
+              case 2:
+                window.location.replace("change");
+                break;
+              case 1:
+                window.location.replace("home");
+                break;
+              case 0:
+                $("#response").html("<span style='color:red'>Incorrect</span>");
+                $("#password").val("");
+                break;
+              default:
+            }
+          },
+          error: function(data){
+            $("#response").html("<span style='color:red'>Error</span>");
+          }
+        });
+      }
+      $("input").keyup(function(e){
+        if (e.keyCode ==13){
+          submit();
+        }
+      });
+    </script>
     </body>
     </html>
   <?php }
