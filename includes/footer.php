@@ -18,5 +18,6 @@
       </div>
     </footer>
     <script src="js/footerSlideshow.js"></script>
+    <script src="js/slider.php"></script>
   </body>
 </html>

@@ -29,7 +29,11 @@ and more flexability than object-fit -->
     </p>
   </div>
   <div class="col-50 home-section text-center">
-    <img class="slideshow-image" src="img/slideshowplaceholder.jpg" alt="Campers having fun at compcamps"/>
+    <div id="slider">
+      <div v-for="number in [currentNumber]" transition="fade">
+        <img :src="images[Math.abs(currentNumber) % images.length]" />
+      </div>
+    </div>
     <h3>Connect With Us!</h3>
     <br/>
     <p class="social-icons">
