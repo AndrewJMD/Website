@@ -28,12 +28,13 @@ ret = 0
 for root, dirs, files in os.walk(scandir):
     if ".git" not in root and "/tests/" not in root:
         for file in files:
-            if os.path.join(root,file).lower() != os.path.join(root,file):
-                print "Uppercase Characters:",os.path.join(root,file)
+            if os.path.join(root,file)[0].lower() != os.path.join(root,file)[0]:
+                print "Leading Uppercase Character:",os.path.join(root,file)
             for i in invalid_characters:
                 if i in file:
                     # Sass uses underscores for partials
-                    if not (i == "_" and file.endswith(".scss")):
+                    # Camelcase in shell is not standard practice
+                    if not (i == "_" and file.split(".")[-1] not in ["scss","sh"])):
                         print "Invalid Character ("+i+"):",os.path.join(root,file)
                         ret = 1
             for i in invalid_names:
