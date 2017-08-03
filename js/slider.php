@@ -11,7 +11,9 @@ new Vue({
 
   methods: {
     next: function() {
-      this.currentNumber += 1;
+      if (!document.hidden) {
+        this.currentNumber += 1;
+      }
       setTimeout(this.next, 2500);
     }
   }
