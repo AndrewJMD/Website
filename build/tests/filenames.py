@@ -15,7 +15,8 @@ Warnings:
 
 invalid_names = ["image","picture","pic","img","file","page"]
 invalid_characters = "()'\"!@#$%^&*_=+{}[]|\\/,?"
-common_extensions = ["sample","yml","html","php","json","css","py","js","otf","svg","woff","woff2","ttf","eot","less","scss","jpg","png","sh","md","gif","map","conf"]
+common_extensions = ["sample","yml","html","php","json","css","py","js","otf","svg","woff","woff2","ttf","eot","less","scss","jpg","png","sh","md","gif","map","conf","sql"]
+uppercase_exceptions = ["README.md","Vagrantfile"]
 
 scandir = ""
 try:
@@ -28,13 +29,13 @@ ret = 0
 for root, dirs, files in os.walk(scandir):
     if ".git" not in root and "/tests/" not in root:
         for file in files:
-            if os.path.join(root,file)[0].lower() != os.path.join(root,file)[0]:
+            if file not in uppercase_exceptions and file[0].lower() != file[0]:
                 print "Leading Uppercase Character:",os.path.join(root,file)
             for i in invalid_characters:
                 if i in file:
                     # Sass uses underscores for partials
                     # Camelcase in shell is not standard practice
-                    if not (i == "_" and file.split(".")[-1] not in ["scss","sh"])):
+                    if not (i == "_" and file.split(".")[-1] in ["scss","sh"]):
                         print "Invalid Character ("+i+"):",os.path.join(root,file)
                         ret = 1
             for i in invalid_names:
