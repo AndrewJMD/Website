@@ -52,7 +52,7 @@ nav a, #nav-handle {
 
   nav a, #nav-handle {
     padding: 15px; } }
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 590px) {
   nav ul {
     max-height: 0;
     overflow: hidden;
