@@ -8,7 +8,7 @@ include('includes/header.php');
 and more flexability than object-fit -->
 <a id="home-banner" class="banner" href="register.php"></a>
 
-<section>
+<section class="font-size-zero">
   <div class="col-50 home-section">
     <div class="well">
       The MSI Computer Camps are a set of non-profit summer camps hosted at the University of Regina. The camps are dedicated to the education of youth in the rapidly changing computing industry.
