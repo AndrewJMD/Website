@@ -140,6 +140,13 @@ footer {
     margin-top: 15px;
     margin-bottom: 5px; }
 
+#schedule tr {
+  text-align: center; }
+#schedule td {
+  padding: 0 5px; }
+#schedule th {
+  text-decoration: underline; }
+
 body {
   background-color: #DAD0C0;
   font: 1rem sans-serif;
