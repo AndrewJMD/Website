@@ -80,5 +80,43 @@ include('includes/header.php');
   <h3>What are the week's features?</h3>
   <p class="indent">The daily program begins when the computer lab opens at 8:30 a.m. Monday through Friday. Each Monday features a pizza party and bowling. Campers get picked up from bowling around 7:45 p.m. Tuesday through Thursday the formal program ends at 5:00 p.m. Most campers choose to participate in the optional evening activities held from 5:00 p.m. through to 8:45 p.m. The optional activities include opportunities for project work, multi-player computer games, and special interest topics. On Fridays campers spend the morning hours finishing their projects and at 3:00 p.m. the camp closes with campers presentations and awards, where each camper’s achievements are highlighted for families, teachers, and other invited guests.</p>
 </section>
+<section class="faq-section">
+  <h2 class="text-center">What about meals?</h2>
+  <h3>What are Biobreaks?</h3>
+  <p class="indent">For the daily morning and afternoon biobreaks, campers are provided with a choice of free refreshments, ranging from bottled water to fruit juices and now and then soda pop. Although food and drink are not allowed in the computer room, water bottles are encouraged. Often, treats are awarded for great answers or creative solutions to challenges.</p>
+  <h3>What meals are provided as part of the camp program?</h3>
+  <p class="indent">Campers are provided with the following meals: Monday: pizza at lunch for all campers. Tuesday: BBQ supper. Wednesday: “2-peat Lunch” for campers back for their second or higher camp year. Thursday: “3-peat Supper” for campers back for their third or higher camp year.</p>
+  <h3>What about other meals?</h3>
+  <p class="indent">Campers are responsible for their own meals for other times. Campers may bring food (store in fridge / heat in microwave) or Campers may buy meals at nearby campus establishments or other nearby establishments.</p>
+</section>
+<section class="faq-section">
+  <h2 class="text-center">What are the camp fees?</h2>
+  <p class="indent">The camp fees are $350 per registration. Fees include T-shirts, all camp activities, and biobreak refreshments. No discounts are offered for 2-week campers or campers from the same family. A $100 administration fee will apply for any cancellation of camp participation after one month prior to the first camp.</p>
+  <h3>Paying by Credit Card</h3>
+  <p class="indent">Simply navigate to the registration page by clicking ‘Register’ and choose which week you would like to sign up for. You will then need to fill out your billing information and camper information. Online registration is secured using SSL encryption and all payments are processed using Stripe.</p>
+  <h3>Paying by Cash or Cheque</h3>
+  <p class="indent">Contact Adam Knutson at (306) 535-0237 or <a href="mailto:computercamps@gmail.com">email us</a> as soon as possible.</p>
+</section>
+<section class="faq-section">
+  <h2 class="text-center">I am out of town, where can I stay during camp?</h2>
+  <p class="indent">The University of Regina provides several options for temporary stay. The most popular with campers in the past has been Luther College, located on the University of Regina campus. Campers staying at Luther College are about a three minute walk from the camps and fees are per night and may vary. All applications for Luther College must be initiated by MSI. <b>Contact us if you plan on staying at Luther College.</b></p>
+</section>
+<section class="faq-section">
+  <h2 class="text-center">Who operates the computer camps?</h2>
+  <h3>Who are the staff members for the camp?</h3>
+  <p class="indent">The camp instructors are technical and subject matter experts from a wide range of our community including volunteers from industry, the University of Regina, and the Saskatchewan Institute of Applied Science and Technology.Community members share insight, knowledge, and support. In addition, mentors (generally senior campers from previous years) assist with camp activities.</p>
+  <h3>What is Mentor Systems Inc. (MSI)?</h3>
+  <p class="indent">Mentor Systems Inc. is a member-based organization registered as a non-profit corporation in Saskatchewan, Canada. MSI was formed by volunteer camp-staff who were counsellors and mentors at the various annual computer camps.MSI has the mandate of providing technological opportunities for youth. The program of camps and workshops fulfills this mandate by providing youth with hands-on experience with sophisticated systems, collaboration in solving challenging problems, and improved computer skills.</p>
+  <h3>Who are the camp sponsors?</h3>
+  <p class="indent">The camp program is made possible through our sponsors. We recognize the following as sponsors for the 2017 camp year: Mentor Systems Incorporated, Metric Hosting Ltd, University of Regina, University of Regina Department of Computer Science, Innovation Place, Information Services Corporation, Strategy Lab, Telus, and Capital One.</p>
+  <p class="indent">As a registered non-profit corporation providing technical opportunities for youth, MSI’s program welcomes donations and sponsored bursaries. Contact us at <a href="mailto:computercamps@gmail.com">computercamps@gmail.com</a></p>
+</section>
+<section class="faq-section">
+  <h2 class="text-center">Who can I contact from the Computer Camps?</h2>
+  <h3>What is the email address?</h3>
+  <p class="indent">Email us at <a href="mailto:computercamps@gmail.com">computercamps@gmail.com</a></p>
+  <h3>Who can I call?</h3>
+  <p class="indent">Adam Knutson at (306) 535-0237 (please leave a message if Adam is busy)</p>
+</section>
 
 <?php include('includes/footer.php'); ?>
