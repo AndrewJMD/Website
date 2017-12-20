@@ -11,18 +11,33 @@
     case "ping":
       echo "pong";
       break;
-    case "all":
-      $campers = Campers::GetAllCampers();
-      if (gettype($campers) != "array") {
+
+    case "campers":
+      $raw = Campers::GetAllCampers(GetFromURL("l","simple"));
+      if (gettype($raw) != "array") {
         $response = array(
-          "code" => $campers
+          "code" => $raw
         );
       } else {
+        $campers = array();
+        foreach($raw as $camper)
+        {
+          $finalcamper = array();
+          foreach($camper as $key=>$value)
+          {
+            if(!(is_null($value) || $value == ''))
+            {
+              $finalcamper[$key] = $value;
+            }
+          }
+          array_push($campers, $finalcamper);
+        }
         $response = array(
           "code" => Result::VALID,
           "data" => $campers
         );
       }
       echo json_encode($response);
+      break;
   }
 ?>

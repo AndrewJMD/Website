@@ -28,6 +28,12 @@
     const GUEST       = 256;
   }
 
+  abstract class CampersFilter
+  {
+    const SIMPLE  = "simple";
+    const ALL     = "all";
+  }
+
   function GetFromURL($tag, $default = "") {
     if (isset($_REQUEST[$tag]))
       return $_REQUEST[$tag];

@@ -25,15 +25,6 @@
     }
   </style>
 
-  <script>
-    var dash = {
-      result : <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>,
-      level: <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>,
-      dash: "<?php echo DASH; ?>",
-      root: "<?php echo ROOT; ?>"
-    }
-  </script>
-
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -276,7 +267,7 @@
 <script>
   var PAGE_A = "<?php echo GetFromURL('a','dashboard'); ?>";
   var PAGE_B = "<?php echo GetFromURL('b',''); ?>";
-  var PAGE_C = "<?php echo GetFromURL('b',''); ?>";
+  var PAGE_C = "<?php echo GetFromURL('c',''); ?>";
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -289,10 +280,19 @@
 <script src="<?php echo DASH; ?>libs/pace/pace.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo DASH; ?>js/adminlte.min.js"></script>
-
 <script src="<?php echo DASH; ?>js/dash.js"></script>
 
-<script src="<?php echo DASH; ?>js/template.js"></script>
+<script>
+  Dash.result = <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>;
+  Dash.level =  <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>;
+  Dash.dash = "<?php echo DASH; ?>";
+  Dash.root = "<?php echo ROOT; ?>";
+  Dash.campers =  {
+    filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
+  }
+</script>
+
+<script src="<?php echo DASH; ?>js/main.js"></script>
 
 <?php include(DROOT."dash/includes/scripts.php"); ?>
 

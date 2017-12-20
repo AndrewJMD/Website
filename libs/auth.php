@@ -34,6 +34,7 @@
             $_SESSION['level']      = $row['level'];
             $_SESSION['name']       = $row['name'];
             $_SESSION['username']   = $row['username'];
+            $_SESSION['camp']       = -1;
 
             if ($row['change_pass'] == 1) {
               $login = Result::CHANGE;
