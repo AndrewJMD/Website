@@ -32,7 +32,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo DASH;?>dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>CC</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -208,6 +208,12 @@
 </div>
 <!-- ./wrapper -->
 
+<script>
+  var PAGE_A = "<?php echo GetFromURL('a','dashboard'); ?>";
+  var PAGE_B = "<?php echo GetFromURL('b',''); ?>";
+  var PAGE_C = "<?php echo GetFromURL('b',''); ?>";
+</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
@@ -216,6 +222,8 @@
 <script src="<?php echo DASH; ?>libs/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo DASH; ?>js/adminlte.min.js"></script>
+
+<script src="<?php echo DASH; ?>js/dash.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

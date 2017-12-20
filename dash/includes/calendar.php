@@ -7,7 +7,6 @@
   }
 </style>
 <?php
-  require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
   $CAMP = GetFromURL("camp","17");
 ?>
 <div class='calendar'>

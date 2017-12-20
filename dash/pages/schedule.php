@@ -1,5 +1,5 @@
 <?php
-  $PAGE_TITLE = "Scedule";
+  $PAGE_TITLE = "Schedule";
 
   function OutputPage() { ?>
     <section class="content-header">

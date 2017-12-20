@@ -29,7 +29,7 @@
             echo "<li><a href=\"$nav_list[short]\">
               <i class=\"$nav_list[icon]\"></i> <span>$nav_list_name</span>
               <span class=\"pull-right-container\">
-                <small class=\"label pull-right bg-green\">Hot</small>
+                <!--<small class=\"label pull-right bg-green\">Hot</small>-->
               </span>
             </a></li>";
           }
