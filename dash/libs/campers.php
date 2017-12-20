@@ -45,6 +45,7 @@
       if ($result = $link->query($q)) {
         $campers = array();
         $raw = $result->fetch_all(MYSQLI_ASSOC);
+        var_dump($raw);
         foreach($raw as &$camper)
         {
           array_push($campers, new Camper($camper));

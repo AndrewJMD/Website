@@ -56,8 +56,17 @@ Dash.get = function(i, d, s) {
       }
     }
   } else {
-    for(var p in i) {
-      f[p] = input[p];
+    if ("data" in i){
+      f.data = i.data;
+    }
+    if ("api" in i){
+      f.api = i.api;
+    }
+    if ("success" in i){
+      f.success = i.success;
+    }
+    if ("error" in i){
+      f.error = i.error;
     }
   }
   if ("api" in f && "success" in f && "data" in f) {

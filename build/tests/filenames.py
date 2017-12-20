@@ -15,7 +15,7 @@ Warnings:
 
 invalid_names = ["image","picture","pic","img","file","page"]
 invalid_characters = "()'\"!@#$%^&*_=+{}[]|\\/,?"
-common_extensions = ["sample","yml","html","php","json","css","py","js","otf","svg","woff","woff2","ttf","eot","less","scss","jpg","png","sh","md","gif","map","conf","sql"]
+common_extensions = ["sample","yml","html","php","json","css","py","js","otf","svg","woff","woff2","ttf","eot","less","scss","jpg","png","sh","md","gif","map","conf","sql","xml"]
 uppercase_exceptions = ["README.md","Vagrantfile"]
 
 scandir = ""
@@ -27,7 +27,7 @@ except:
 ret = 0
 
 for root, dirs, files in os.walk(scandir):
-    if ".git" not in root and "/tests/" not in root:
+    if ".git" not in root and "/tests/" not in root and "/vendor/" not in root:
         for file in files:
             if file not in uppercase_exceptions and file[0].lower() != file[0]:
                 print "Leading Uppercase Character:",os.path.join(root,file)

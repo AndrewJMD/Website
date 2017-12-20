@@ -1,0 +1,12 @@
+<phpunit bootstrap="dash/libs/campers.php">
+  <testsuites>
+    <testsuite>
+       <directory suffix="Test.php">./build/phpunit/Campers</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <file>./dash/libs/campers.php</file>
+    </whitelist>
+  </filter>
+</phpunit>

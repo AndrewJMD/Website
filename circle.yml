@@ -13,6 +13,8 @@ compile:
       - mkdir css
       - sass --update resources/www/scss:www/css
       - python3.6 build/compile/minify.py
+  php:
+    version: 7.1.6
 
 test:
   override:
@@ -30,3 +32,7 @@ deployment:
     tag: /release-.*/
     commands:
       - scp -r www/* mentor@compcamps.com:/home/mentor/public_html/
+      
+  post:
+    - php vendor/bin/phpunit --coverage-clover build/coverage/xml
+    - php vendor/bin/codacycoverage clover build/coverage/xml

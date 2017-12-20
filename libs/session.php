@@ -1,7 +1,9 @@
 <?php
   session_start();
 
-  require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+  if (isset($SERVER['DOCUMENT_ROOT'])) {
+    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+  }
 
   if (!isset($_SESSION['id']))
   {

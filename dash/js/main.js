@@ -51,7 +51,7 @@ history.replaceState({
   c: PAGE_C
 }, document.title, document.location.href);
 
-$(document).on("click", 'a', function(e) {
+$(document).on("click", "a", function(e) {
   var a = $(this).attr("href");
   if (a !== undefined) {
     if (!a.startsWith("http") && !a.contains("#")) {

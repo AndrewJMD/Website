@@ -6,9 +6,11 @@
   define("MYSQL_USER","mentor");
   define("MYSQL_PASS","admin");
 
-  define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']."/");
-  define("DASH",ROOT."dash/");
-  define("DROOT",$_SERVER['DOCUMENT_ROOT']."/");
+  if (isset($_SERVER['HTTP_HOST'])) {
+    define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']."/");
+    define("DASH",ROOT."dash/");
+    define("DROOT",$_SERVER['DOCUMENT_ROOT']."/");
+  }
 
   abstract class Result
   {
@@ -68,6 +70,7 @@
   function GeneratePageDefaults() {
     global $PAGE_TYPE;
     global $PAGE_GUEST_ALLOWED;
+    global $PAGE_TITLE;
     $PAGE_TYPE = "NORMAL";
     $PAGE_GUEST_ALLOWED = False;
     $PAGE_TITLE = "No Page";
