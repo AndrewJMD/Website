@@ -8,6 +8,7 @@
         "short" : "web-dash"
       },
       "Registrations" : {
+        "view-level" : "1",
         "icon" : "fa fa-user-plus",
         "short" : "registrations"
       }
@@ -15,7 +16,7 @@
   },
   "Camps" : {
     "view-level" : "7",
-    "edit-level" : "3",
+    "edit-level" : "1",
     "children" : {
       "Schedule" : {
         "icon" : "fa fa-calendar",

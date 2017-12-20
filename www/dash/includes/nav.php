@@ -26,8 +26,8 @@
         foreach ($nav_data as $nav_item_name => $nav_item) {
           echo "<li class=\"header\">".$nav_item_name."</li>";
           foreach ($nav_item['children'] as $nav_list_name => $nav_list) {
-            echo "<li><a href=\"../widgets.html\">
-              <i class=\"".$nav_list['icon']."\"></i> <span>".$nav_list_name."</span>
+            echo "<li><a href=\"$nav_list[short]\">
+              <i class=\"$nav_list[icon]\"></i> <span>$nav_list_name</span>
               <span class=\"pull-right-container\">
                 <small class=\"label pull-right bg-green\">Hot</small>
               </span>

@@ -6,12 +6,22 @@
   define("MYSQL_USER","mentor");
   define("MYSQL_PASS","admin");
 
+  define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']);
+  define("DASH",ROOT."/dash/");
+
   abstract class Result
   {
     const INVALID     = 0;
     const VALID       = 1;
     const CHANGE      = 2;
     const MYSQLERROR  = 50;
+  }
+
+  abstract class Level
+  {
+    const ADMIN       = 1;
+    const CAMPER      = 2;
+    const GUEST       = 4;
   }
 
   function GetFromURL($tag, $default = "") {

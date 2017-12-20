@@ -9,12 +9,12 @@
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo DASH; ?>libs/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   Theme style -->
-  <link rel="stylesheet" href="css/admin.min.css">
-  <link rel="stylesheet" href="css/skin-blue.min.css">
+  <link rel="stylesheet" href="<?php echo DASH; ?>css/admin.min.css">
+  <link rel="stylesheet" href="<?php echo DASH; ?>css/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -405,11 +405,11 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo DASH; ?>libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="libs/fastclick/fastclick.js"></script>
+<script src="<?php echo DASH; ?>libs/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
+<script src="<?php echo DASH; ?>js/adminlte.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
