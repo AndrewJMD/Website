@@ -14,6 +14,7 @@
   ob_end_clean();
   $page = array(
     "title" => $PAGE_TITLE,
+    "header" => $PAGE_HEADER,
     "data" => str_replace("\n","",$data)
   );
   echo json_encode($page);

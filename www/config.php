@@ -24,7 +24,8 @@
     const DISABLED    = 0;
     const ADMIN       = 1;
     const CAMPER      = 2;
-    const GUEST       = 4;
+    const MIT         = 4;
+    const GUEST       = 256;
   }
 
   function GetFromURL($tag, $default = "") {

@@ -1,18 +1,8 @@
 <?php
   $PAGE_TITLE = "Campers";
+  $PAGE_HEADER = "Campers";
 
   function OutputPage() { ?>
-    <section class="content-header">
-      <h1>
-        Campers
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">404 error</li>
-      </ol>
-    </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="box">

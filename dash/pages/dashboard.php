@@ -1,12 +1,12 @@
 <?php
-  $PAGE_TITLE = "Schedule";
-  $PAGE_HEADER = "Schedule";
+  $PAGE_TITLE = "Dashboard";
+  $PAGE_HEADER = "Dashboard";
 
   function OutputPage() { ?>
     <!-- Main content -->
     <section class="content">
       <?php
-        include(DROOT."dash/includes/calendar.php");
+        
       ?>
     </section>
   <?php }

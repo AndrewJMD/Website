@@ -5,7 +5,7 @@ $.ajax({
   data: {"f" : "all"},
   success: function(data){
     if(data.code == dash.result.VALID) {
-      template = new Template("campers/camper_row.html");
+      template = new Template("campers/camper-row.html");
       data.data.forEach(function(entry){
         $('#campers-table tr:last').after(template.exec(entry));
       });

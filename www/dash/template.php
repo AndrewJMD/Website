@@ -47,7 +47,6 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo DASH;?>dashboard" class="logo">
@@ -59,7 +58,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a onclick="" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -70,7 +69,7 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
             </a>
@@ -80,7 +79,7 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li><!-- start message -->
-                    <a href="#">
+                    <a onclick="">
                       <div class="pull-left">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
@@ -94,12 +93,12 @@
                   <!-- end message -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a onclick="">See All Messages</a></li>
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">10</span>
             </a>
@@ -109,18 +108,18 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-                    <a href="#">
+                    <a onclick="">
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+              <li class="footer"><a onclick="">View all</a></li>
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger">9</span>
             </a>
@@ -130,7 +129,7 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li><!-- Task item -->
-                    <a href="#">
+                    <a onclick="">
                       <h3>
                         Design some buttons
                         <small class="pull-right">20%</small>
@@ -147,13 +146,50 @@
                 </ul>
               </li>
               <li class="footer">
-                <a href="#">View all tasks</a>
+                <a onclick="">View all tasks</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown camps-menu">
+            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">2018, Week 1</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a onclick="">
+                      <p>
+                        All Camps
+                      </p>
+                    </a>
+                  </li>
+                  <li><!-- Task item -->
+                    <a onclick="">
+                      <p>
+                        2018, Week 1
+                      </p>
+                    </a>
+                  </li>
+                  <li><!-- Task item -->
+                    <a onclick="">
+                      <p>
+                        2018, Week 2
+                      </p>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a onclick="">View all camps</a>
               </li>
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="hidden-xs"><?php echo $_SESSION['name']?></span>
             </a>
             <ul class="dropdown-menu">
@@ -170,13 +206,13 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    <a onclick="">Followers</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                    <a onclick="">Sales</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                    <a onclick="">Friends</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -184,7 +220,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a onclick="" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="process.php?f=signout" class="btn btn-default btn-flat">Sign out</a>
@@ -206,8 +242,19 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <?php OutputPage(); ?>
+    <section class="content-header">
+      <h1 id='page_header'>
+        <?php echo $PAGE_HEADER; ?>
+      </h1>
+      <!--<ol class="breadcrumb">
+        <li><a onclick=""><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a onclick="">Examples</a></li>
+        <li class="active">404 error</li>
+      </ol>-->
+    </section>
+    <div id='page_content'>
+      <?php OutputPage(); ?>
+    </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

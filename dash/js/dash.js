@@ -9,7 +9,8 @@ $(document).on('click', 'a', function(e) {
       dataType: "json",
       data: state,
       success: function(data){
-        $(".content-wrapper").html(data.data);
+        $("#page_content").html(data.data);
+        $("#page_header").html(data.header);
         history.pushState(state, data.title + " | CCDash", a);
         $("script.pagejs").each(function(){
           $(this).remove();
@@ -29,7 +30,7 @@ $(document).on('click', 'a', function(e) {
 });
 
 window.onpopstate = function(event) {
-  console.log(event);
+  Pace.restart();
   $.ajax({
     url: "libs/getpage.php",
     type: "POST",

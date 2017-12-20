@@ -8,23 +8,26 @@
       $this->_id          = $row['_id'];
       $this->name         = $row['name'];
       $this->username     = $row['username'];
-      $this->dob          = $row['dob'];
-      $this->health_card  = $row['health_card'];
-      $this->phone        = $row['phone'];
-      $this->parent_name  = $row['parent_name'];
-      $this->email        = $row['email'];
-      $this->health_notes = $row['health_notes'];
-      $this->gender       = $row['gender'];
-      $this->shirt        = $row['shirt'];
-      $this->change_pass  = $row['change_pass'];
-      $this->hash_pass    = $row['hash_pass'];
+      
+      if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
+        $this->dob          = $row['dob'];
+        $this->health_card  = $row['health_card'];
+        $this->phone        = $row['phone'];
+        $this->parent_name  = $row['parent_name'];
+        $this->email        = $row['email'];
+        $this->health_notes = $row['health_notes'];
+        $this->gender       = $row['gender'];
+        $this->shirt        = $row['shirt'];
+        $this->change_pass  = $row['change_pass'];
+        $this->hash_pass    = $row['hash_pass'];
+      }
     }
   }
 
   class Campers {
     public static function GetAllCampers()
     {
-      if ($_SESSION['level'] == Level::ADMIN) {
+      if (Session::Allowed($_SESSION['level'],Level::ADMIN + Level::CAMPER)) {
         $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
         if (!$link) {
           return Result::MYSQLERROR;
