@@ -1,3 +1,6 @@
+var Dash; //Dash is defined in dash.js
+var Pace; //Pace is an external library, it will already be loaded
+
 function toUrl(a, b, c) {
   var s = "";
   if(typeof history.state.b !== "undefined" && history.state.b !== "") {s += "../";}

@@ -1,3 +1,4 @@
+var Dash;
 Dash.get("campers",{"f": "campers", "l": Dash.Campers.Filter.SIMPLE},
   function(d) {
     if(d.code === Dash.Result.VALID) {
