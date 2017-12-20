@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left info">
-        <p>Alexander Pierce</p>
+        <p><?php echo $_SESSION['name']?></p>
       </div>
     </div>
     <!-- search form -->

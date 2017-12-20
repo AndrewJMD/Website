@@ -16,7 +16,7 @@
     if ($PAGE_TYPE == "custom") {
       OutputPage();
     } else {
-      input("template.php");
+      include("template.php");
     }
   } else {
     include("pages/404.php");
