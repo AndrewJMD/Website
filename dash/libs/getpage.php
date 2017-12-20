@@ -2,6 +2,7 @@
   ob_start();
   header('Content-Type: application/json');
   require($_SERVER['DOCUMENT_ROOT']."/config.php");
+  require(DROOT."libs/session.php");
   $a = GetFromURL('a','dashboard');
   if (file_exists(DROOT."dash/pages/$a.php")) {
     include(DROOT."dash/pages/$a.php");

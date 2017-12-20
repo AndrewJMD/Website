@@ -12,10 +12,11 @@
 
   abstract class Result
   {
-    const INVALID     = 0;
-    const VALID       = 1;
-    const CHANGE      = 2;
-    const MYSQLERROR  = 50;
+    const INVALID       = 0;
+    const VALID         = 1;
+    const CHANGE        = 2;
+    const INSUFFICIENT  = 3;
+    const MYSQLERROR    = 50;
   }
 
   abstract class Level

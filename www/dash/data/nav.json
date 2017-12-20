@@ -21,6 +21,10 @@
       "Schedule" : {
         "icon" : "fa fa-calendar",
         "short" : "schedule"
+      },
+      "Campers" : {
+        "icon" : "fa fa-users",
+        "short" : "campers"
       }
     }
   }

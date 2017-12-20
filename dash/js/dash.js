@@ -1,22 +1,24 @@
 $(document).on('click', 'a', function(e) {
   e.preventDefault();
   var a = $(this).attr("href");
-  var state = {"a" : a};
-  $.ajax({
-    url: "libs/getpage.php",
-    type: "POST",
-    dataType: "json",
-    data: state,
-    success: function(data){
-      $(".content-wrapper").html(data.data);
-      history.pushState(state, data.title + " | CCDash", a);
-      Pace.stop();
-    },
-    error: function(data){
-      console.log("Error");
-      console.log(data);
-    }
-  });
+  if (a !== undefined) {
+    var state = {"a" : a};
+    $.ajax({
+      url: "libs/getpage.php",
+      type: "POST",
+      dataType: "json",
+      data: state,
+      success: function(data){
+        $(".content-wrapper").html(data.data);
+        history.pushState(state, data.title + " | CCDash", a);
+        Pace.stop();
+      },
+      error: function(data){
+        console.log("Error");
+        console.log(data);
+      }
+    });
+  }
 });
 
 window.onpopstate = function(event) {
