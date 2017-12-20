@@ -30,7 +30,7 @@
           }
           if ($login == Result::VALID) {
 
-            $_SESSION['id']         = $row['id'];
+            $_SESSION['id']         = $row['_id'];
             $_SESSION['level']      = $row['level'];
             $_SESSION['name']       = $row['name'];
             $_SESSION['username']   = $row['username'];

@@ -6,8 +6,9 @@
   define("MYSQL_USER","mentor");
   define("MYSQL_PASS","admin");
 
-  define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']);
-  define("DASH",ROOT."/dash/");
+  define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']."/");
+  define("DASH",ROOT."dash/");
+  define("DROOT",$_SERVER['DOCUMENT_ROOT']."/");
 
   abstract class Result
   {
@@ -19,6 +20,7 @@
 
   abstract class Level
   {
+    const DISABLED    = 0;
     const ADMIN       = 1;
     const CAMPER      = 2;
     const GUEST       = 4;
@@ -28,6 +30,24 @@
     if (isset($_REQUEST[$tag]))
       return $_REQUEST[$tag];
     return $default;
+  }
+
+  function NameFromDayCode($code) {
+    switch ($code){
+      case 'M':
+        return "Monday";
+      case 'T':
+        return "Tuesday";
+      case 'W':
+        return "Wednesday";
+      case 'R':
+        return "Thursday";
+      case 'F':
+        return "Friday";
+      default:
+        return Result::INVALID;
+        break;
+    }
   }
 
   function HumanFilesize($bytes, $decimals = 2) {
