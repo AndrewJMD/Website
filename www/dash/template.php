@@ -283,12 +283,12 @@
 <script src="<?php echo DASH; ?>js/dash.js"></script>
 
 <script>
-  Dash.result = <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>;
-  Dash.level =  <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>;
-  Dash.dash = "<?php echo DASH; ?>";
-  Dash.root = "<?php echo ROOT; ?>";
-  Dash.campers =  {
-    filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
+  Dash.Result = <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>;
+  Dash.Level =  <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>;
+  Dash.DASH = "<?php echo DASH; ?>";
+  Dash.ROOT = "<?php echo ROOT; ?>";
+  Dash.Campers =  {
+    Filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
   }
 </script>
 

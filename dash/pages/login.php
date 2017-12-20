@@ -80,6 +80,7 @@
           },
           error: function(data){
             $("#response").html("<span style='color:red'>Error</span>");
+            console.log("Error",data);
           }
         });
       }

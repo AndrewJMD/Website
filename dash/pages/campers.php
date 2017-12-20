@@ -22,7 +22,7 @@
             <tr>
               <th style="width: 10px">#</th>
               <th>Name</th>
-              <th>Progress</th>
+              <th>Discriminator</th>
               <th style="width: 40px">Label</th>
             </tr>
           </table>

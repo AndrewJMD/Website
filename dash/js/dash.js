@@ -1,4 +1,4 @@
-function Dash() {}
+Dash = {};
 
 Dash.error = {
   no_api_provided: "No api was provided.",
@@ -6,9 +6,22 @@ Dash.error = {
   no_data_provided: "No data for the api was provided."
 };
 
+Dash.Error = class extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "Error";
+  }
+};
+
+$(document).ready(function(){
+  $.getJSON(Dash.dash+"data/nav.json",function(d){
+      Dash.nav = d;
+  });
+});
+
 Dash.getCode = function(c){
-  for( var prop in dash.result ) {
-     if( dash.result[ prop ] === c )
+  for( var prop in Dash.result ) {
+     if( Dash.result[ prop ] === c )
        return prop;
   }
 };
@@ -38,7 +51,7 @@ Dash.get = function(i, d, s) {
       f.success = s;
     } else {
       if (!("success" in f)){
-        throw Dash.error.no_callback_provided;
+        throw new Dash.Error(Dash.error.no_callback_provided);
       }
     }
   } else {
@@ -48,12 +61,12 @@ Dash.get = function(i, d, s) {
   }
   if ("api" in f && "success" in f && "data" in f) {
     $.ajax({
-      url: Dash.dash+"api/"+f.api+".php",
+      url: Dash.DASH+"api/"+f.api+".php",
       type: "POST",
       dataType: "json",
       data: f.data,
       success: function(d){
-        if(d.code == Dash.result.VALID) {
+        if(d.code == Dash.Result.VALID) {
           f.success(d);
         } else {
           f.error(d);
@@ -64,18 +77,18 @@ Dash.get = function(i, d, s) {
       }
     });
   } else if (!("api" in f)) {
-    throw Dash.error.no_api_provided;
+    throw new Dash.Error(Dash.error.no_api_provided);
   } else if (!("success" in f)) {
-    throw Dash.error.no_callback_provided;
+    throw new Dash.Error(Dash.error.no_callback_provided);
   } else if (!("data" in f)) {
-    throw Dash.error.no_data_provided;
+    throw new Dash.Error(Dash.error.no_data_provided);
   }
 };
 
 Dash.Template = function(f) {
   this.t = "";
   $.ajax({
-    url: Dash.dash+'templates/'+f,
+    url: Dash.DASH+'templates/'+f,
     type: 'get',
     async: false,
     context: this,

@@ -16,6 +16,7 @@
     const VALID         = 1;
     const CHANGE        = 2;
     const INSUFFICIENT  = 3;
+    const NOTFOUND      = 4;
     const MYSQLERROR    = 50;
   }
 

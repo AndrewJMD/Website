@@ -1,9 +1,12 @@
 <?php
   session_start();
 
+  require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+
   if(!isset($_SESSION['id']))
   {
     $_SESSION['id'] = -1;
+    $_SESSION['level'] = Level::GUEST;
   }
 
   class Session
@@ -22,8 +25,11 @@
       This only works with powers of 2 (1, 2, 4, 8, 16, 32) as the role value
     */
     public static function Allowed($user, $required) {
-      $v = decbin($required);
-      return ($v[strlen($v) - strlen(decbin($user))] == 1);
+      $r = decbin($required);
+      $u = decbin($user);
+      if (strlen($u) > strlen($r))
+        return False;
+      return ($r[strlen($r) - strlen(decbin($user))] == 1);
     }
 
   }

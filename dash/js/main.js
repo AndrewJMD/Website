@@ -1,8 +1,10 @@
 $(document).on('click', 'a', function(e) {
-  e.preventDefault();
   var a = $(this).attr("href");
   if (a !== undefined) {
-    loadPage(a);
+    if (!a.startsWith("http") && !a.contains("#")) {
+      e.preventDefault();
+      loadPage(a);
+    }
   }
 });
 
@@ -16,21 +18,27 @@ function toUrl(a, b, c) {
   return s;
 }
 
-function loadPage(a, b, c) {
+function loadPage(a, b, c, push) {
+  if (typeof(push) == "undefined") {
+    push = true;
+  }
   var state = {"a" : a, "b" : b, "c" : c};
   $.ajax({
-    url: Dash.dash+"libs/getpage.php",
+    url: Dash.DASH+"libs/getpage.php",
     type: "POST",
     dataType: "json",
     data: state,
     success: function(data){
       $("#page_content").html(data.data);
       $("#page_header").html(data.header);
-      history.pushState(state, data.title + " | CCDash", toUrl(a,b,c));
+      document.title = data.title + " | CCDash";
+      if (push) {
+        history.pushState(state, data.title + " | CCDash", toUrl(a,b,c));
+      }
       $("script.pagejs").each(function(){
         $(this).remove();
       });
-      $.get(Dash.dash+"includes/scripts.php?a="+a,function(html){
+      $.get(Dash.DASH+"includes/scripts.php?a="+a,function(html){
         $("body").append(html);
         Pace.stop();
       });
@@ -44,7 +52,7 @@ function loadPage(a, b, c) {
 
 window.onpopstate = function(event) {
   Pace.restart();
-  loadPage(event.state.a, event.state.b, event.state.c);
+  loadPage(event.state.a, event.state.b, event.state.c, false);
 };
 
 history.replaceState({

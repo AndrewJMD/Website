@@ -1,12 +1,12 @@
-Dash.get("campers",{"f": "campers", "l": Dash.campers.filter.SIMPLE},
-  function(data) {
-    if(data.code == Dash.result.VALID) {
-      template = new Dash.Template("campers/camper-row.html");
-      data.data.forEach(function(entry){
-        $('#campers-table tr:last').after(template.exec(entry));
+Dash.get("campers",{"f": "campers", "l": Dash.Campers.Filter.SIMPLE},
+  function(d) {
+    if(d.code == Dash.Result.VALID) {
+      t = new Dash.Template("campers/camper-row.html");
+      d.data.forEach(function(i){
+        $('#campers-table tr:last').after(t.exec(i));
       });
     } else {
-      console.log("Retuning campers failed with ",data.code);
+      console.log("Retrieving campers failed with ",d.code);
     }
   }
 );

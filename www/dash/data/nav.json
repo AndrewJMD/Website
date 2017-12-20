@@ -1,7 +1,7 @@
 {
   "Website" : {
-    "view-level" : "3",
-    "edit-level" : "1",
+    "view_level" : "3",
+    "edit_level" : "1",
     "children" : {
       "Dashboard" : {
         "icon" : "fa fa-dashboard",
@@ -15,8 +15,8 @@
     }
   },
   "Camps" : {
-    "view-level" : "7",
-    "edit-level" : "1",
+    "view_level" : "7",
+    "edit_level" : "1",
     "children" : {
       "Schedule" : {
         "icon" : "fa fa-calendar",
@@ -24,7 +24,14 @@
       },
       "Campers" : {
         "icon" : "fa fa-users",
-        "short" : "campers"
+        "short" : "campers",
+        "children" : {
+          "Camper" : {
+            "icon" : "fa fa-user",
+            "short" : "camper",
+            "hidden" : true
+          }
+        }
       }
     }
   }
