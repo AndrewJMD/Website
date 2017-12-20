@@ -42,7 +42,7 @@
   }
 
   function NameFromDayCode($code) {
-    switch ($code){
+    switch ($code) {
       case 'M':
         return "Monday";
       case 'T':
@@ -70,6 +70,6 @@
     global $PAGE_GUEST_ALLOWED;
     $PAGE_TYPE = "NORMAL";
     $PAGE_GUEST_ALLOWED = False;
-    $PAGE_TITLE = "";
+    $PAGE_TITLE = "No Page";
   }
 ?>

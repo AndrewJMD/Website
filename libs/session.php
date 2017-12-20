@@ -3,7 +3,7 @@
 
   require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
 
-  if(!isset($_SESSION['id']))
+  if (!isset($_SESSION['id']))
   {
     $_SESSION['id'] = -1;
     $_SESSION['level'] = Level::GUEST;

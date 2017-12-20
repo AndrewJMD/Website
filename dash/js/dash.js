@@ -1,4 +1,4 @@
-Dash = {};
+var Dash = {};
 
 Dash.error = {
   no_api_provided: "No api was provided.",
@@ -20,15 +20,16 @@ $(document).ready(function(){
 });
 
 Dash.getCode = function(c){
-  for( var prop in Dash.result ) {
-     if( Dash.result[ prop ] === c )
-       return prop;
+  for (var prop in Dash.result) {
+    if (Dash.result[ prop ] === c) {
+      return prop;
+    }
   }
 };
 
 Dash.get = function(i, d, s) {
-  f = {
-    error: function(e) {
+  var f = {
+    error(e) {
       console.log("Dash.get unhandled error",e);
     }
   };
@@ -55,8 +56,8 @@ Dash.get = function(i, d, s) {
       }
     }
   } else {
-    for(var prop in input) {
-      f[prop] = input[prop];
+    for(var p in i) {
+      f[p] = input[p];
     }
   }
   if ("api" in f && "success" in f && "data" in f) {
@@ -65,14 +66,14 @@ Dash.get = function(i, d, s) {
       type: "POST",
       dataType: "json",
       data: f.data,
-      success: function(d){
-        if(d.code == Dash.Result.VALID) {
+      success(d) {
+        if(d.code === Dash.Result.VALID) {
           f.success(d);
         } else {
           f.error(d);
         }
       },
-      error: function(d){
+      error(d) {
         console.log("Error in Dash.get", d);
       }
     });
@@ -88,11 +89,11 @@ Dash.get = function(i, d, s) {
 Dash.Template = function(f) {
   this.t = "";
   $.ajax({
-    url: Dash.DASH+'templates/'+f,
-    type: 'get',
+    url: Dash.DASH+"templates/"+f,
+    type: "get",
     async: false,
     context: this,
-    success: function(h) {
+    success(h) {
       this.t = h;
     }
   });
