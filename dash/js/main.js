@@ -36,8 +36,7 @@ function loadPage(a, b, c) {
       });
     },
     error: function(data){
-      console.log("Error");
-      console.log(data);
+      console.log("Error loading page",data);
       Pace.stop();
     }
   });
@@ -45,20 +44,7 @@ function loadPage(a, b, c) {
 
 window.onpopstate = function(event) {
   Pace.restart();
-  $.ajax({
-    url: "libs/getpage.php",
-    type: "POST",
-    dataType: "json",
-    data: event.state,
-    success: function(data){
-      $(".content-wrapper").html(data.data);
-      Pace.stop();
-    },
-    error: function(data){
-      console.log("Error");
-      console.log(data);
-    }
-  });
+  loadPage(event.state.a, event.state.b, event.state.c);
 };
 
 history.replaceState({
