@@ -17,8 +17,6 @@ DBNAME=compcamps
 DBUSER=mentor
 DBPASSWD=admin
 
-echo -e "\n--- Mkay, installing now... ---\n"
-
 echo -e "\n--- Updating packages list ---\n"
 apt-get -qq update
 
@@ -48,7 +46,7 @@ mysql -uroot -p$DBPASSWD -e "CREATE DATABASE $DBNAME" >> /vagrant/vm_build.log 2
 mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'localhost' identified by '$DBPASSWD'" > /vagrant/vm_build.log 2>&1
 
 echo -e "\n--- Installing PHP-specific packages ---\n"
-apt-get -y install php apache2 libapache2-mod-php php-curl php-gd php-mysql php-gettext >> /vagrant/vm_build.log 2>&1
+apt-get -y install php apache2 libapache2-mod-php phpphp-curl php-gd php-mysql php-gettext >> /vagrant/vm_build.log 2>&1
 
 echo -e "\n--- Enabling mod-rewrite ---\n"
 a2enmod rewrite >> /vagrant/vm_build.log 2>&1
@@ -59,6 +57,9 @@ sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 echo -e "\n--- Setting document root to vagrant directory ---\n"
 rm -rf /var/www/html
 ln -fs /vagrant/www/ /var/www/html
+
+echo -e "\n--- Importing fake data into MySQL ---\n"
+sh /vagrant/tools/mysql_import.sh
 
 echo -e "\n--- We definitly need to see the PHP errors, turning them on ---\n"
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/apache2/php.ini

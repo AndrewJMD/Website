@@ -84,6 +84,8 @@
         $link->query("UPDATE `users` SET `password` = '$passwordn', `hash_pass` = '1', `change_pass` = '0' WHERE `username` = '$username'");
 
         return Result::VALID;
+      } else {
+        return Result::INVALID;
       }
     }
 

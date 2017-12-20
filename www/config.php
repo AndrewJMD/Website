@@ -17,7 +17,6 @@
   function GetFromURL($tag, $default = "") {
     if (isset($_REQUEST[$tag]))
       return $_REQUEST[$tag];
-
     return $default;
   }
 
@@ -32,5 +31,6 @@
     global $PAGE_GUEST_ALLOWED;
     $PAGE_TYPE = "NORMAL";
     $PAGE_GUEST_ALLOWED = False;
+    $PAGE_TITLE = "";
   }
 ?>

@@ -1,4 +1,5 @@
 <?php
+  $PAGE_TITLE = "404";
   function OutputPage() { ?>
     <section class="content-header">
       <h1>
