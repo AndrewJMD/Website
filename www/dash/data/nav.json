@@ -5,7 +5,7 @@
     "children" : {
       "Dashboard" : {
         "icon" : "fa fa-dashboard",
-        "short" : "web-dash"
+        "short" : "dashboard"
       },
       "Registrations" : {
         "view-level" : "1",
