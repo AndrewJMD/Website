@@ -11,11 +11,18 @@ $(document).on('click', 'a', function(e) {
       success: function(data){
         $(".content-wrapper").html(data.data);
         history.pushState(state, data.title + " | CCDash", a);
-        Pace.stop();
+        $("script.pagejs").each(function(){
+          $(this).remove();
+        });
+        $.get(dash.dash+"includes/scripts.php?a="+a,function(html){
+          $("body").append(html);
+          Pace.stop();
+        });
       },
       error: function(data){
         console.log("Error");
         console.log(data);
+        Pace.stop();
       }
     });
   }

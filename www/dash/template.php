@@ -28,7 +28,9 @@
   <script>
     var dash = {
       result : <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>,
-      level: <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>
+      level: <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>,
+      dash: "<?php echo DASH; ?>",
+      root: "<?php echo ROOT; ?>"
     }
   </script>
 
@@ -245,9 +247,7 @@
 
 <script src="<?php echo DASH; ?>js/template.js"></script>
 
-<?php if (file_exists(DROOT."dash/js/pages/$a.js")){ ?>
-  <script src="<?php echo DASH; ?>js/pages/<?php echo $a; ?>.js"></script>
-<?php } ?>
+<?php include(DROOT."dash/includes/scripts.php"); ?>
 
 <script>
   $(document).ready(function () {
