@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="<?php echo DASH; ?>css/admin.min.css">
   <link rel="stylesheet" href="<?php echo DASH; ?>css/skin-blue.min.css">
 
+  <!-- Pace style -->
+  <link rel="stylesheet" href="<?php echo DASH;?>libs/pace/pace.min.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -220,6 +223,8 @@
 <script src="<?php echo DASH; ?>libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo DASH; ?>libs/fastclick/fastclick.js"></script>
+<!-- PACE -->
+<script src="<?php echo DASH; ?>libs/pace/pace.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo DASH; ?>js/adminlte.min.js"></script>
 

@@ -10,6 +10,7 @@ $(document).on('click', 'a', function(e) {
     success: function(data){
       $(".content-wrapper").html(data.data);
       history.pushState(state, data.title + " | CCDash", a);
+      Pace.stop();
     },
     error: function(data){
       console.log("Error");
@@ -27,6 +28,7 @@ window.onpopstate = function(event) {
     data: event.state,
     success: function(data){
       $(".content-wrapper").html(data.data);
+      Pace.stop();
     },
     error: function(data){
       console.log("Error");
