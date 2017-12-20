@@ -200,7 +200,12 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+      <b>Active</b>
+      <a target="_blank" href="https://github.com/CompCamps/Website/commit/<?php echo shell_exec("git log --pretty=format:'%H' -n 1"); ?>">
+        <?php echo shell_exec("git log --pretty=format:'%h' -n 1"); ?>
+      </a> on <a target="_blank" href="https://github.com/CompCamps/Website/tree/<?php echo shell_exec("git rev-parse --abbrev-ref HEAD"); ?>">
+        <?php echo shell_exec("git rev-parse --abbrev-ref HEAD"); ?>
+      </a>
     </div>
     <strong>CompCamps Dash</strong>
   </footer>
