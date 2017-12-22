@@ -2,3 +2,4 @@
 *.log
 /.sass-cache/*
 compcamps.sql
+/css/www/

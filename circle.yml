@@ -1,5 +1,25 @@
+dependencies:
+  pre:
+    - sudo apt update; sudo apt install ruby-sass
+
+compile:
+    override:
+      - mkdir css
+      - sass --update resources/www/scss:www/css
+
 test:
   override:
-    - python ./build/tests/filenames.py .
-    - python ./build/tests/existence.py .
+    - python ./build/tests/filenames.py www
+    - python ./build/tests/existence.py www
     - sh ./build/tests/line-endings.sh
+
+deployment:
+  testing:
+    branch: master
+    commands:
+      - scp -r www/* mentor@compcamps.com:/public_html/testing
+
+  production:
+    tag: /release-.*/
+    commands:
+      - scp -r www/* mentor@compcamps.com:/public_html/

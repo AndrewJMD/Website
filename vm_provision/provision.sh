@@ -22,8 +22,12 @@ echo -e "\n--- Mkay, installing now... ---\n"
 echo -e "\n--- Updating packages list ---\n"
 apt-get -qq update
 
+echo -e "\n--- Upgradig Packages ---\n"
+apt-get upgrade -y >> /vagrant/vm_build.log 2>&1
+
 echo -e "\n--- Install base packages ---\n"
-apt-get -y install vim curl build-essential python-software-properties git >> /vagrant/vm_build.log 2>&1
+apt-get -y install vim curl build-essential python-software-properties git ruby-sass ruby-dev >> /vagrant/vm_build.log 2>&1
+gem install listen
 
 echo -e "\n--- Updating packages list ---\n"
 apt-get -qq update
