@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 echo -e "Starting sass --watch"
 pkill sass
 rm /vagrant/sass.log
