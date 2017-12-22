@@ -1,10 +1,23 @@
 <?php
+
+  function url_get_contents ($Url) {
+    if (!function_exists('curl_init')){
+        die('CURL is not installed!');
+    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $Url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return $output;
+  }
+
   class GooglePhotos {
 
     const RE = '/(?<!=)"https:\/\/lh3\.googleusercontent\.com\/([^\/\[]+?)",[0-9]+?,/';
 
     public static function albumArray($shareable_link) {
-      $str = file_get_contents($shareable_link);
+      $str = url_get_contents($shareable_link);
       preg_match_all(self::RE, $str, $matches, PREG_SET_ORDER, 0);
       array_pop($matches);
       $links = array();
@@ -22,7 +35,7 @@
       $albums = func_get_args();
       $links = array();
       foreach($albums as $album){
-        $str = file_get_contents($album);
+        $str = url_get_contents($album);
         preg_match_all(self::RE, $str, $matches, PREG_SET_ORDER, 0);
         array_pop($matches);
         foreach($matches as $match)
