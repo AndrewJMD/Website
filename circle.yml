@@ -17,9 +17,9 @@ deployment:
   testing:
     branch: master
     commands:
-      - scp -r www/* mentor@compcamps.com:/public_html/testing
+      - scp -r www/* mentor@compcamps.com:/home/mentor/public_html/testing
 
   production:
     tag: /release-.*/
     commands:
-      - scp -r www/* mentor@compcamps.com:/public_html/
+      - scp -r www/* mentor@compcamps.com:/home/mentor/public_html/
