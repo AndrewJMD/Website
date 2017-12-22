@@ -58,7 +58,7 @@ sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 
 echo -e "\n--- Setting document root to vagrant directory ---\n"
 rm -rf /var/www/html
-ln -fs /vagrant/ /var/www/html
+ln -fs /vagrant/www/ /var/www/html
 
 echo -e "\n--- We definitly need to see the PHP errors, turning them on ---\n"
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/apache2/php.ini
