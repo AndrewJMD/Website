@@ -16,7 +16,7 @@ Warnings:
 invalid_names = ["image","picture","pic","img","file","page"]
 invalid_characters = "()'\"!@#$%^&*_=+{}[]|\\/,?"
 common_extensions = ["sample","yml","html","php","json","css","py","js","otf","svg","woff","woff2","ttf","eot","less","scss","jpg","png","sh","md","gif","map","conf","sql","xml"]
-uppercase_exceptions = ["README.md","Vagrantfile"]
+uppercase_exceptions = ["README.md","Vagrantfile","FontAwesome.otf"]
 
 scandir = ""
 try:

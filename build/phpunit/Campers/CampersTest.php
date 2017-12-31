@@ -2,8 +2,8 @@
 
   declare(strict_types=1);
 
-  require_once("config.php");
-  require_once("libs/session.php");
+  require_once("www/config.php");
+  require_once("www/libs/session.php");
 
   use PHPUnit\Framework\TestCase;
 
