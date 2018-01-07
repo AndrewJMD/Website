@@ -8,10 +8,10 @@ include('includes/header.php');
 
 <section class="register-section">
   <form class="register-form">
-    <label for="firstname">First Name</label>
+    <label for="firstname">First Name</label><br />
     <input type="text" id="firstname" name="firstname" />
     <br />
-    <label for="week">Week</label>
+    <label for="week">Week</label><br />
     <select id="week">
       <option value="1">Week One</option>
       <option value="2">Week Two</option>
