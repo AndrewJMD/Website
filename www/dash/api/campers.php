@@ -20,12 +20,12 @@
         );
       } else {
         $campers = array();
-        foreach($raw as $camper)
+        foreach ($raw as $camper)
         {
           $finalcamper = array();
-          foreach($camper as $key=>$value)
+          foreach ($camper as $key=>$value)
           {
-            if(!(is_null($value) || $value == ''))
+            if (!(is_null($value) || $value == ''))
             {
               $finalcamper[$key] = $value;
             }
@@ -47,9 +47,9 @@
         );
       } else {
         $finalcamper = array();
-        foreach($raw as $key=>$value)
+        foreach ($raw as $key=>$value)
         {
-          if(!(is_null($value) || $value == ''))
+          if (!(is_null($value) || $value == ''))
           {
             $finalcamper[$key] = $value;
           }

@@ -1,5 +1,5 @@
 <?php
-  if(!isset($CALENDAR_STYLE_PRESENT)){
+  if (!isset($CALENDAR_STYLE_PRESENT)){
     $CALENDAR_STYLE_PRESENT = 1;
   ?>
   <style>

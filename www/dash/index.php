@@ -9,7 +9,7 @@
 
   $a = GetFromURL('a','dashboard');
 
-  if($_SESSION['id'] == -1 && $a != "login") {
+  if ($_SESSION['id'] == -1 && $a != "login") {
     header("Location: login");
   }
 
