@@ -8,7 +8,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Search&nbsp;</h3>
-          <input type="text">
+          <input type="text" id="campers-search">
           <div class="box-tools">
             <ul class="pagination pagination-sm no-margin pull-right">
               <li><a onclick="">1</a></li>
@@ -22,7 +22,7 @@
             <tr>
               <th style="width: 10px">#</th>
               <th>Name</th>
-              <th>Discriminator</th>
+              <th>Username</th>
               <th style="width: 40px">Label</th>
             </tr>
           </table>
