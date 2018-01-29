@@ -12,7 +12,7 @@
     define("DROOT",$_SERVER['DOCUMENT_ROOT']."/");
     require DROOT.'vendor/autoload.php';
   } else {
-    require "./www/vendor/autoload.php";
+    require "./vendor/autoload.php";
   }
 
   abstract class Result
