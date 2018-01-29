@@ -10,9 +10,10 @@
     define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']."/");
     define("DASH",ROOT."dash/");
     define("DROOT",$_SERVER['DOCUMENT_ROOT']."/");
+    require DROOT.'vendor/autoload.php';
+  } else {
+    require "./www/vendor/autoload.php";
   }
-
-  require DROOT.'vendor/autoload.php';
 
   abstract class Result
   {
