@@ -2,5 +2,8 @@
     "require-dev": {
         "codacy/coverage": "dev-master",
         "phpunit/phpunit": "^6.5"
+    },
+    "require": {
+        "cekurte/environment": "^0.3.0"
     }
 }

@@ -1,11 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
-<<<<<<< HEAD
   config.vm.provision :shell, path: "vm_provision/provision.sh"
   config.vm.provision :shell, path: "vm_provision/up.sh", run: "always"
-=======
-  config.vm.provision :shell, :path => "vm_provision/provision.sh"
->>>>>>> Use Xenial
   config.vm.network "private_network", ip: "10.0.0.10"
 
   config.vm.provider "virtualbox" do |vb|

@@ -39,5 +39,29 @@
       }
       echo json_encode($response);
       break;
+    case "get":
+      $raw = Campers::GetFromUsername(GetFromURL("u",""), GetFromURL("l","simple"));
+      if (gettype($raw) != "object") {
+        $response = array(
+          "code" => $raw
+        );
+      } else {
+        $finalcamper = array();
+        foreach($raw as $key=>$value)
+        {
+          if(!(is_null($value) || $value == ''))
+          {
+            $finalcamper[$key] = $value;
+          }
+        }
+        $response = array(
+          "code" => Result::VALID,
+          "data" => $finalcamper
+        );
+      }
+      echo json_encode($response);
+      break;
+    default:
+      echo json_encode(array("code" => Result::INVALID));
   }
 ?>

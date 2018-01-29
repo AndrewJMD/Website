@@ -1,6 +1,5 @@
 <?php
-  $PAGE_TITLE = "Schedule";
-  $PAGE_HEADER = "Schedule";
+  $PAGE_HEADER = $PAGE_TITLE = "Schedule";
 
   function OutputPage() { ?>
     <!-- Main content -->

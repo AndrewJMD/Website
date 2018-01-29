@@ -1,15 +1,19 @@
 <?php
 
+  use function Cekurte\Environment\env;
+  use Cekurte\Environment\Environment;
+
   class Camper {
     public $_id, $name, $first, $username, $dob, $health_card, $phone, $parent_name;
     public $email, $health_notes, $gender, $shirt, $change_pass, $hash_pass, $discriminator;
+    public $camps_attended, $weeks_attended;
 
     function __construct($row)
     {
-      $this->_id          = $row['_id'];
-      $this->name         = explode(" ", $row['name'])[0];
-      $this->discriminator= $row['discriminator'];
-      $this->username    = Camper::SafeName($row);
+      $this->_id            = $row['_id'];
+      $this->name           = explode(" ", $row['name'])[0];
+      $this->discriminator  = $row['discriminator'];
+      $this->username       = Camper::SafeName($row);
 
       if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
         $this->first        = explode(" ", $row['name'])[0];
@@ -18,6 +22,15 @@
             $this->$key = $row[$key];
         }
       }
+
+      if (!Environment::get("CIRCLECI", false)) {
+        //Not in a CircleCI Test
+        //TODO In the future it would be nice to test data retrieving in CircleCI.
+        $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+        $this->weeks_attended = $link->query("SELECT _id FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+        $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+      }
+
     }
 
     public static function SafeName($row) {
