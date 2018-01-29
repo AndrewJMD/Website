@@ -1,5 +1,7 @@
 <?php
 
+  header('X-Frame-Options: DENY');
+
   require_once("../config.php");
   require_once("../libs/session.php");
 
