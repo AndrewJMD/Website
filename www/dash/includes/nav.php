@@ -23,14 +23,21 @@
       <?php
         $nav_data = json_decode(file_get_contents("data/nav.json"),true);
 
+        $tree = array();
+        $breadcrumb = array();
+
         foreach ($nav_data as $nav_item_name => $nav_item) {
           echo "<li class=\"header\">".$nav_item_name."</li>";
+          $tree = array($nav_item_name);
           foreach ($nav_item['children'] as $nav_list_name => $nav_list) {
-            echo "<li><a onclick=\"loadPage('$nav_list[short]')\">
+            if ($nav_list['short'] == $a) {
+              array_push($tree, $nav_list_name);
+              $active = "active";
+            } else {
+              $active = "";
+            }
+            echo "<li class=\"$active\" id=\"nav_item_$nav_list[short]\"><a onclick=\"loadPage('$nav_list[short]')\">
               <i class=\"$nav_list[icon]\"></i> <span>$nav_list_name</span>
-              <span class=\"pull-right-container\">
-                <!--<small class=\"label pull-right bg-green\">Hot</small>-->
-              </span>
             </a></li>";
           }
         }

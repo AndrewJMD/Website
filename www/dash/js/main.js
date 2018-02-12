@@ -35,6 +35,8 @@ function loadPage(a, b, c, push) {
         $("body").append(html);
         Pace.stop();
       });
+      $(".sidebar-menu > .active").removeClass("active");
+      $("#nav_item_"+a).addClass("active");
     },
     error(data) {
       console.log("Error loading page",data);

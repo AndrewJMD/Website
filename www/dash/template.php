@@ -201,11 +201,6 @@
       <h1 id='page_header'>
         <?php echo $PAGE_HEADER; ?>
       </h1>
-      <!--<ol class="breadcrumb">
-        <li><a onclick=""><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a onclick="">Examples</a></li>
-        <li class="active">404 error</li>
-      </ol>-->
     </section>
     <div id='page_content'>
       <?php OutputPage(); ?>
