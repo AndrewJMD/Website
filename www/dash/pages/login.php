@@ -49,13 +49,21 @@
             <span id='response'></span>
           </div>
         </div>
-        <br/>
-        <a href="#">Reset Password</a><br>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<?php echo DASH; ?>js/dash.js"></script>
+    <script>
+      Dash.Result = <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>;
+      Dash.Level =  <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>;
+      Dash.DASH = "<?php echo DASH; ?>";
+      Dash.ROOT = "<?php echo ROOT; ?>";
+      Dash.Campers =  {
+        Filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
+      }
+    </script>
     <script>
       function submit() {
         $.ajax({
@@ -64,14 +72,18 @@
           dataType: "json",
           data: {"f" : "login", "username" : $("#username").val(), "password" : $("#password").val()},
           success: function(data){
+            console.log(data);
             switch (data.result) {
-              case 2:
+              case Dash.Result.MYSQLERROR:
+                $("#response").html("<span style='color:red'>MySQL Error</span>");
+                break;
+              case Dash.Result.CHANGE:
                 window.location.replace("change");
                 break;
-              case 1:
+              case Dash.Result.VALID:
                 window.location.replace("home");
                 break;
-              case 0:
+              case Dash.Result.INVALID:
                 $("#response").html("<span style='color:red'>Incorrect</span>");
                 $("#password").val("");
                 break;

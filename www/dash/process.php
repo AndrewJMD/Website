@@ -9,13 +9,13 @@
       require_once("../libs/auth.php");
       $username = GetFromURL('username');
       $password = GetFromURL('password');
-      echo "{\"result\":".Auth::Login($username, $password)."}";
+      echo json_encode(Auth::Login($username, $password));
       break;
 
     case 'change':
       require_once("../libs/auth.php");
       $password = GetFromURL('password');
-      echo "{\"result\":".Auth::ChangePassword($_SESSION['username'], $password)."}";
+      echo json_encode(Auth::ChangePassword($_SESSION['username'], $password));
       break;
 
     case 'signout':
@@ -23,6 +23,7 @@
       $_SESSION['username'] = "";
       $_SESSION['level'] = 0;
       $_SESSION['name'] = "";
+      header("Location: ".DASH);
 
     default:
       # code...
