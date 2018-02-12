@@ -7,31 +7,51 @@
 
   $f = GetFromURL("f","ping");
 
-  switch($f) {
+  function removeEmpty($raw) {
+    $campers = array();
+    foreach ($raw as $camper)
+    {
+      $finalcamper = array();
+      foreach ($camper as $key=>$value)
+      {
+        if (!(is_null($value) || $value == ''))
+        {
+          $finalcamper[$key] = $value;
+        }
+      }
+      array_push($campers, $finalcamper);
+    }
+    return $campers;
+  }
+
+  function output($raw, $type = "array")
+  {
+    if (gettype($raw) != $type) {
+      $response = array(
+        "code" => $raw
+      );
+    } else {
+      $response = array(
+        "code" => Result::VALID,
+        "data" => $raw
+      );
+    }
+    echo json_encode($response);
+  }
+
+  switch ($f) {
     case "ping":
-      echo "pong";
+      output("pong", "string");
       break;
 
-    case "campers":
-      $raw = Campers::GetAllCampers(GetFromURL("l","simple"));
+    case "all":
+      $raw = Campers::GetAllCampers(GetFromURL("a","simple"));
       if (gettype($raw) != "array") {
         $response = array(
           "code" => $raw
         );
       } else {
-        $campers = array();
-        foreach ($raw as $camper)
-        {
-          $finalcamper = array();
-          foreach ($camper as $key=>$value)
-          {
-            if (!(is_null($value) || $value == ''))
-            {
-              $finalcamper[$key] = $value;
-            }
-          }
-          array_push($campers, $finalcamper);
-        }
+        $campers = removeEmpty($raw);
         $response = array(
           "code" => Result::VALID,
           "data" => $campers
@@ -39,28 +59,44 @@
       }
       echo json_encode($response);
       break;
-    case "get":
-      $raw = Campers::GetFromUsername(GetFromURL("u",""), GetFromURL("l","simple"));
-      if (gettype($raw) != "object") {
+
+    case "year":
+      $raw = Campers::GetCampersFromYear(GetFromURL("a",date("Y")), GetFromURL("b","simple"));
+      if (gettype($raw) != "array") {
         $response = array(
           "code" => $raw
         );
       } else {
-        $finalcamper = array();
-        foreach ($raw as $key=>$value)
-        {
-          if (!(is_null($value) || $value == ''))
-          {
-            $finalcamper[$key] = $value;
-          }
-        }
+        $campers = removeEmpty($raw);
         $response = array(
           "code" => Result::VALID,
-          "data" => $finalcamper
+          "data" => $campers
         );
       }
       echo json_encode($response);
       break;
+
+    case "camp":
+      $raw = Campers::GetCampersFromCamp(GetFromURL("a",$_SESSION['camp']['_id']), GetFromURL("b","simple"));
+      if (gettype($raw) != "array") {
+        $response = array(
+          "code" => $raw
+        );
+      } else {
+        $campers = removeEmpty($raw);
+        $response = array(
+          "code" => Result::VALID,
+          "data" => $campers
+        );
+      }
+      echo json_encode($response);
+      break;
+
+    case "get":
+      $raw = Campers::GetFromUsername(GetFromURL("a",""), GetFromURL("b","simple"));
+      output($raw, "object");
+      break;
+
     default:
       echo json_encode(array("code" => Result::INVALID));
   }

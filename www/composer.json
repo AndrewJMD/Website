@@ -1,0 +1,6 @@
+{
+	"require": {
+	  "cekurte/environment": "^0.3.0",
+	  "league/oauth2-github": "^2.0"
+	}
+}

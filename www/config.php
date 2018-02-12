@@ -22,7 +22,13 @@
     const CHANGE        = 2;
     const INSUFFICIENT  = 3;
     const NOTFOUND      = 4;
-    const MYSQLERROR    = 50;
+    const REDIRECT      = 5;
+
+    //MYSQL
+    const MYSQLERROR    = 50; //TODO Change to MYSQLCONNECT
+    const MYSQLPREPARE  = 51;
+    const MYSQLBIND     = 52;
+    const MYSQLEXECUTE  = 53;
   }
 
   abstract class Level

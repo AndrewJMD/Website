@@ -1,0 +1,15 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9.]+)/([a-zA-Z0-9.]+)/([a-zA-Z0-9.]+)/(.+)/?$ $1.php?f=$2&a=$3&b=$4 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9.]+)/([a-zA-Z0-9.]+)/(.+)/?$ $1.php?f=$2&a=$3 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9.]+)/([a-zA-Z0-9.]+)/?$ $1.php?f=$2 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9.]+)/?$ $1.php [L,QSA]

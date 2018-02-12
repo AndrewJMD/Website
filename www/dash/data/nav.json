@@ -4,7 +4,7 @@
     "edit_level" : "1",
     "children" : {
       "Dashboard" : {
-        "icon" : "fa fa-dashboard",
+        "icon" : "fas fa-tachometer-alt",
         "short" : "dashboard"
       },
       "Registrations" : {
@@ -18,6 +18,10 @@
     "view_level" : "7",
     "edit_level" : "1",
     "children" : {
+      "Camps" : {
+        "icon" : "fas fa-calendar-alt",
+        "short" : "camps"
+      },
       "Schedule" : {
         "icon" : "fa fa-calendar",
         "short" : "schedule"

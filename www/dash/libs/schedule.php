@@ -8,6 +8,7 @@
       if (!$link) {
         return Result::MYSQLERROR;
       }
+      //TODO Prepared Statements
       if ($result = $link->query(
         "SELECT `sessions`.*,
           (SELECT `color` FROM `session_types`

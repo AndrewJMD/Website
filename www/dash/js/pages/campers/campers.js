@@ -1,5 +1,5 @@
 var Dash;
-Dash.get("campers",{"f": "campers", "l": Dash.Campers.Filter.SIMPLE},
+Dash.get("campers/camp/"+Dash.Week._id,
   function(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("campers/camper-row.html");
@@ -16,10 +16,10 @@ $(function(){
   $("#campers-search").on("input propertychange",function() {
     var query = $(this).val().toLowerCase();
     $("#campers-table tbody").children().each(function(i) {
-      if (i == 0) { return; }
+      if (i === 0) { return; }
       var elements = $(this).children();
       var id        = $(elements[0]).html();
-      var name      = $(elements[1]).find('a').html();
+      var name      = $(elements[1]).find("a").html();
       var username  = $(elements[2]).html();
 
       if (

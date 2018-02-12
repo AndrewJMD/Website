@@ -64,16 +64,19 @@ jobs:
       - run: sh ./build/tests/line-endings.sh
 
   deploy-testing:
-    machine:
-      enabled: true
+    docker:
+      # specify the version you desire here
+      - image: circleci/php:latest-node-browsers
 
     working_directory: ~/build-output
 
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-
-      - run: scp -r www/* mentor@compcamps.com:/home/mentor/public_html/testing
+          
+      - run: cd www/
+      - run: composer install
+      - run: scp -r * mentor@compcamps.com:/home/mentor/public_html/testing
 
 workflows:
   version: 2

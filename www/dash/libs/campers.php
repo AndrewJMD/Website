@@ -5,15 +5,14 @@
 
   class Camper {
     public $_id, $name, $first, $username, $dob, $health_card, $phone, $parent_name;
-    public $email, $health_notes, $gender, $shirt, $change_pass, $hash_pass, $discriminator;
+    public $email, $health_notes, $gender, $shirt;
     public $camps_attended, $weeks_attended;
 
     function __construct($row)
     {
       $this->_id            = $row['_id'];
       $this->name           = explode(" ", $row['name'])[0];
-      $this->discriminator  = $row['discriminator'];
-      $this->username       = Camper::SafeName($row);
+      $this->username       = $row['username'];
 
       if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
         $this->first        = explode(" ", $row['name'])[0];
@@ -32,14 +31,14 @@
       }
 
     }
-
-    public static function SafeName($row) {
-      $first = strtolower(explode(" ", $row['name'])[0]);
-      return $first.".".$row['discriminator'];
-    }
   }
 
   class Campers {
+
+    const YEAR_ALL_STMT     = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year`= ?)) ORDER BY `name` ASC";
+    const YEAR_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year`= ?)) ORDER BY `name` ASC";
+    const CAMP_ALL_STMT     = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
+    const CAMP_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
 
     public static function GetAllCampers($filter = "all")
     {
@@ -48,24 +47,47 @@
         return Result::MYSQLERROR;
       }
       switch($filter){
+        //TODO Switch to PDO and ORM
         case "all":
           $q = "SELECT * from `users` WHERE `level` = '".Level::CAMPER."'";
           break;
         case "simple":
-          $q = "SELECT `_id`,`name`,`discriminator` from `users` WHERE `level` = '".Level::CAMPER."'";
+          $q = "SELECT `_id`,`name` from `users` WHERE `level` = '".Level::CAMPER."'";
           break;
       }
       if ($result = $link->query($q)) {
-        $campers = array();
-        $raw = $result->fetch_all(MYSQLI_ASSOC);
-        foreach($raw as &$camper)
-        {
-          array_push($campers, new Camper($camper));
-        }
-        return $campers;
+        return Campers::_FetchToCamperArray($stmt);
       } else {
         return Result::INVALID;
       }
+    }
+
+    public static function GetCampersFromYear($year, $filter = "all")
+    {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::YEAR_ALL_STMT : Campers::YEAR_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
+      }
+      if (!$stmt->execute(array($year))) {
+        return Result::MYSQLEXECUTE;
+      }
+      return Campers::_FetchToCamperArray($stmt);
+    }
+
+    public static function GetCampersFromCamp($camp, $filter = "all")
+    {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::CAMP_ALL_STMT : Campers::CAMP_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
+      }
+      if (!$stmt->execute(array($camp))) {
+        return Result::MYSQLEXECUTE;
+      }
+      return Campers::_FetchToCamperArray($stmt);
     }
 
     public static function GetFromUsername($username, $filter="all")
@@ -74,15 +96,15 @@
       if (!$link) {
         return Result::MYSQLERROR;
       }
-      $where = "AND CONCAT(SUBSTRING_INDEX(`name`,' ',1),'.',`discriminator`) = '$username'";
       switch($filter){
         case "all":
-          $q = "SELECT * from `users` WHERE `level` = '".Level::CAMPER."' $where";
+          $q = "SELECT * from `users` WHERE `username` = '$username'";
           break;
         case "simple":
-          $q = "SELECT `_id`,`name`,`discriminator` from `users` WHERE `level` = '".Level::CAMPER."' $where";
+          $q = "SELECT `_id`,`name`,`username` from `users` WHERE `username` = '$username'";
           break;
       }
+      //TODO Prepared Statements
       if ($result = $link->query($q)) {
         if($result->num_rows == 1)
           return new Camper($result->fetch_array(MYSQLI_ASSOC));
@@ -91,6 +113,16 @@
       } else {
         return Result::INVALID;
       }
+    }
+
+    static function _FetchToCamperArray($stmt)
+    {
+      $campers = array();
+      $raw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($raw as &$camper) {
+        array_push($campers, new Camper($camper));
+      }
+      return $campers;
     }
   }
 ?>

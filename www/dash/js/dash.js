@@ -27,56 +27,29 @@ Dash.getCode = function(c){
   }
 };
 
-Dash.get = function(i, d, s) {
+Dash.get = function(i, s) {
+  //TODO rewrite to take json object instead of multiple params
   var f = {
     error(e) {
       console.log("Dash.get unhandled error",e);
     }
   };
-  if (typeof(d) != "undefined") {
-    f.api = i;
-    if (typeof(d) == "object") {
-      if ("success" in d){
-        f.success = d.success;
-        delete d.success;
-      }
-      if ("data" in d) {
-        f.data = d.data;
-      } else {
-        f.data = d;
-      }
-    } else {
-      f.data = {f: d};
-    }
-    if (typeof(s) != "undefined") {
-      f.success = s;
-    } else {
-      if (!("success" in f)){
-        throw new Dash.Error(Dash.error.no_callback_provided);
-      }
-    }
+  f.api = i;
+  if (typeof(s) != "undefined") {
+    f.success = s;
   } else {
-    if ("data" in i){
-      f.data = i.data;
-    }
-    if ("api" in i){
-      f.api = i.api;
-    }
-    if ("success" in i){
-      f.success = i.success;
-    }
-    if ("error" in i){
-      f.error = i.error;
+    if (!("success" in f)){
+      throw new Dash.Error(Dash.error.no_callback_provided);
     }
   }
-  if ("api" in f && "success" in f && "data" in f) {
+  if ("api" in f && "success" in f) {
     $.ajax({
-      url: Dash.DASH+"api/"+f.api+".php",
+      url: Dash.DASH+"api/"+f.api,
       type: "POST",
       dataType: "json",
       data: f.data,
       success(d) {
-        if(d.code === Dash.Result.VALID) {
+        if (d.code === Dash.Result.VALID) {
           f.success(d);
         } else {
           f.error(d);
@@ -90,10 +63,49 @@ Dash.get = function(i, d, s) {
     throw new Dash.Error(Dash.error.no_api_provided);
   } else if (!("success" in f)) {
     throw new Dash.Error(Dash.error.no_callback_provided);
-  } else if (!("data" in f)) {
-    throw new Dash.Error(Dash.error.no_data_provided);
   }
 };
+
+Dash.do = function(f) {
+  if (typeof(f) == "string") {
+    f = {data: {}, action: f};
+  }
+  f.data.f = f.action;
+  $.ajax({
+    url: Dash.DASH+"process.php",
+    type: "POST",
+    dataType: "json",
+    data: f.data,
+    success(d) {
+      console.log(d);
+      if (d.code === Dash.Result.VALID) {
+        if (typeof(f.success) != "undefined") {
+          f.success(d);
+        }
+      } else if (d.code === Dash.Result.REDIRECT) {
+        window.location.href = d.location;
+      }  else {
+        if (typeof(f.error) != "undefined") {
+          f.error(d);
+        }
+      }
+    }, error(d){
+      console.log(d);
+    }
+  });
+}
+
+Dash.setweek = function(id) {
+  Dash.do({
+    action: 'setweek',
+    data: {
+      camp: id
+    },
+    success(d) {
+      location.reload();
+    }
+  });
+}
 
 Dash.Template = function(f) {
   this.t = "";

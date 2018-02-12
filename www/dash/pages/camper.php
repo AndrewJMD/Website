@@ -6,7 +6,10 @@
       <script>
         var camper = "<?php echo GetFromURL("b",""); ?>";
       </script>
-      <div class="row" id='userbadge'></div>
+      <div class="row">
+        <div id='userbadge'></div>
+        <div id='userprojects'></div>
+      </div>
     </section>
   <?php }
 ?>

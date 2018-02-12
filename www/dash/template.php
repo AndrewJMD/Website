@@ -8,8 +8,6 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo DASH; ?>libs/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   Theme style -->
@@ -18,6 +16,8 @@
 
   <!-- Pace style -->
   <link rel="stylesheet" href="<?php echo DASH;?>libs/pace/pace.min.css">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   <style>
     a {
@@ -141,43 +141,7 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown camps-menu">
-            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">2018, Week 1</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a onclick="">
-                      <p>
-                        All Camps
-                      </p>
-                    </a>
-                  </li>
-                  <li><!-- Task item -->
-                    <a onclick="">
-                      <p>
-                        2018, Week 1
-                      </p>
-                    </a>
-                  </li>
-                  <li><!-- Task item -->
-                    <a onclick="">
-                      <p>
-                        2018, Week 2
-                      </p>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a onclick="">View all camps</a>
-              </li>
-            </ul>
-          </li>
+          <?php include("includes/week-select.php"); ?>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
@@ -214,7 +178,7 @@
                   <a onclick="" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="process.php?f=signout" class="btn btn-default btn-flat">Sign out</a>
+                  <a onclick="Dash.do('signout');" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -290,9 +254,18 @@
   Dash.Campers =  {
     Filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
   }
+  Dash.Week = <?php
+      $values = array();
+      foreach($_SESSION['camp'] as $key=>$value) {
+        $values[$key] = $value;
+      }
+      echo json_encode($values);
+    ?>;
 </script>
 
 <script src="<?php echo DASH; ?>js/main.js"></script>
+
+<script src="<?php echo DASH; ?>includes/js/week-selector.js"></script>
 
 <?php include(DROOT."dash/includes/scripts.php"); ?>
 
