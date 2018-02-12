@@ -15,8 +15,7 @@
     const EX_DATA = array(
       "_id" => "100",
       "name" => "John Doe",
-      "discriminator" => "228",
-      "password" => "1\$salt\$fakepassword",
+      "username" => "johndoe",
       "dob" => "",
       "health_card" => "ABC123",
       "phone" => "5555824714",
@@ -26,8 +25,6 @@
       "gender" => "Male",
       "level" => "2",
       "shirt" => "Adult XL",
-      "change_pass" => "0",
-      "hash_pass" => "1"
     );
 
     public function testCamperCanBeCreatedFromValidRow()
@@ -41,14 +38,8 @@
     public function testCamperNameCreatedProperly()
     {
       $camper = new Camper(CampersTest::EX_DATA);
-      $this->expectOutputString("john.228");
+      $this->expectOutputString("johndoe");
       print $camper->username;
-    }
-
-    public function testCamperSafeName()
-    {
-      $this->expectOutputString("fake.123");
-      print Camper::SafeName(array("name" => "Fake Name", "discriminator"=> "123"));
     }
   }
 ?>
