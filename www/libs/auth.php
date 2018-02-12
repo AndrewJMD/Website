@@ -114,8 +114,8 @@
 
     public static function ChangePassword($username, $password)
     {
+      $ret = array("result" => Result::MYSQLERROR, "text" => "");
       if ($_SESSION['id'] != -1) {
-        $ret = array("result" => Result::MYSQLERROR, "text" => "");
         if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
           $ret['result'] = Result::MYSQLERROR;
           $ret['text'] = "Failed to connect";
@@ -145,6 +145,7 @@
       } else {
         $ret['result'] = Result::INSUFFICIENT;
       }
+      return $ret;
     }
   }
 ?>

@@ -30,7 +30,7 @@
       "hash_pass" => "1"
     );
 
-    public function testCamperCanBeCreatedFromValidRow(): void
+    public function testCamperCanBeCreatedFromValidRow()
     {
       $this->assertInstanceOf(
         Camper::class,
@@ -38,14 +38,14 @@
       );
     }
 
-    public function testCamperNameCreatedProperly(): void
+    public function testCamperNameCreatedProperly()
     {
       $camper = new Camper(CampersTest::EX_DATA);
       $this->expectOutputString("john.228");
       print $camper->username;
     }
 
-    public function testCamperSafeName(): void
+    public function testCamperSafeName()
     {
       $this->expectOutputString("fake.123");
       print Camper::SafeName(array("name" => "Fake Name", "discriminator"=> "123"));
