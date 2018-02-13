@@ -47,7 +47,7 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          
+
       - run: php vendor/bin/phpunit --coverage-clover build/coverage/xml
       - run: php vendor/bin/codacycoverage clover build/coverage/xml
 
@@ -76,9 +76,8 @@ jobs:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
-      - run: cd www/
-      - run: composer install
-      - run: scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
+      - run: cd www/ && composer install
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
 
 workflows:
   version: 2
