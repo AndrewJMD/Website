@@ -23,11 +23,8 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-
-<<<<<<< HEAD
+          
       - run: cd www/ && composer install
-=======
->>>>>>> circle ci fix
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css
       - run: python3 build/compile/minify.py
