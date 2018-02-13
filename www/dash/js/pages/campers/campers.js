@@ -1,6 +1,7 @@
-var Dash;
-Dash.get("campers/camp/"+Dash.Week._id,
-  function(d) {
+Dash.get({
+  api: "campers",
+  request: "camp/"+Dash.Week._id,
+  success(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("campers/camper-row.html");
       d.data.forEach(function(i){
@@ -8,7 +9,7 @@ Dash.get("campers/camp/"+Dash.Week._id,
       });
     }
   }
-);
+});
 
 $(function(){
   $("#campers-search").on("input propertychange",function() {

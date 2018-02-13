@@ -1,6 +1,7 @@
-var Dash;
-Dash.get("camps/all",
-  function(d) {
+Dash.get({
+  api: "camps",
+  request: "all",
+  success(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("camps/camp-row.html");
       d.data.forEach(function(i){
@@ -8,7 +9,7 @@ Dash.get("camps/all",
       });
     }
   }
-);
+});
 
 $(function(){
   $("#camps-search").on("input propertychange",function() {

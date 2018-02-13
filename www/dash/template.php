@@ -226,7 +226,7 @@
   }
   Dash.Week = <?php
       $values = array();
-      foreach($_SESSION['camp'] as $key=>$value) {
+      foreach ($_SESSION['camp'] as $key=>$value) {
         $values[$key] = $value;
       }
       echo json_encode($values);
