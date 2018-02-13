@@ -6,8 +6,6 @@ Dash.get("camps/all",
       d.data.forEach(function(i){
         $("#camps-table tr:last").after(t.exec(i));
       });
-    } else {
-      console.log("Retrieving campers failed with ",d.code);
     }
   }
 );

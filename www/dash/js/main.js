@@ -39,7 +39,6 @@ function loadPage(a, b, c, push) {
       $("#nav_item_"+a).addClass("active");
     },
     error(data) {
-      console.log("Error loading page",data);
       Pace.stop();
     }
   });

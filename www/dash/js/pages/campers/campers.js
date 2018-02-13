@@ -6,8 +6,6 @@ Dash.get("campers/camp/"+Dash.Week._id,
       d.data.forEach(function(i){
         $("#campers-table tr:last").after(t.exec(i));
       });
-    } else {
-      console.log("Retrieving campers failed with ",d.code);
     }
   }
 );

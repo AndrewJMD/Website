@@ -10,17 +10,15 @@
 
   function output($raw, $type = "array")
   {
-    if (gettype($raw) != $type) {
-      $response = array(
+    echo json_encode((gettype($raw) != $type) ?
+      array(
         "code" => $raw
-      );
-    } else {
-      $response = array(
+      ) :
+      array(
         "code" => Result::VALID,
         "data" => $raw
-      );
-    }
-    echo json_encode($response);
+      )
+    );
   }
 
   switch($f) {
