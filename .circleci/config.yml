@@ -75,7 +75,8 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          
+
+      - run: cd www/ && composer install
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
 
 workflows:
