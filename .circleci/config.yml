@@ -47,7 +47,11 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> php-test on master
       - run: php vendor/bin/phpunit --coverage-clover build/coverage/xml
       - run: php vendor/bin/codacycoverage clover build/coverage/xml
 
@@ -74,7 +78,7 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          
+
       - run: cd www/
       - run: composer install
       - run: scp -r * mentor@compcamps.com:/home/mentor/public_html/testing
@@ -87,9 +91,6 @@ workflows:
       - php-test:
           requires:
             - build
-          filters:
-            branches:
-              only: dash
       - python-test:
           requires:
             - build
