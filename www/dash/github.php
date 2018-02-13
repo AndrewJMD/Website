@@ -7,8 +7,8 @@
   use League\OAuth2\Client\Provider\Github;
 
   $provider = new Github([
-      'clientId'          => Secrets::GitHub::CLIENT,
-      'clientSecret'      => Secrets::GitHub::SECRET,
+      'clientId'          => Secrets::GITHUB_CLIENT,
+      'clientSecret'      => Secrets::GITHUB_SECRET,
       'redirectUri'       => DASH."github.php",
   ]);
 
