@@ -1,5 +1,6 @@
 <?php
   require_once("../../config.php");
+  require_once("../../secrets.php");
   require_once(DROOT."libs/session.php");
   require_once(DROOT."dash/libs/camps.php");
 
@@ -42,7 +43,7 @@
     case "current":
       output(Camps::GetCurrentCamp(), "object");
       break;
-      
+
     default:
       echo json_encode(array("code" => Result::INVALID));
   }

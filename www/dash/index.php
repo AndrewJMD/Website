@@ -3,8 +3,9 @@
   header('X-Frame-Options: DENY');
 
   require_once("../config.php");
+  require_once("../secrets.php");
   require_once("../libs/session.php");
-
+  
   GeneratePageDefaults();
 
   $a = GetFromURL('a','dashboard');
