@@ -45,7 +45,7 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-
+          
       - run: php vendor/bin/phpunit --coverage-clover build/coverage/xml
       - run: php vendor/bin/codacycoverage clover build/coverage/xml
 
