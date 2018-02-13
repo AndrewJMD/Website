@@ -1,5 +1,6 @@
 <?php
   require_once("../../config.php");
+  require_once("../../secrets.php");
   require_once(DROOT."libs/session.php");
   require_once(DROOT."dash/libs/campers.php");
 

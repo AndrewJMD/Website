@@ -1,5 +1,6 @@
 <?php
   require("../config.php");
+  require("../secrets.php");
   require("../libs/session.php");
 
   $f = GetFromURL('f','ping');
