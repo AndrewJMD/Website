@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/php:latest-node-browsers
 
     working_directory: ~/repo
@@ -13,11 +12,9 @@ jobs:
       - run: sudo apt update; sudo apt install ruby-sass
       - run: sudo npm install uglify-js -g #TODO install locally and cache the dependency
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run: composer install -n --prefer-dist
@@ -27,6 +24,7 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
+      - run: cd www/ && composer install
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css
       - run: python3 build/compile/minify.py
@@ -66,9 +64,8 @@ jobs:
       - run: sh ./build/tests/line-endings.sh
 
   deploy-testing:
-    docker:
-      # specify the version you desire here
-      - image: circleci/php:latest-node-browsers
+    machine:
+      enabled: true
 
     working_directory: ~/build-output
 
