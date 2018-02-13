@@ -26,7 +26,7 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-
+          
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css
       - run: python3 build/compile/minify.py
@@ -47,6 +47,7 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          
       - run: php vendor/bin/phpunit --coverage-clover build/coverage/xml
       - run: php vendor/bin/codacycoverage clover build/coverage/xml
 
@@ -95,6 +96,7 @@ workflows:
       - deploy-testing:
           requires:
             - python-test
+            - php-test
           filters:
             branches:
               only: master
