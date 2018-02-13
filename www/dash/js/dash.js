@@ -29,11 +29,10 @@ Dash.getCode = function(c){
 
 Dash.get = function(f) {
   if (typeof(f) == "string") {
-    f = {data: {}, api: f};
+    f = {data: {}, api: f, request: ""};
   }
-  f.data.api = f.api;
   $.ajax({
-    url: Dash.DASH+"api/"+f.api,
+    url: Dash.DASH+"api/"+f.api+"/"+f.request,
     type: "POST",
     dataType: "json",
     data: f.data,
@@ -42,10 +41,8 @@ Dash.get = function(f) {
         if (typeof(f.success) != "undefined") {
           f.success(d);
         }
-      } else {
-        if ("error" in f) {
-          f.error(d);
-        }
+      } else if ("error" in f) {
+        f.error(d);
       }
     }
   });
@@ -68,10 +65,8 @@ Dash.do = function(f) {
         }
       } else if (d.code === Dash.Result.REDIRECT) {
         window.location.href = d.location;
-      }  else {
-        if (typeof(f.error) != "undefined") {
-          f.error(d);
-        }
+      } else if (typeof(f.error) != "undefined") {
+        f.error(d);
       }
     }
   });

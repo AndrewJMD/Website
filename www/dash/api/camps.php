@@ -21,7 +21,7 @@
     );
   }
 
-  switch($f) {
+  switch ($f) {
     case "ping":
       output("pong", "string");
       break;
