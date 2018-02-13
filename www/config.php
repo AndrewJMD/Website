@@ -1,11 +1,5 @@
 <?php
 
-  //MYSQL
-  define("MYSQL_SERVER","localhost");
-  define("MYSQL_DATABASE","compcamps");
-  define("MYSQL_USER","mentor");
-  define("MYSQL_PASS","admin");
-
   if (isset($_SERVER['HTTP_HOST'])) {
     define("ROOT",(isset($_SERVER['HTTPS']) ? "https" : "http")."://".$_SERVER['HTTP_HOST']."/");
     define("DASH",ROOT."dash/");
