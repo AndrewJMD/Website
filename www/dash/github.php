@@ -7,8 +7,8 @@
   use League\OAuth2\Client\Provider\Github;
 
   $provider = new Github([
-      'clientId'          => 'dac08e3ee7f58eaaef8a',
-      'clientSecret'      => Secrets::GITHUB,
+      'clientId'          => Secrets::GitHub::CLIENT,
+      'clientSecret'      => Secrets::GitHub::SECRET,
       'redirectUri'       => DASH."github.php",
   ]);
 
@@ -65,7 +65,7 @@
       } catch (Exception $e) {
 
           // Failed to get user details
-          exit('Oh dear...');
+          header('Location: login.php');
       }
   }
 ?>
