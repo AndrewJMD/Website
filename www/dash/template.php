@@ -35,6 +35,10 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<?php
+  $client = new \Github\Client();
+  $client->authenticate($_SESSION['token'], null, \Github\Client::AUTH_HTTP_TOKEN);
+?>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -144,42 +148,13 @@
           <?php include("includes/week-select.php"); ?>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <img src="<?php echo $client->api('current_user')->show()['avatar_url']; ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $_SESSION['name']?></span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a onclick="">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a onclick="">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a onclick="">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a onclick="" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a onclick="Dash.do('signout');" class="btn btn-default btn-flat">Sign out</a>
-                </div>
+            <ul class="dropdown-menu" style="width:10px;">
+              <li class="footer">
+                <a onclick="Dash.do('signout');">Sign Out</a>
               </li>
             </ul>
           </li>

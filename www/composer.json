@@ -1,6 +1,9 @@
 {
 	"require": {
 	  "cekurte/environment": "^0.3.0",
-	  "league/oauth2-github": "^2.0"
+	  "league/oauth2-github": "^2.0",
+		"knplabs/github-api": "^2.7",
+		"php-http/guzzle6-adapter": "^1.1",
+		"symfony/options-resolver": "3.4.3"
 	}
 }
