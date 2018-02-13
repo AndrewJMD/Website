@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left info">
-        <p>Alexander Pierce</p>
+        <p><?php echo $_SESSION['name']?></p>
       </div>
     </div>
     <!-- search form -->
@@ -12,9 +12,9 @@
       <div class="input-group">
         <input type="text" name="q" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+          </button>
+        </span>
       </div>
     </form>
     <!-- /.search form -->
@@ -26,11 +26,13 @@
         foreach ($nav_data as $nav_item_name => $nav_item) {
           echo "<li class=\"header\">".$nav_item_name."</li>";
           foreach ($nav_item['children'] as $nav_list_name => $nav_list) {
-            echo "<li><a href=\"../widgets.html\">
-              <i class=\"".$nav_list['icon']."\"></i> <span>".$nav_list_name."</span>
-              <span class=\"pull-right-container\">
-                <small class=\"label pull-right bg-green\">Hot</small>
-              </span>
+            if ($nav_list['short'] == $a) {
+              $active = "active";
+            } else {
+              $active = "";
+            }
+            echo "<li class=\"$active\" id=\"nav_item_$nav_list[short]\"><a onclick=\"loadPage('$nav_list[short]')\">
+              <i class=\"$nav_list[icon]\"></i> <span>$nav_list_name</span>
             </a></li>";
           }
         }

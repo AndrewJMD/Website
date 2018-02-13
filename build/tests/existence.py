@@ -27,7 +27,7 @@ def check(text, regex):
         matchNum = matchNum + 1
         if len(match.groups()) != 0:
             src = match.group(1)
-            if "http" not in src:
+            if "http" not in src and not src.startswith("<?php"):
                 if not os.path.isfile(src) and not os.path.isfile(os.path.join(root,src)):
                     ret = 1
                     print "File not found:",os.path.join(root,file),src

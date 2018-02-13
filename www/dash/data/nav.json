@@ -1,25 +1,41 @@
 {
   "Website" : {
-    "view-level" : "3",
-    "edit-level" : "1",
+    "view_level" : "3",
+    "edit_level" : "1",
     "children" : {
       "Dashboard" : {
-        "icon" : "fa fa-dashboard",
-        "short" : "web-dash"
+        "icon" : "fas fa-tachometer-alt",
+        "short" : "dashboard"
       },
       "Registrations" : {
+        "view-level" : "1",
         "icon" : "fa fa-user-plus",
         "short" : "registrations"
       }
     }
   },
   "Camps" : {
-    "view-level" : "7",
-    "edit-level" : "3",
+    "view_level" : "7",
+    "edit_level" : "1",
     "children" : {
+      "Camps" : {
+        "icon" : "fas fa-calendar-alt",
+        "short" : "camps"
+      },
       "Schedule" : {
         "icon" : "fa fa-calendar",
         "short" : "schedule"
+      },
+      "Campers" : {
+        "icon" : "fa fa-users",
+        "short" : "campers",
+        "children" : {
+          "Camper" : {
+            "icon" : "fa fa-user",
+            "short" : "camper",
+            "hidden" : true
+          }
+        }
       }
     }
   }

@@ -1,4 +1,5 @@
 <?php
+header('X-Frame-Options: DENY');
 $page_title = 'Home';
 include('includes/head.php');
 include('includes/header.php');

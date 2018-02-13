@@ -3,3 +3,7 @@
 /.sass-cache/*
 compcamps.sql
 /www/css/*
+/www/vendor/
+*.lock
+/vendor/
+secrets.php
