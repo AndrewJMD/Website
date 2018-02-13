@@ -24,7 +24,10 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
+<<<<<<< HEAD
       - run: cd www/ && composer install
+=======
+>>>>>>> circle ci fix
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css
       - run: python3 build/compile/minify.py
@@ -72,8 +75,14 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+<<<<<<< HEAD
 
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
+=======
+      - run: cd www/
+      - run: composer install
+      - run: scp -r * mentor@compcamps.com:/home/mentor/public_html/testing
+>>>>>>> circle ci fix
 
 workflows:
   version: 2
