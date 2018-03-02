@@ -47,7 +47,6 @@ and more flexability than object-fit -->
       <a class="facebook" href="https://www.facebook.com/compcamps"><i class="fa fa-3x fa-facebook"></i></a>
     </p>
     <br/>
-    <a href="campers.php">View Past Campers</a>
   </div>
 </section>
 
