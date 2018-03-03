@@ -1,0 +1,61 @@
+<div class="form-group">
+  <label for="name">Name</label>
+  <input class="form-control" id="name" placeholder="Enter Full Name" autocomplete="off" type="text">
+</div>
+<div class="form-group">
+  <label for="dob">Date of Birth</label>
+  <input class="form-control" id="dob" placeholder="Click to Select" autocomplete="off" type="text" readonly="readonly">
+  <script>
+    var d = new Date();
+    var year = d.getFullYear() - 11;
+    var end = d.getFullYear() - 18;
+    d.setFullYear(year);
+    $('#dob').datepicker({ changeYear: true, changeMonth: true, yearRange: end + ":" + year + '', defaultDate: d});
+  </script>
+</div>
+<div class="form-group">
+  <label for="cellphone">Camper's Cellphone Number</label>
+  <input type="text" id="cellphone"></input>
+  <script src="libs/mask/mask.min.js"></script>
+  <script>
+    $("#cellphone").mask("(999) 999-9999");
+  </script>
+</div>
+<div class="form-group">
+  <label for="name">Shirt Size</label>
+  <select id="shirt" class="form-control">
+    <option>Youth Small</option>
+    <option>Youth Medium</option>
+    <option>Youth Large</option>
+    <option>Adult Small</option>
+    <option>Adult Medium</option>
+    <option>Adult Large</option>
+    <option>Adult X-Large</option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="health">Health Card Number</label>
+  <input class="form-control" id="health" placeholder="Enter Health Card" autocomplete="off" type="number">
+</div>
+<div class="form-group">
+  <label for="prov">Health Card Province</label>
+  <select id="prov" class="form-control">
+    <option value="AB">Alberta</option>
+    <option value="BC">British Columbia</option>
+    <option value="MB">Manitoba</option>
+    <option value="NB">New Brunswick</option>
+    <option value="NL">Newfoundland and Labrador</option>
+    <option value="NS">Nova Scotia</option>
+    <option value="NT">Northwest Terrirories</option>
+    <option value="NU">Nunavut</option>
+    <option value="ON">Ontario</option>
+    <option value="PE">Prince Edward Island</option>
+    <option value="QC">Quebec</option>
+    <option value="SK" selected>Saskatchewan</option>
+    <option value="YT">Yukon</option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="medical">Medical Notes</label><br/>
+  <textarea class="form-control" id="medical" style="resize: vertical;"></textarea>
+</div>
