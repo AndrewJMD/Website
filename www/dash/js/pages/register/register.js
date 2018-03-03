@@ -41,9 +41,15 @@ function prev() {
   }
 }
 
-function validateEmail(email) {
+function validateEmail(id) {
+    email = $(id).val();
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    if (!re.test(String(email).toLowerCase())) {
+      $(id).parent().addClass("has-error");
+      return true;
+    }
+    $(id).parent().removeClass("has-error");
+    return false;
 }
 
 function checkInput(id) {
@@ -81,6 +87,7 @@ function next() {
       var error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
+      error     = validateEmail("#parent_email") || error;
       if (!error) {
         $("#parent").slideUp();
         $("#github").slideDown();
