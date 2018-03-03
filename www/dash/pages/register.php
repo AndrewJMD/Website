@@ -51,12 +51,24 @@
               <div id="github" style="display:none">
                 <?php include("includes/registration/github.html"); ?>
               </div>
+              <div id="github-select" style="display:none">
+                <?php include("includes/registration/github-select.html"); ?>
+              </div>
+              <div id="github-create" style="display:none">
+                <?php include("includes/registration/github-create.html"); ?>
+              </div>
+              <div id="github-wait" style="display:none">
+                <?php include("includes/registration/github-wait.html"); ?>
+              </div>
+              <div id="github-done" style="display:none">
+                <?php include("includes/registration/github-done.html"); ?>
+              </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer" style="display:none" id="buttons">
-              <button type="button" class="btn btn-default" onclick="prev()">Back</button>
+              <button type="button" class="btn btn-default" onclick="prev()" id="prev-button">Back</button>
               <button type="button" class="btn btn-info pull-right" onclick="next()" id="next-button">Next</button>
-              <a class="btn btn-social btn-github pull-right" onclick="github()" id="github-button" style="display:none">
+              <a class="btn btn-social btn-github pull-right" onclick="next()" id="github-button" style="display:none">
                 <i class="fab fa-github" style="color:white;margin-top:5px"></i> Next
               </a>
             </div>

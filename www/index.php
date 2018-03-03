@@ -37,6 +37,9 @@ and more flexability than object-fit -->
             <img class="slider-image" :src="images[Math.abs(currentNumber) % images.length]"/>
           </div>
         </transition-group>
+        <div style="display:none">
+          <img :src="images[Math.abs(currentNumber + 1) % images.length]"/>
+        </div>
       </div>
     </div>
     <h3>Connect With Us!</h3>

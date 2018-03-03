@@ -89,9 +89,65 @@ function next() {
         state = 3;
       }
       break;
+    case 3:
+      $("#github").slideUp();
+      $("#github-select").slideDown();
+      $("#buttons").slideUp();
+      state = 4;
+      break;
+    case 4:
+      popup = window.open('github-js.php','GitHub Registration','width=1,height=1');
+      setTimeout(function(){popup.close()}, 500);
+      $("#github-select").slideUp();
+      $("#github-create").slideDown();
+      $("#buttons").slideDown();
+      $("#prev-button").hide();
+      $("#github-button").hide();
+      $("#next-button").show();
+      state = 5;
+      break;
+    case 5:
+      github();
+      state = 6;
+      break;
   }
 }
 
+var interval;
+
 function github() {
-  javascript:window.open('github-js.php','GitHub Registration','width=600,height=400');
+  popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
+  $("#github-select").slideUp();
+  $("#github-create").slideUp();
+  $("#buttons").slideUp();
+  $("#github-wait").show();
+  interval = setInterval(githubCheck, 500);
+}
+
+function githubCheck() {
+  if (popup.opener === null) {
+    clearInterval(interval);
+    setTimeout(function(){
+      $.get("includes/registration/github.php",function(data){
+        console.log(data);
+        if (data !== "__") {
+          githubDone(data);
+        } else {
+          github();
+        }
+      });
+    }, 1000);
+  }
+}
+
+function githubDone(username) {
+  clearInterval(interval);
+  $("#prev-button").hide();
+  $("#github-button").hide();
+  $("#next-button").show()
+  $("#buttons").show()
+  $("#github-wait").slideUp();
+  $("#github-done").slideDown();
+  $("#github-username").html(username);
+  state = 7;
 }

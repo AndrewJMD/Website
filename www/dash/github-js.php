@@ -9,8 +9,11 @@
   $provider = new Github([
       'clientId'          => Secrets::GITHUB_CLIENT,
       'clientSecret'      => Secrets::GITHUB_SECRET,
-      'redirectUri'       => DASH."github-js.php",
+      'redirectUri'       => DASH."github.php",
   ]);
+
+  $_SESSION['github'] = "js";
+  $_SESSION['username'] = "__";
 
   if (!isset($_GET['code'])) {
 
@@ -26,25 +29,5 @@
       unset($_SESSION['oauth2state']);
       exit('Invalid state');
 
-  } else {
-
-      // Try to get an access token (using the authorization code grant)
-      $token = $provider->getAccessToken('authorization_code', [
-          'code' => $_GET['code']
-      ]);
-
-      // Optional: Now you have a token you can look up a users profile data
-      try {
-          // We got an access token, let's now get the user's details
-          $user = $provider->getResourceOwner($token);
-
-          $_SESSION['token'] = $token->getToken();
-          $_SESSION['username'] = $user->getNickname();
-
-      } catch (Exception $e) {
-
-          // Failed to get user details
-          header('Location: github-failed.php');
-      }
   }
 ?>
