@@ -49,6 +49,7 @@ echo -e "\n--- Installing PHP-specific packages ---\n"
 apt-get -y install php apache2 libapache2-mod-php php-curl php-gd php-mysql php-gettext >> /vagrant/vm_build.log 2>&1
 
 echo -e "\n--- Installing composer packages ---\n"
+cd /vagrant
 composer install
 cd /vagrant/www
 composer install
