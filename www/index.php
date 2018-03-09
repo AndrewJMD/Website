@@ -39,12 +39,11 @@ and more flexability than object-fit -->
         </transition-group>
       </div>
     </div>
-    <h3>Connect With Us!</h3>
     <br/>
     <p class="social-icons">
-      <a class="twitter" href="https://twitter.com/compcamps"><i class="fa fa-3x fa-twitter"></i></a>
-      <a class="steam" href="http://steamcommunity.com/groups/msicompcamps"><i class="fa fa-3x fa-steam"></i></a>
-      <a class="facebook" href="https://www.facebook.com/compcamps"><i class="fa fa-3x fa-facebook"></i></a>
+      <a class="twitter" href="https://twitter.com/compcamps"><i class="fab fa-3x fa-twitter"></i></a>
+      <a class="steam" href="http://steamcommunity.com/groups/msicompcamps"><i class="fab fa-3x fa-steam"></i></a>
+      <a class="facebook" href="https://www.facebook.com/compcamps"><i class="fab fa-3x fa-facebook"></i></a>
     </p>
     <br/>
   </div>

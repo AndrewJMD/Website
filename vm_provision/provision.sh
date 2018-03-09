@@ -24,7 +24,7 @@ echo -e "\n--- Upgradig Packages ---\n"
 apt-get upgrade -y >> /vagrant/vm_build.log 2>&1
 
 echo -e "\n--- Install base packages ---\n"
-apt-get -y install vim curl build-essential python-software-properties git ruby-sass ruby-dev >> /vagrant/vm_build.log 2>&1
+apt-get -y install vim curl build-essential python-software-properties git ruby-sass ruby-dev composer >> /vagrant/vm_build.log 2>&1
 gem install listen
 
 echo -e "\n--- Updating packages list ---\n"
@@ -47,6 +47,11 @@ mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'loc
 
 echo -e "\n--- Installing PHP-specific packages ---\n"
 apt-get -y install php apache2 libapache2-mod-php php-curl php-gd php-mysql php-gettext >> /vagrant/vm_build.log 2>&1
+
+echo -e "\n--- Installing composer packages ---\n"
+composer install
+cd /vagrant/www
+composer install
 
 echo -e "\n--- Enabling mod-rewrite ---\n"
 a2enmod rewrite >> /vagrant/vm_build.log 2>&1
