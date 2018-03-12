@@ -12,6 +12,11 @@ var parent_name = "";
 var parent_phone = "";
 var parent_email = "";
 
+var github_username = "";
+
+var week1 = false;
+var week2 = false;
+
 function first() {
   $("#start").slideUp();
   $("#first").slideDown();
@@ -19,11 +24,20 @@ function first() {
   state = 1;
 }
 
+function returning() {
+  $("#start").slideUp();
+  $("#returning").slideDown();
+  $("#buttons").slideDown();
+  state = 100;
+}
+
 function prev() {
   switch(state) {
     case 1:
+    case 100:
       $("#start").slideDown();
       $("#first").slideUp();
+      $("#returning").slideUp();
       $("#buttons").slideUp();
       state = 0;
       break;
@@ -103,8 +117,6 @@ function next() {
       state = 4;
       break;
     case 4:
-      popup = window.open('github-js.php','GitHub Registration','width=1,height=1');
-      setTimeout(function(){popup.close()}, 500);
       $("#github-select").slideUp();
       $("#github-create").slideDown();
       $("#buttons").slideDown();
@@ -114,21 +126,44 @@ function next() {
       state = 5;
       break;
     case 5:
-      github();
+      github(7);
       state = 6;
+      break;
+    case 7:
+      $("#week-select").slideDown();
+      $("#github-done").slideUp();
+      state = 8;
+      break;
+    case 8:
+      week1 = $("#week-1").val();
+      week2 = $("#week-2").val();
+      if (!week1 && !week2) {
+        break;
+      }
+      $("#week-select").slideUp();
+      $("#payment").slideDown();
+      state = 9;
+      break;
+
+
+    case 101:
+      $("#github-done").slideUp();
+      $("#confirm-info").slideDown();
       break;
   }
 }
 
 var interval;
+var github_finish_state = 7;
 
-function github() {
+function github(finish_state) {
   popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
   $("#github-select").slideUp();
   $("#github-create").slideUp();
   $("#buttons").slideUp();
   $("#github-wait").show();
   interval = setInterval(githubCheck, 500);
+  github_finish_state = finish_state;
 }
 
 function githubCheck() {
@@ -140,7 +175,7 @@ function githubCheck() {
         if (data !== "__") {
           githubDone(data);
         } else {
-          github();
+          github(github_finish_state);
         }
       });
     }, 1000);
@@ -148,6 +183,7 @@ function githubCheck() {
 }
 
 function githubDone(username) {
+  github_username = username;
   clearInterval(interval);
   $("#prev-button").hide();
   $("#github-button").hide();
@@ -156,5 +192,5 @@ function githubDone(username) {
   $("#github-wait").slideUp();
   $("#github-done").slideDown();
   $("#github-username").html(username);
-  state = 7;
+  state = github_finish_state;
 }

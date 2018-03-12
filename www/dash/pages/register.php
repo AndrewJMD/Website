@@ -45,6 +45,9 @@
               <div id="first" style="display:none">
                 <?php include("includes/registration/first.html"); ?>
               </div>
+              <div id="returning" style="display:none">
+                <?php include("includes/registration/returning.html"); ?>
+              </div>
               <div id="parent" style="display:none">
                 <?php include("includes/registration/parent.html"); ?>
               </div>
@@ -63,8 +66,10 @@
               <div id="github-done" style="display:none">
                 <?php include("includes/registration/github-done.html"); ?>
               </div>
+              <div id="week-select" style="display:none">
+                <?php include("includes/registration/week-select.html"); ?>
+              </div>
             </div>
-            <!-- /.box-body -->
             <div class="box-footer" style="display:none" id="buttons">
               <button type="button" class="btn btn-default" onclick="prev()" id="prev-button">Back</button>
               <button type="button" class="btn btn-info pull-right" onclick="next()" id="next-button">Next</button>
@@ -72,7 +77,6 @@
                 <i class="fab fa-github" style="color:white;margin-top:5px"></i> Next
               </a>
             </div>
-            <!-- /.box-footer -->
           </form>
         </div>
 
