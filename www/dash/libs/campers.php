@@ -35,6 +35,8 @@
 
   class Campers {
 
+    const ALL_ALL_STMT      = "SELECT * FROM `users` WHERE `level` = '".Level::CAMPER."' ORDER BY `name` ASC";
+    const ALL_SIMPLE_STMT   = "SELECT `_id`,`name`,`username` FROM `users` WHERE `level` = '".Level::CAMPER."' ORDER BY `name` ASC";
     const YEAR_ALL_STMT     = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year`= ?)) ORDER BY `name` ASC";
     const YEAR_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year`= ?)) ORDER BY `name` ASC";
     const CAMP_ALL_STMT     = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
@@ -42,24 +44,16 @@
 
     public static function GetAllCampers($filter = "all")
     {
-      $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-      if (!$link) {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return Result::MYSQLERROR;
       }
-      switch($filter){
-        //TODO Switch to PDO and ORM
-        case "all":
-          $q = "SELECT * from `users` WHERE `level` = '".Level::CAMPER."'";
-          break;
-        case "simple":
-          $q = "SELECT `_id`,`name` from `users` WHERE `level` = '".Level::CAMPER."'";
-          break;
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::ALL_ALL_STMT : Campers::ALL_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
       }
-      if ($result = $link->query($q)) {
-        return Campers::_FetchToCamperArray($stmt);
-      } else {
-        return Result::INVALID;
+      if (!$stmt->execute()) {
+        return Result::MYSQLEXECUTE;
       }
+      return Campers::_FetchToCamperArray($stmt);
     }
 
     public static function GetCampersFromYear($year, $filter = "all")
