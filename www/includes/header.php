@@ -4,7 +4,7 @@
       <nav>
         <ul>
           <li><a href="./index.php">Home</a></li>
-          <li><a href="#">Campers</a></li>
+          <li><a href="./campers.php">Campers</a></li>
           <li><a href="./faq.php">FAQ</a></li>
           <li><a href="#">Mentors</a></li>
           <li><a href="./dash/register">Register</a></li>
