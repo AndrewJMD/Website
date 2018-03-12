@@ -40,7 +40,7 @@
           <form>
             <div class="box-body" id="content">
               <div id="start">
-                <?php include("includes/registration/start.php"); ?>
+                <?php include("includes/registration/start.html"); ?>
               </div>
               <div id="first" style="display:none">
                 <?php include("includes/registration/first.html"); ?>
@@ -66,6 +66,15 @@
               <div id="github-done" style="display:none">
                 <?php include("includes/registration/github-done.html"); ?>
               </div>
+              <div id="github-forgot" style="display:none">
+                <?php include("includes/registration/github-forgot.html"); ?>
+              </div>
+              <div id="github-invalid" style="display:none">
+                <?php include("includes/registration/github-invalid.html"); ?>
+              </div>
+              <div id="confirm-info" style="display:none">
+                <?php include("includes/registration/confirm-info.html"); ?>
+              </div>
               <div id="week-select" style="display:none">
                 <?php include("includes/registration/week-select.html"); ?>
               </div>
@@ -79,8 +88,25 @@
             </div>
           </form>
         </div>
-
       </div>
+      <script src="<?php echo DASH; ?>js/dash.js"></script>
+      <script>
+        Dash.Result = <?php echo json_encode((new ReflectionClass("Result"))->getConstants()); ?>;
+        Dash.Level =  <?php echo json_encode((new ReflectionClass("Level"))->getConstants()); ?>;
+        Dash.DASH = "<?php echo DASH; ?>";
+        Dash.ROOT = "<?php echo ROOT; ?>";
+        Dash.Campers =  {
+          Filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
+        }
+        Dash.Week = <?php
+            $values = array();
+            foreach ($_SESSION['camp'] as $key=>$value) {
+              $values[$key] = $value;
+            }
+            echo json_encode($values);
+          ?>;
+      </script>
+
     </body>
     </html>
   <?php }

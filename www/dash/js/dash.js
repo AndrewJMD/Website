@@ -20,8 +20,8 @@ $(document).ready(function(){
 });
 
 Dash.getCode = function(c){
-  for (var prop in Dash.result) {
-    if (Dash.result[ prop ] === c) {
+  for (var prop in Dash.Result) {
+    if (Dash.Result[ prop ] === c) {
       return prop;
     }
   }

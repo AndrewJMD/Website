@@ -52,6 +52,12 @@ function prev() {
       $("#github-button").hide();
       $("#next-button").show();
       break;
+
+    case 102:
+      $("#github-forgot").slideUp();
+      $("#returning").slideDown();
+      state = 100;
+      break;
   }
 }
 
@@ -129,14 +135,16 @@ function next() {
       github(7);
       state = 6;
       break;
+    case 200:
     case 7:
       $("#week-select").slideDown();
       $("#github-done").slideUp();
+      $("#confirm-info").slideUp();
       state = 8;
       break;
     case 8:
-      week1 = $("#week-1").val();
-      week2 = $("#week-2").val();
+      week1 = $("#week-1").is(':checked');
+      week2 = $("#week-2").is(':checked');
       if (!week1 && !week2) {
         break;
       }
@@ -146,9 +154,33 @@ function next() {
       break;
 
 
+    case 100:
+      $("#returning").slideUp();
+      $("#github-forgot").slideDown();
+      state = 102;
+      break;
     case 101:
       $("#github-done").slideUp();
-      $("#confirm-info").slideDown();
+      Dash.get({
+        api: "campers",
+        request: "get/"+github_username,
+        success(d) {
+          if (d.code == Dash.Result.VALID) {
+            $("#camper-name").html(d.data.name);
+            $("#confirm-info").slideDown();
+            state = 200;
+          } else {
+            $("#github-invalid").slideDown();
+            state = 400;
+          }
+        }
+      });
+      break;
+    case 102:
+    case 400:
+      $("#github-invalid").slideUp();
+      $("#github-forgot").slideUp();
+      first();
       break;
   }
 }
@@ -160,6 +192,7 @@ function github(finish_state) {
   popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
   $("#github-select").slideUp();
   $("#github-create").slideUp();
+  $("#returning").slideUp();
   $("#buttons").slideUp();
   $("#github-wait").show();
   interval = setInterval(githubCheck, 500);
@@ -171,7 +204,6 @@ function githubCheck() {
     clearInterval(interval);
     setTimeout(function(){
       $.get("includes/registration/github.php",function(data){
-        console.log(data);
         if (data !== "__") {
           githubDone(data);
         } else {
