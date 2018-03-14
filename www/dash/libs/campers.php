@@ -109,6 +109,33 @@
       }
     }
 
+    public static function Register($data) {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt = $link->prepare("
+      INSERT INTO `users`
+          (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `level`, `shirt`)
+          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, ".Level::CAMPER.", :shirt);") {
+        return Result::MYSQLPREPARE;
+      }
+      $stmt->bindParam(":name",       $info['name']);
+      $stmt->bindParam(":username",   $info['username']);
+      $stmt->bindParam(":dob",        $info['dob']);
+      $stmt->bindParam(":health",     $info['health']);
+      $stmt->bindParam(":prov",       $info['prov']);
+      $stmt->bindParam(":medical",    $info['medical']);
+      $stmt->bindParam(":cellphone",  $info['phone']);
+      $stmt->bindParam(":phone",      $info['parent_phone']);
+      $stmt->bindParam(":parents",    $info['parent_name']);
+      $stmt->bindParam(":email",      $info['parent_email']);
+      $stmt->bindParam(":shirt",      $info['shirt']);
+      if (!$stmt->execute(array($camp))) {
+        return Result::MYSQLEXECUTE;
+      }
+      return Result::VALID;
+    }
+
     static function _FetchToCamperArray($stmt)
     {
       $campers = array();

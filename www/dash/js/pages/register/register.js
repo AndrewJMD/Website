@@ -27,7 +27,6 @@ function first() {
 function returning() {
   $("#start").slideUp();
   $("#returning").slideDown();
-  $("#buttons").slideDown();
   state = 100;
 }
 
@@ -52,8 +51,16 @@ function prev() {
       $("#github-button").hide();
       $("#next-button").show();
       break;
+    case 9:
+      $("#week-select").slideDown();
+      $("#payment").slideUp();
+      $("#next-button").slideDown();
+      $("#prev-button").slideUp();
+      state = 8;
+      break;
 
     case 102:
+      $("#buttons").slideUp();
       $("#github-forgot").slideUp();
       $("#returning").slideDown();
       state = 100;
@@ -149,7 +156,10 @@ function next() {
         break;
       }
       $("#week-select").slideUp();
+      $("#cost").html("CAD $"+((week1 ? 350 : 0) + (week2 ? 350 : 0)).toString());
       $("#payment").slideDown();
+      $("#next-button").slideUp();
+      $("#prev-button").slideDown();
       state = 9;
       break;
 
@@ -157,14 +167,15 @@ function next() {
     case 100:
       $("#returning").slideUp();
       $("#github-forgot").slideDown();
+      $("#buttons").slideDown();
       state = 102;
       break;
     case 101:
-      $("#github-done").slideUp();
       Dash.get({
         api: "campers",
         request: "get/"+github_username,
         success(d) {
+          $("#github-done").slideUp();
           if (d.code == Dash.Result.VALID) {
             $("#camper-name").html(d.data.name);
             $("#confirm-info").slideDown();

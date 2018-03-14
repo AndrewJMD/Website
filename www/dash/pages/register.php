@@ -1,6 +1,8 @@
 <?php
   $PAGE_TYPE = "custom";
 
+  require_once("../secrets.php");
+
   function OutputPage() {?>
     <!DOCTYPE html>
     <html>
@@ -31,7 +33,12 @@
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://checkout.stripe.com/checkout.js"></script>
       <script src="js/pages/register/register.js"></script>
+      <script>
+        var STRIPE_PUBLISHABLE = "<?php echo Secrets::STRIPE_CLIENT; ?>";
+      </script>
+      <script src="js/pages/register/stripe.js"></script>
       <div class="login-box">
         <div class="login-logo">
           <a href="#"><b>CC</b>Dash</a>
@@ -78,6 +85,9 @@
               <div id="week-select" style="display:none">
                 <?php include("includes/registration/week-select.html"); ?>
               </div>
+              <div id="payment" style="display:none">
+                <?php include("includes/registration/payment.html"); ?>
+              </div>
             </div>
             <div class="box-footer" style="display:none" id="buttons">
               <button type="button" class="btn btn-default" onclick="prev()" id="prev-button">Back</button>
@@ -98,15 +108,7 @@
         Dash.Campers =  {
           Filter: <?php echo json_encode((new ReflectionClass("CampersFilter"))->getConstants()); ?>
         }
-        Dash.Week = <?php
-            $values = array();
-            foreach ($_SESSION['camp'] as $key=>$value) {
-              $values[$key] = $value;
-            }
-            echo json_encode($values);
-          ?>;
       </script>
-
     </body>
     </html>
   <?php }
