@@ -3,9 +3,9 @@
       <img id="header-img" src="img/logo.png">
       <nav>
         <ul>
-          <li><a href="./index.php">Home</a></li>
-          <li><a href="./campers.php">Campers</a></li>
-          <li><a href="./faq.php">FAQ</a></li>
+          <li><a href="./">Home</a></li>
+          <li><a href="./campers">Campers</a></li>
+          <li><a href="./faq">FAQ</a></li>
           <li><a href="#">Mentors</a></li>
           <li><a href="./dash/register">Register</a></li>
         </ul>

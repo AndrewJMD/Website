@@ -116,7 +116,7 @@
       if (!$stmt = $link->prepare("
       INSERT INTO `users`
           (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `level`, `shirt`)
-          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, ".Level::CAMPER.", :shirt);") {
+          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, ".Level::CAMPER.", :shirt);")) {
         return Result::MYSQLPREPARE;
       }
       $stmt->bindParam(":name",       $info['name']);
