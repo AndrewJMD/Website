@@ -109,14 +109,15 @@
       }
     }
 
-    public static function Register($data) {
+    public static function Register($info) {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return Result::MYSQLERROR;
       }
+      $link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
       if (!$stmt = $link->prepare("
       INSERT INTO `users`
           (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `level`, `shirt`)
-          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, ".Level::CAMPER.", :shirt);")) {
+          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, '".Level::CAMPER."', :shirt);")) {
         return Result::MYSQLPREPARE;
       }
       $stmt->bindParam(":name",       $info['name']);
@@ -130,8 +131,9 @@
       $stmt->bindParam(":parents",    $info['parent_name']);
       $stmt->bindParam(":email",      $info['parent_email']);
       $stmt->bindParam(":shirt",      $info['shirt']);
-      if (!$stmt->execute(array($camp))) {
-        return Result::MYSQLEXECUTE;
+      if (!$stmt->execute()) {
+        //return Result::MYSQLEXECUTE;
+        return $link->errorInfo();
       }
       return Result::VALID;
     }

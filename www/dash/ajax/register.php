@@ -1,9 +1,10 @@
 <?php
   require("../../config.php");
+  require("../../secrets.php");
   require("../libs/campers.php");
 
   $returning  = isset($_POST['returning']);
-  $github     = $_POST['github'];
+  $github     = $_POST['username'];
 
   if ($returning) {
 

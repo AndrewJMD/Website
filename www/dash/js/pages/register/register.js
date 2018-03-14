@@ -147,6 +147,21 @@ function next() {
       $("#week-select").slideDown();
       $("#github-done").slideUp();
       $("#confirm-info").slideUp();
+      $.ajax({
+        method: "POST",
+        url: "ajax/register.php",
+        data: {
+          name: name,
+          username: github_username,
+          dob: dob,
+          phone: phone,
+          health: health,
+          prov: prov,
+          medical: medical,
+          parent_name: parent_name,
+          parent_phone: parent_phone,
+          parent_email: parent_email
+      }}).done(function(data){console.log(data);});
       state = 8;
       break;
     case 8:
