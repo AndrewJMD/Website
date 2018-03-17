@@ -10,7 +10,7 @@ var camperApp = new Vue({
   methods: {
     loadCampers: function () {
       var vm = this;
-      var urlToGet = 'http://' + window.location.host + '/dash/api/campers.php?f=year&a=' + this.year;
+      var urlToGet = 'http://' + window.location.host + '/dash/api/campers/year/' + this.year + '/simple';
       console.log(urlToGet);
       axios.get(urlToGet)
         .then(function (response) {

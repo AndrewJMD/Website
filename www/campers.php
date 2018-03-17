@@ -8,8 +8,8 @@ include('includes/header.php');
 <div id="camper-app">
   <section class="camper-section">
     <div class="camper" v-for="camper in campers">
-      <img width="128" src="img/profileicon.png" /><br />
-      <a href="#">{{ camper.first }}</a>
+      <img width="178" src="img/profileicon.png" /><br />
+      <a href="#">{{ camper.name }}</a>
     </div>
   </section>
 </div>
