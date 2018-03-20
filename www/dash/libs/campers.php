@@ -4,6 +4,7 @@
   use Cekurte\Environment\Environment;
 
   class Camper {
+    
     public $_id, $name, $first, $username, $dob, $health_card, $phone, $parent_name;
     public $email, $health_notes, $gender, $shirt;
     public $camps_attended, $weeks_attended;
@@ -111,14 +112,14 @@
 
     public static function Register($info) {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
-        return Result::MYSQLERROR;
+        return array("code" => Result::MYSQLERROR);
       }
       $link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
       if (!$stmt = $link->prepare("
       INSERT INTO `users`
           (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `level`, `shirt`)
           VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, '".Level::CAMPER."', :shirt);")) {
-        return Result::MYSQLPREPARE;
+        return array("code" => Result::MYSQLPREPARE);
       }
       $stmt->bindParam(":name",       $info['name']);
       $stmt->bindParam(":username",   $info['username']);
@@ -132,10 +133,9 @@
       $stmt->bindParam(":email",      $info['parent_email']);
       $stmt->bindParam(":shirt",      $info['shirt']);
       if (!$stmt->execute()) {
-        //return Result::MYSQLEXECUTE;
-        return $link->errorInfo();
+        return array("code" => Result::MYSQLEXECUTE);
       }
-      return Result::VALID;
+      return array("code" => Result::VALID, "id" => $link->lastInsertId());
     }
 
     static function _FetchToCamperArray($stmt)
@@ -147,5 +147,6 @@
       }
       return $campers;
     }
+
   }
 ?>

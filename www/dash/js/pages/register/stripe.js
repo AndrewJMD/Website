@@ -9,13 +9,16 @@ var handler = StripeCheckout.configure({
     $.ajax({
       method: 'POST',
       url: 'ajax/payment.php',
-      data: { token: token.id, amount: amount }
+      dataType: 'json',
+      data: { token: token.id, amount: amount, camper: camper_id, phone: parent_phone, email: parent_email }
     })
       .done(function( msg ) {
-        console.log("ok",msg);
+        console.log("ok", msg);
+        next();
       })
       .fail(function( jqXHR, textStatus ) {
-        console.log("fail",textStatus);
+        console.log(jqXHR);
+        console.log("fail", textStatus);
       })
   }
 });

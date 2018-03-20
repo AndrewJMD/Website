@@ -1,5 +1,7 @@
 state = 0;
 
+var camper_id = -1;
+
 var name = "";
 var dob = "";
 var phone = "";
@@ -96,7 +98,7 @@ function next() {
       phone = $("#cellphone").val();
       health = $("#health").val();
       prov = $("#prov").val();
-      medical = $("#medical").html();
+      medical = $("#medical").val();
       shirt = $("#shirt").val();
       var error = checkInput("#name");
       error     = checkInput("#dob")    || error;
@@ -150,6 +152,7 @@ function next() {
       $.ajax({
         method: "POST",
         url: "ajax/register.php",
+        dataType: 'json',
         data: {
           name: name,
           username: github_username,
@@ -158,11 +161,18 @@ function next() {
           health: health,
           prov: prov,
           medical: medical,
+          shirt: shirt,
           parent_name: parent_name,
           parent_phone: parent_phone,
           parent_email: parent_email
-      }}).done(function(data){console.log(data);});
-      state = 8;
+      }}).done(function(data){
+        if (data.code == Dash.Result.VALID) {
+          state = 8;
+          camper_id = data.id;
+        } else {
+          alert("Error");
+        }
+      });
       break;
     case 8:
       week1 = $("#week-1").is(':checked');
@@ -177,7 +187,35 @@ function next() {
       $("#prev-button").slideDown();
       state = 9;
       break;
-
+    case 9:
+      $("#complete-email").html(parent_email);
+      $("#complete").slideDown();
+      $("#payment").slideUp();
+      $("#buttons").slideUp();
+      state = 1000;
+      if (week1) {
+        $.ajax({
+          method: "POST",
+          url: "ajax/attend.php",
+          dataType: 'json',
+          data : {
+            camper: camper_id,
+            week: 17
+          }
+        });
+      }
+      if (week2) {
+        $.ajax({
+          method: "POST",
+          url: "ajax/attend.php",
+          dataType: 'json',
+          data : {
+            camper: camper_id,
+            camp: 18
+          }
+        });
+      }
+      break;
 
     case 100:
       $("#returning").slideUp();

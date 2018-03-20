@@ -18,13 +18,14 @@
       "health"        => $_POST['health'],
       "prov"          => $_POST['prov'],
       "medical"       => $_POST['medical'],
+      "shirt"         => $_POST['shirt'],
 
       "parent_name"   => $_POST['parent_name'],
       "parent_phone"  => $_POST['parent_phone'],
       "parent_email"  => $_POST['parent_email']
     );
 
-    echo json_encode(array("code" => Campers::Register($info)));
+    echo json_encode(Campers::Register($info));
 
   }
 ?>
