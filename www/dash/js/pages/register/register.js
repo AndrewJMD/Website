@@ -1,4 +1,4 @@
-state = 0;
+state = 1;
 
 var camper_id = -1;
 
@@ -29,6 +29,7 @@ function first() {
 function returning() {
   $("#start").slideUp();
   $("#returning").slideDown();
+  $("#buttons").slideDown();
   state = 100;
 }
 
@@ -45,6 +46,7 @@ function prev() {
     case 2:
       $("#parent").slideUp();
       $("#first").slideDown();
+      $("#prev-button").slideUp();
       state = 1;
       break;
     case 3:
@@ -106,6 +108,7 @@ function next() {
       if (!error) {
         $("#first").slideUp();
         $("#parent").slideDown();
+        $("#prev-button").slideDown();
         state = 2;
       }
       break;
@@ -200,7 +203,7 @@ function next() {
           dataType: 'json',
           data : {
             camper: camper_id,
-            week: 17
+            camp: 17
           }
         });
       }
