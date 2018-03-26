@@ -6,8 +6,6 @@ Dash.get("camps/year/"+Dash.Week.year,
       d.data.forEach(function(i){
         $("#week-selector").append(t.exec(i));
       });
-    } else {
-      console.log("Retrieving camps failed with ",d.code);
     }
   }
 );

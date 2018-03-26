@@ -1,0 +1,31 @@
+<?php
+  require("../../config.php");
+  require("../../secrets.php");
+  require("../libs/campers.php");
+
+  $returning  = isset($_POST['returning']);
+  $github     = $_POST['username'];
+
+  if ($returning) {
+
+  } else {
+
+    $info = array(
+      "name"          => $_POST['name'],
+      "username"      => $github,
+      "dob"           => $_POST['dob'],
+      "phone"         => $_POST['phone'],
+      "health"        => $_POST['health'],
+      "prov"          => $_POST['prov'],
+      "medical"       => $_POST['medical'],
+      "shirt"         => $_POST['shirt'],
+
+      "parent_name"   => $_POST['parent_name'],
+      "parent_phone"  => $_POST['parent_phone'],
+      "parent_email"  => $_POST['parent_email']
+    );
+
+    echo json_encode(Campers::Register($info));
+
+  }
+?>

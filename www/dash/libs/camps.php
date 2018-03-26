@@ -75,6 +75,28 @@
       }
       return $camps;
     }
+
+    static function Attend($camper, $camp) {
+      if (gettype($camp) == "object") {
+        $camp = $camp->_id;
+      }
+      if (gettype($camper) == "object") {
+        $camper = $camper->_id;
+      }
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt = $link->prepare("INSERT INTO `attend` (`camper`, `camp`) VALUES (:camper, :camp)")) {
+        return Result::MYSQLERROR;
+      }
+      $stmt->bindParam(":camper", $camper);
+      $stmt->bindParam(":camp",   $camp);
+      if (!$stmt->execute()) {
+        return Result::MYSQLERROR;
+      }
+      return Result::VALID;
+    }
+
   }
 
   class Camp

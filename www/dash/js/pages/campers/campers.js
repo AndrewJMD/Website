@@ -1,16 +1,15 @@
-var Dash;
-Dash.get("campers/camp/"+Dash.Week._id,
-  function(d) {
+Dash.get({
+  api: "campers",
+  request: "camp/"+Dash.Week._id,
+  success(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("campers/camper-row.html");
       d.data.forEach(function(i){
         $("#campers-table tr:last").after(t.exec(i));
       });
-    } else {
-      console.log("Retrieving campers failed with ",d.code);
     }
   }
-);
+});
 
 $(function(){
   $("#campers-search").on("input propertychange",function() {

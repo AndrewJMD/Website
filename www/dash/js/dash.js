@@ -20,50 +20,32 @@ $(document).ready(function(){
 });
 
 Dash.getCode = function(c){
-  for (var prop in Dash.result) {
-    if (Dash.result[ prop ] === c) {
+  for (var prop in Dash.Result) {
+    if (Dash.Result[ prop ] === c) {
       return prop;
     }
   }
 };
 
-Dash.get = function(i, s) {
-  //TODO rewrite to take json object instead of multiple params
-  var f = {
-    error(e) {
-      console.log("Dash.get unhandled error",e);
-    }
-  };
-  f.api = i;
-  if (typeof(s) != "undefined") {
-    f.success = s;
-  } else {
-    if (!("success" in f)){
-      throw new Dash.Error(Dash.error.no_callback_provided);
-    }
+Dash.get = function(f) {
+  if (typeof(f) == "string") {
+    f = {data: {}, api: f, request: ""};
   }
-  if ("api" in f && "success" in f) {
-    $.ajax({
-      url: Dash.DASH+"api/"+f.api,
-      type: "POST",
-      dataType: "json",
-      data: f.data,
-      success(d) {
-        if (d.code === Dash.Result.VALID) {
+  $.ajax({
+    url: Dash.DASH+"api/"+f.api+"/"+f.request,
+    type: "POST",
+    dataType: "json",
+    data: f.data,
+    success(d) {
+      if (d.code === Dash.Result.VALID) {
+        if (typeof(f.success) != "undefined") {
           f.success(d);
-        } else {
-          f.error(d);
         }
-      },
-      error(d) {
-        console.log("Error in Dash.get", d);
+      } else if ("error" in f) {
+        f.error(d);
       }
-    });
-  } else if (!("api" in f)) {
-    throw new Dash.Error(Dash.error.no_api_provided);
-  } else if (!("success" in f)) {
-    throw new Dash.Error(Dash.error.no_callback_provided);
-  }
+    }
+  });
 };
 
 Dash.do = function(f) {
@@ -77,27 +59,22 @@ Dash.do = function(f) {
     dataType: "json",
     data: f.data,
     success(d) {
-      console.log(d);
       if (d.code === Dash.Result.VALID) {
         if (typeof(f.success) != "undefined") {
           f.success(d);
         }
       } else if (d.code === Dash.Result.REDIRECT) {
         window.location.href = d.location;
-      }  else {
-        if (typeof(f.error) != "undefined") {
-          f.error(d);
-        }
+      } else if (typeof(f.error) != "undefined") {
+        f.error(d);
       }
-    }, error(d){
-      console.log(d);
     }
   });
-}
+};
 
 Dash.setweek = function(id) {
   Dash.do({
-    action: 'setweek',
+    action: "setweek",
     data: {
       camp: id
     },
@@ -105,7 +82,7 @@ Dash.setweek = function(id) {
       location.reload();
     }
   });
-}
+};
 
 Dash.Template = function(f) {
   this.t = "";

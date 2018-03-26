@@ -23,7 +23,7 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-
+          
       - run: cd www/ && composer install
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css

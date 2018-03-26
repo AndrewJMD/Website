@@ -1,16 +1,15 @@
-var Dash;
-Dash.get("camps/all",
-  function(d) {
+Dash.get({
+  api: "camps",
+  request: "all",
+  success(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("camps/camp-row.html");
       d.data.forEach(function(i){
         $("#camps-table tr:last").after(t.exec(i));
       });
-    } else {
-      console.log("Retrieving campers failed with ",d.code);
     }
   }
-);
+});
 
 $(function(){
   $("#camps-search").on("input propertychange",function() {

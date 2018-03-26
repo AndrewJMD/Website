@@ -39,7 +39,6 @@ function loadPage(a, b, c, push) {
       $("#nav_item_"+a).addClass("active");
     },
     error(data) {
-      console.log("Error loading page",data);
       Pace.stop();
     }
   });
@@ -58,7 +57,7 @@ history.replaceState({
 
 $(document).on("click", "a", function(e) {
   var a = $(this).attr("href");
-  if (a !== undefined) {
+  if (typeof(a) !== "undefined") {
     if (!a.startsWith("http") && !a.contains("#")) {
       e.preventDefault();
       loadPage(a);

@@ -5,12 +5,12 @@
   require_once("../config.php");
   require_once("../secrets.php");
   require_once("../libs/session.php");
-  
+
   GeneratePageDefaults();
 
   $a = GetFromURL('a','dashboard');
 
-  if ($_SESSION['id'] == -1 && $a != "login") {
+  if ($_SESSION['id'] == -1 && ($a != "login" && $a != "register")) {
     header("Location: login");
   }
 
