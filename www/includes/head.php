@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Vue.js is currently the dev version. Download and replace with
     prod before running website in production. -->
-    <script src="https://unpkg.com/vue@2.4.2"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
     <script src="js/navbar.js"></script>
   </head>
