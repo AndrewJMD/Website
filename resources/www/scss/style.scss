@@ -19,12 +19,20 @@ body {
   background-image: url('../img/homebanner.png');
   max-width: 1280px;
   height: 400px;
+  margin-top: 25px;
 }
 
-@media only screen and (max-width: 590px) {
+@media only screen and (max-width: 640px) {
   #home-banner {
     background-size: 960px 300px;
     height: 300px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  #home-banner {
+    background-size: 640px 200px;
+    height: 200px;
   }
 }
 
