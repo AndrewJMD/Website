@@ -8,7 +8,7 @@ include('includes/header.php');
 
 <section class="faq-section">
   <h2 class="text-center">Overview</h2>
-  <h3>When are the 2017 camps?</h3>
+  <h3>When are the 2018 camps?</h3>
   <p class="indent">This year we have two separate 5-day computer camps for you and your friends. As each camper gets an individual PC workstation, the camp is currently limited to twenty-four participants per week. Week One starts Monday, July 3 and finishes Friday, July 7, 2017. Week Two starts Monday, July 10 and finishes Friday, July 14, 2017.</p>
   <h3>Where do the camps take place?</h3>
   <p class="indent">The camp program takes place in the Classroom Building on the north west corner of the University of Regina Campus in Regina, Saskatchewan, Canada. Some of the camp activities such as bowling, swimming, Matrix Gaming, and a barbeque take place at other Regina locations but most of the day is in the computer lab. Campus maps are available on the University of Regina website.</p>

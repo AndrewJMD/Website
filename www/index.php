@@ -24,9 +24,9 @@ and more flexability than object-fit -->
     <p>... and more!</p>
     <br/>
     <p>
-      The 2017 Computer Camps will consist of two weeks:<br/>
-      Week One: from <strong>July 3th to July 7th</strong><br/>
-      Week Two: from <strong>July 10th to July 14th</strong>
+      The 2018 Computer Camps will consist of two weeks:<br/>
+      Week One: from <strong>July 2nd to July 6th</strong><br/>
+      Week Two: from <strong>July 9th to July 13th</strong>
     </p>
   </div>
   <div class="col-50 home-section text-center">

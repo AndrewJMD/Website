@@ -14,10 +14,11 @@ input[type="text"], textarea, select {
   }
 }
 
-input[type="submit"] {
+input[type="submit"], button, .button {
+  text-decoration: none;
   font: $font;
-  cursor: pointer;
   padding: 7px;
+  cursor: pointer;
   background-color: $nav-link-hover-background-color;
   border: 3px solid $background-color;
   color: $color;
@@ -25,4 +26,5 @@ input[type="submit"] {
   &:hover, &:focus {
     border-color: $nav-link-hover-background-color;
   }
+  line-height: 40px;
 }
