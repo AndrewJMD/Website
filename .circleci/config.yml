@@ -23,7 +23,7 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-          
+
       - run: cd www/ && composer install
       - run: mkdir www/css
       - run: sass --update resources/www/scss:www/css
@@ -74,6 +74,8 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/testing
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/testing/dash
 
 workflows:
   version: 2
