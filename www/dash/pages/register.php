@@ -9,7 +9,7 @@
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>Register | CCDash</title>
+      <title>Register | CompCamps</title>
       <!-- Tell the browser to be responsive to screen width -->
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -41,7 +41,7 @@
       <script src="js/pages/register/stripe.js"></script>
       <div class="login-box">
         <div class="login-logo">
-          <a href="#"><b>CC</b>Dash</a>
+          <a href="#"><b>CompCamps</b> Registration</a>
         </div>
         <div class="box box-info">
           <form>

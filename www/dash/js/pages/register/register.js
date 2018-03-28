@@ -2,17 +2,19 @@ state = 1;
 
 var camper_id = -1;
 
-var name = "";
-var dob = "";
-var phone = "";
-var health = "";
-var prov = "";
+var name    = "";
+var dob     = "";
+var phone   = "";
+var health  = "";
+var prov    = "";
 var medical = "";
-var shirt = "";
+var shirt   = "";
+var hear    = "";
 
-var parent_name = "";
-var parent_phone = "";
-var parent_email = "";
+var parent_name   = "";
+var parent_phone  = "";
+var parent_email  = "";
+var parent_drive  = false;
 
 var github_username = "";
 
@@ -95,13 +97,14 @@ function checkInput(id) {
 function next() {
   switch(state) {
     case 1:
-      name = $("#name").val();
-      dob = $("#dob").val();
-      phone = $("#cellphone").val();
-      health = $("#health").val();
-      prov = $("#prov").val();
+      name    = $("#name").val();
+      dob     = $("#dob").val();
+      phone   = $("#cellphone").val();
+      health  = $("#health").val();
+      prov    = $("#prov").val();
       medical = $("#medical").val();
-      shirt = $("#shirt").val();
+      shirt   = $("#shirt").val();
+      hear    = $("#hear").val();
       var error = checkInput("#name");
       error     = checkInput("#dob")    || error;
       error     = checkInput("#health") || error;
@@ -113,9 +116,10 @@ function next() {
       }
       break;
     case 2:
-      parent_name = $("#parent_name").val();
-      parent_phone = $("#parent_phone").val();
-      parent_email = $("#parent_email").val();
+      parent_name   = $("#parent_name").val();
+      parent_phone  = $("#parent_phone").val();
+      parent_email  = $("#parent_email").val();
+      parent_drive  = $("#parent_drive").is(':checked');
       var error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
@@ -165,9 +169,11 @@ function next() {
           prov: prov,
           medical: medical,
           shirt: shirt,
+          hear: hear,
           parent_name: parent_name,
           parent_phone: parent_phone,
-          parent_email: parent_email
+          parent_email: parent_email,
+          parent_drive: parent_drive
       }}).done(function(data){
         if (data.code == Dash.Result.VALID) {
           state = 8;
@@ -175,6 +181,9 @@ function next() {
         } else {
           alert("Error");
         }
+      }).fail(function( jqXHR, textStatus ) {
+        console.log(jqXHR);
+        console.log("fail", textStatus);
       });
       break;
     case 8:
