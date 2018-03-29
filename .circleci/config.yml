@@ -77,6 +77,20 @@ jobs:
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/testing
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/testing/dash
 
+  deploy-live:
+    machine:
+      enabled: true
+
+    working_directory: ~/build-output
+
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/dash
+
 workflows:
   version: 2
   build-and-deploy:
@@ -95,3 +109,10 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy-live:
+          requires:
+            - python-test
+            - php-test
+          filters:
+            branches:
+              only: live
