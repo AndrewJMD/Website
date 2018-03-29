@@ -11,3 +11,5 @@ include('includes/header.php');
   <h3>$350</h3>
   <a class="button" href="dash/register">Register</a>
 </section>
+
+<?php include('includes/footer.php'); ?>

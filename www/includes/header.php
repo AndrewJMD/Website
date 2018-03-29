@@ -12,3 +12,4 @@
         <div id="nav-handle"><i class="fa fa-bars" aria-hidden="true"></i> Menu</div>
       </nav>
     </header>
+    <div class="content">

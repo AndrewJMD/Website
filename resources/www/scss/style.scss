@@ -8,10 +8,21 @@
 @import 'partials/forms';
 @import 'partials/campers';
 
+html {
+  height: 100%;
+}
+
 body {
   background-color: $background-color;
   font: $font;
   color: $color;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
 }
 
 /* code specific to the homepage banner */

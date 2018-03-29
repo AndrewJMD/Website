@@ -1,3 +1,4 @@
+    </div>
     <footer>
       <div id="slideshow">
         <div @click="moveLeft" class="slideshow-button"><i class="fa fa-2x fa-chevron-left"
