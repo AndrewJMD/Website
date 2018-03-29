@@ -10,8 +10,7 @@ var camperApp = new Vue({
   methods: {
     loadCampers: function () {
       var vm = this;
-      var urlToGet = 'http://' + window.location.host + '/dash/api/campers/year/' + this.year + '/simple';
-      console.log(urlToGet);
+      var urlToGet = window.location.protocol + '//' + window.location.host + '/dash/api/campers/year/' + this.year + '/simple';
       axios.get(urlToGet)
         .then(function (response) {
           vm.campers = response["data"].data;
