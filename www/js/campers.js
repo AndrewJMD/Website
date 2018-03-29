@@ -20,6 +20,9 @@ var camperApp = new Vue({
         .catch(function (error) {
           alert('Sorry! An error occurred: ' + error);
         });
+    },
+    camperSrc: function (src) {
+      return "http://compcamps.com/2017%20Pictures/" + src + ".jpg";
     }
   }
 });
