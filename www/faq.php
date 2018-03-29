@@ -9,7 +9,7 @@ include('includes/header.php');
 <section class="faq-section">
   <h2 class="text-center">Overview</h2>
   <h3>When are the 2018 camps?</h3>
-  <p class="indent">This year we have two separate 5-day computer camps for you and your friends. As each camper gets an individual PC workstation, the camp is currently limited to twenty-four participants per week. Week One starts Monday, July 3 and finishes Friday, July 7, 2017. Week Two starts Monday, July 10 and finishes Friday, July 14, 2017.</p>
+  <p class="indent">This year we have two separate 5-day computer camps for you and your friends. As each camper gets an individual PC workstation, the camp is currently limited to twenty-four participants per week. Week One starts Monday, July 2 and finishes Friday, July 6, 2018. Week Two starts Monday, July 9 and finishes Friday, July 13, 2018.</p>
   <h3>Where do the camps take place?</h3>
   <p class="indent">The camp program takes place in the Classroom Building on the north west corner of the University of Regina Campus in Regina, Saskatchewan, Canada. Some of the camp activities such as bowling, swimming, Matrix Gaming, and a barbeque take place at other Regina locations but most of the day is in the computer lab. Campus maps are available on the University of Regina website.</p>
   <h3>Who should attend the camp?</h3>
@@ -106,9 +106,9 @@ include('includes/header.php');
   <h3>Who are the staff members for the camp?</h3>
   <p class="indent">The camp instructors are technical and subject matter experts from a wide range of our community including volunteers from industry, the University of Regina, and the Saskatchewan Institute of Applied Science and Technology.Community members share insight, knowledge, and support. In addition, mentors (generally senior campers from previous years) assist with camp activities.</p>
   <h3>What is Mentor Systems Inc. (MSI)?</h3>
-  <p class="indent">Mentor Systems Inc. is a member-based organization registered as a non-profit corporation in Saskatchewan, Canada. MSI was formed by volunteer camp-staff who were counsellors and mentors at the various annual computer camps.MSI has the mandate of providing technological opportunities for youth. The program of camps and workshops fulfills this mandate by providing youth with hands-on experience with sophisticated systems, collaboration in solving challenging problems, and improved computer skills.</p>
+  <p class="indent">Mentor Systems Inc. is a member-based organization registered as a non-profit corporation in Saskatchewan, Canada. MSI was formed by volunteer camp-staff who were counsellors and mentors at the various annual computer camps. MSI has the mandate of providing technological opportunities for youth. The program of camps and workshops fulfills this mandate by providing youth with hands-on experience with sophisticated systems, collaboration in solving challenging problems, and improved computer skills.</p>
   <h3>Who are the camp sponsors?</h3>
-  <p class="indent">The camp program is made possible through our sponsors. We recognize the following as sponsors for the 2017 camp year: Mentor Systems Incorporated, Metric Hosting Ltd, University of Regina, University of Regina Department of Computer Science, Innovation Place, Information Services Corporation, Strategy Lab, Telus, and Capital One.</p>
+  <p class="indent">The camp program is made possible through our sponsors. We recognize the following as sponsors for the 2017 camp year: Mentor Systems Incorporated, Metric Hosting Ltd, University of Regina, University of Regina Department of Computer Science, Innovation Place, Information Services Corporation, Strategy Lab, Telus, and Capital.</p>
   <p class="indent">As a registered non-profit corporation providing technical opportunities for youth, MSI’s program welcomes donations and sponsored bursaries. Contact us at <a href="mailto:computercamps@gmail.com">computercamps@gmail.com</a></p>
 </section>
 <section class="faq-section">
