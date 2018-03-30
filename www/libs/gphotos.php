@@ -4,12 +4,12 @@
     if (!function_exists('curl_init')) {
         die('CURL is not installed!');
     }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    $output = curl_exec($ch);
-    curl_close($ch);
+    $curlh = curl_init();
+    curl_setopt($curlh, CURLOPT_URL, $url);
+    curl_setopt($curlh, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlh, CURLOPT_FOLLOWLOCATION, true);
+    $output = curl_exec($curlh);
+    curl_close($curlh);
     return $output;
   }
 

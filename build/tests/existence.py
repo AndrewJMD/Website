@@ -14,7 +14,7 @@ rSCRIPT = r"<script(?:.+?)src=\"(.+?)\"(?:.+?)>"
 scandir = ""
 try:
     scandir = sys.argv[1]
-except:
+except IndexError:
     scandir = "."
 
 ret = 0

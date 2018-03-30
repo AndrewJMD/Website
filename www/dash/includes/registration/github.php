@@ -1,6 +1,6 @@
 <?php
 
-  require_once("../../../session.php");
+  require_once("../../../libs/session.php");
 
   echo $_SESSION['username'];
 
