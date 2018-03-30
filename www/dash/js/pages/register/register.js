@@ -180,13 +180,8 @@ function next() {
         if (data.code == Dash.Result.VALID) {
           state = 8;
           camper_id = data.id;
-        } else {
-          alert("Error");
         }
-      }).fail(function( jqXHR, textStatus ) {
-        console.log(jqXHR);
-        console.log("fail", textStatus);
-      });
+      }).fail(function( jqXHR, textStatus ) { return; });
       break;
     case 8:
       week1 = $("#week-1").is(":checked");
@@ -264,17 +259,20 @@ function next() {
 }
 
 var interval;
+var popup;
 var github_finish_state = 7;
 
-function github(finish_state) {
-  popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
-  $("#github-select").slideUp();
-  $("#github-create").slideUp();
-  $("#returning").slideUp();
-  $("#buttons").slideUp();
-  $("#github-wait").show();
-  interval = setInterval(githubCheck, 500);
-  github_finish_state = finish_state;
+function githubDone(username) {
+  github_username = username;
+  clearInterval(interval);
+  $("#prev-button").hide();
+  $("#github-button").hide();
+  $("#next-button").show();
+  $("#buttons").show();
+  $("#github-wait").slideUp();
+  $("#github-done").slideDown();
+  $("#github-username").html(username);
+  state = github_finish_state;
 }
 
 function githubCheck() {
@@ -292,15 +290,13 @@ function githubCheck() {
   }
 }
 
-function githubDone(username) {
-  github_username = username;
-  clearInterval(interval);
-  $("#prev-button").hide();
-  $("#github-button").hide();
-  $("#next-button").show()
-  $("#buttons").show()
-  $("#github-wait").slideUp();
-  $("#github-done").slideDown();
-  $("#github-username").html(username);
-  state = github_finish_state;
+function github(finish_state) {
+  popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
+  $("#github-select").slideUp();
+  $("#github-create").slideUp();
+  $("#returning").slideUp();
+  $("#buttons").slideUp();
+  $("#github-wait").show();
+  interval = setInterval(githubCheck, 500);
+  github_finish_state = finish_state;
 }

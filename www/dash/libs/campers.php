@@ -17,9 +17,9 @@
       $this->username       = $row['username'];
 
       if (class_exists("Session")) {
-        if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
+        if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
           $this->first        = explode(" ", $row['name'])[0];
-          foreach(get_class_vars("Camper") as $key=>$value) {
+          foreach (get_class_vars("Camper") as $key) {
             if (array_key_exists($key, $row))
               $this->$key = $row[$key];
           }
@@ -35,7 +35,7 @@
           $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
         }
       }
-      
+
     }
   }
 
@@ -102,7 +102,7 @@
       }
       //TODO Prepared Statements
       if ($stmt->execute(array($username))) {
-        if($stmt->rowCount() == 1)
+        if ($stmt->rowCount() == 1)
           return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
         else
           return Result::NOTFOUND;
