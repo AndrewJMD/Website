@@ -5,30 +5,35 @@
 
   class Camper {
 
-    public $_id, $name, $first, $username, $dob, $health_card, $phone, $parent_name;
-    public $email, $health_notes, $gender, $shirt;
+    public $_id, $name, $first, $username, $dob, $health, $prov, $cellphone, $phone, $parents;
+    public $drive, $email, $medical, $gender, $shirt;
     public $camps_attended, $weeks_attended;
 
     function __construct($row)
     {
       $this->_id            = $row['_id'];
       $this->name           = explode(" ", $row['name'])[0];
+      $this->first          = $this->name;
       $this->username       = $row['username'];
 
-      if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
-        $this->first        = explode(" ", $row['name'])[0];
-        foreach(get_class_vars("Camper") as $key=>$value) {
-          if (array_key_exists($key, $row))
-            $this->$key = $row[$key];
+      if (class_exists("Session")) {
+        if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
+          $this->first        = explode(" ", $row['name'])[0];
+          foreach (get_class_vars("Camper") as $key) {
+            if (array_key_exists($key, $row))
+              $this->$key = $row[$key];
+          }
         }
       }
 
-      if (!Environment::get("CIRCLECI", false)) {
-        //Not in a CircleCI Test
-        //TODO In the future it would be nice to test data retrieving in CircleCI.
-        $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-        $this->weeks_attended = $link->query("SELECT _id FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
-        $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+      if (class_exists("Environment")) {
+        if (!Environment::get("CIRCLECI", false)) {
+          //Not in a CircleCI Test
+          //TODO In the future it would be nice to test data retrieving in CircleCI.
+          $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+          $this->weeks_attended = $link->query("SELECT _id FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+          $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+        }
       }
 
     }
@@ -42,6 +47,8 @@
     const YEAR_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year`= ?)) ORDER BY `name` ASC";
     const CAMP_ALL_STMT     = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
     const CAMP_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
+    const USER_ALL_STMT     = "SELECT * from `users` WHERE `username` = ?";
+    const USER_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` from `users` WHERE `username` = ?";
 
     public static function GetAllCampers($filter = "all")
     {
@@ -87,22 +94,16 @@
 
     public static function GetFromUsername($username, $filter="all")
     {
-      $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-      if (!$link) {
-        return Result::MYSQLERROR;
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return array("code" => Result::MYSQLERROR);
       }
-      switch($filter){
-        case "all":
-          $q = "SELECT * from `users` WHERE `username` = '$username'";
-          break;
-        case "simple":
-          $q = "SELECT `_id`,`name`,`username` from `users` WHERE `username` = '$username'";
-          break;
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::USER_ALL_STMT : Campers::USER_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
       }
       //TODO Prepared Statements
-      if ($result = $link->query($q)) {
-        if($result->num_rows == 1)
-          return new Camper($result->fetch_array(MYSQLI_ASSOC));
+      if ($stmt->execute(array($username))) {
+        if ($stmt->rowCount() == 1)
+          return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
         else
           return Result::NOTFOUND;
       } else {
