@@ -36,13 +36,13 @@
 
     public function testRegisterCamper()
     {
-      $camper = Campers::Register(EX_DATA);
+      $camper = Campers::Register(CampersTest::EX_DATA);
       $this->assertEquals(1, $camper['code']);
     }
 
     public function testAllCampers()
     {
-      $campers = len(Campers::GetAllCampers());
+      $campers = count(Campers::GetAllCampers());
       $this->assertEquals(2, $campers);
     }
   }
