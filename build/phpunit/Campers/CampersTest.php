@@ -40,8 +40,10 @@
       //Create Fake Camper
       $link->query("
         INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
-        VALUES (NULL, 'Joe Baker', 'codekid', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Baker', 0, 'jane@baker.ca', '', 1, 'Youth Medium');
+        VALUES (NULL, 'Joe Baker', 'codekid', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Baker', 0, 'jane@baker.ca', '', 2, 'Youth Medium');
       ");
+
+      $this->assertEquals(2, $link->lastInsertId);
 
       //Create Fake 2018 Camp
       $link->query("
@@ -50,6 +52,8 @@
       $link->query("
         INSERT INTO `camps` (`_id`, `year`, `month`, `day`, `week`, `theme`)
         VALUES (NULL, 2018, 7, 6, 2, 'Camp Theme 2');");
+
+      $this->assertEquals(2, $link->lastInsertId);
     }
 
     public function testGetCamperByUsername()
