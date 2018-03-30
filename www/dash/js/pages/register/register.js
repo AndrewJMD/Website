@@ -88,7 +88,7 @@ function validateEmail(id) {
 }
 
 function checkInput(id) {
-  if ($(id).val() == "") {
+  if ($(id).val() === "") {
     $(id).parent().addClass("has-error");
     return true;
   }
@@ -291,7 +291,7 @@ function githubCheck() {
 }
 
 function github(finish_state) {
-  popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
+  popup = window.open("github-js.php","GitHub Registration","width=600,height=800");
   $("#github-select").slideUp();
   $("#github-create").slideUp();
   $("#returning").slideUp();

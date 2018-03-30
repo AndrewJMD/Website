@@ -16,17 +16,17 @@
       $this->first          = $this->name;
       $this->username       = $row['username'];
 
-      if (class_exists("Session")) {
-        if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
-          $this->first        = explode(" ", $row['name'])[0];
-          foreach (get_class_vars("Camper") as $key) {
-            if (array_key_exists($key, $row))
-              $this->$key = $row[$key];
+      if (class_exists("Environment")) {
+        if (!Environment::get("CIRCLECI", false) && class_exists("Session")) {
+          if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
+            $this->first        = explode(" ", $row['name'])[0];
+            foreach (get_class_vars("Camper") as $key) {
+              if (array_key_exists($key, $row))
+                $this->$key = $row[$key];
+            }
           }
         }
-      }
 
-      if (class_exists("Environment")) {
         if (!Environment::get("CIRCLECI", false)) {
           //Not in a CircleCI Test
           //TODO In the future it would be nice to test data retrieving in CircleCI.
@@ -92,7 +92,7 @@
       return Campers::_FetchToCamperArray($stmt);
     }
 
-    public static function GetFromUsername($username, $filter="all")
+    public static function GetFromUsername($username, $filter = "all")
     {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return array("code" => Result::MYSQLERROR);
@@ -104,11 +104,9 @@
       if ($stmt->execute(array($username))) {
         if ($stmt->rowCount() == 1)
           return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
-        else
-          return Result::NOTFOUND;
-      } else {
-        return Result::INVALID;
+        return Result::NOTFOUND;
       }
+      return Result::INVALID;
     }
 
     public static function Register($info) {

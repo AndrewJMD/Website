@@ -37,7 +37,7 @@
       return Camps::_FetchToCampArray($stmt);
     }
 
-    public static function GetCamp($id)
+    public static function GetCamp($camp)
     {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return Result::MYSQLERROR;
@@ -45,7 +45,7 @@
       if (!$stmt = $link->prepare(Camps::ID_STMT)) {
         return Result::MYSQLERROR;
       }
-      if (!$stmt->execute(array($id))) {
+      if (!$stmt->execute(array($camp))) {
         return Result::MYSQLERROR;
       }
       $stmt->setFetchMode(PDO::FETCH_INTO, new Camp);

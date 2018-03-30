@@ -13,7 +13,6 @@ var handler = StripeCheckout.configure({
       data: { token: token.id, amount: amount, camper: camper_id, phone: parent_phone, email: parent_email }
     })
       .done(function( msg ) {
-        console.log("ok", msg);
         next();
       })
       .fail(function( jqXHR, textStatus ) {
