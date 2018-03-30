@@ -19,7 +19,7 @@
       "health" => "987654321",
       "prov" => "SK",
       "medical" => "Not Real",
-      "cellphone" => "(306) 555-9876",
+      "phone" => "(306) 555-9876",
       "parent_phone" => "(306) 555-6789",
       "parent_name" => "Jake Doe",
       "parent_email" => "jake@doe.com",

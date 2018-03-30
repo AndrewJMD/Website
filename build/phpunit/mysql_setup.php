@@ -75,4 +75,6 @@
   $link->query("ALTER TABLE `attend` ADD PRIMARY KEY (`_id`);");
   $link->query("ALTER TABLE `attend` MODIFY `_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");
 
+  $link->query("COMMIT;");
+
 ?>
