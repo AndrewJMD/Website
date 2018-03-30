@@ -27,6 +27,29 @@
       "shirt" => "Youth Medium",
     );
 
+    public function testCreateStartData()
+    {
+      //Create Fake Admin
+      $link->query("
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
+        VALUES (2, 'John Smith', 'jsmith', '', '', '', '', '', '', '', 0, '', '', 1, 'Adult Large');
+      ");
+
+      //Create Fake Camper
+      $link->query("
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
+        VALUES (2, 'Joe Baker', 'codekid', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Baker', 0, 'jane@baker.ca', '', 1, 'Youth Medium');
+      ");
+
+      //Create Fake 2018 Camp
+      $link->query("
+        INSERT INTO `camps` (`_id`, `year`, `month`, `day`, `week`, `theme`)
+        VALUES (1, 2018, 7, 2, 1, 'Camp Theme 1');");
+      $link->query("
+        INSERT INTO `camps` (`_id`, `year`, `month`, `day`, `week`, `theme`)
+        VALUES (2, 2018, 7, 6, 2, 'Camp Theme 2');");
+    }
+
     public function testGetCamperByUsername()
     {
       $camper = Campers::GetFromUsername("codekid");
