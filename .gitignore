@@ -6,4 +6,4 @@ compcamps.sql
 /www/vendor/
 *.lock
 /vendor/
-secrets.php
+/www/secrets.php

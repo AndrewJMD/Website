@@ -8,7 +8,7 @@ function parseDate(label, x, y, flotItem) {
   return monthNames[date.getMonth()] + " " + date.getDate() + ": " + y;
 }
 
-$(document).ready(()=>{
+$(document).ready(function(){
   //Registrations
   $.ajax({
     url: Dash.DASH+"data/registrations.php",
@@ -52,7 +52,6 @@ $(document).ready(()=>{
     dataType: "json",
     success(d) {
       if (d.code === Dash.Result.VALID) {
-        console.log(d);
         $.plot($("#camper-line"), [d.data], {
           series: {
             lines: {
