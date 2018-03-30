@@ -29,6 +29,8 @@
 
     public function testCreateStartData()
     {
+      $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+
       //Create Fake Admin
       $link->query("
         INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
