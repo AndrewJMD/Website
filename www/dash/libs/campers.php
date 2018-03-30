@@ -5,14 +5,15 @@
 
   class Camper {
 
-    public $_id, $name, $first, $username, $dob, $health_card, $phone, $parent_name;
-    public $email, $health_notes, $gender, $shirt;
+    public $_id, $name, $first, $username, $dob, $health, $prov, $cellphone, $phone, $parents;
+    public $drive, $email, $medical, $gender, $shirt;
     public $camps_attended, $weeks_attended;
 
     function __construct($row)
     {
       $this->_id            = $row['_id'];
       $this->name           = explode(" ", $row['name'])[0];
+      $this->first          = $this->name;
       $this->username       = $row['username'];
 
       if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
