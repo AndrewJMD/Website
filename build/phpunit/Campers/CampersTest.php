@@ -3,6 +3,7 @@
   declare(strict_types=1);
 
   require_once("www/config.php");
+  require_once("build/phpunit/secrets.php");
 
   use PHPUnit\Framework\TestCase;
 
@@ -39,6 +40,13 @@
       $camper = new Camper(CampersTest::EX_DATA);
       $this->expectOutputString("johndoe");
       print $camper->username;
+    }
+
+    public function testGetCamperByUsername()
+    {
+      $camper = Camper::GetFromUsername("codekid");
+      $this->expectOutputString("Joe");
+      print $camper->first;
     }
   }
 ?>
