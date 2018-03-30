@@ -1,4 +1,4 @@
-state = 1;
+var state = 1;
 
 var camper_id = -1;
 
@@ -20,6 +20,8 @@ var github_username = "";
 
 var week1 = false;
 var week2 = false;
+
+var error = null;
 
 function first() {
   $("#start").slideUp();
@@ -75,7 +77,7 @@ function prev() {
 }
 
 function validateEmail(id) {
-    email = $(id).val();
+    var email = $(id).val();
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(email).toLowerCase())) {
       $(id).parent().addClass("has-error");
@@ -105,7 +107,7 @@ function next() {
       medical = $("#medical").val();
       shirt   = $("#shirt").val();
       hear    = $("#hear").val();
-      var error = checkInput("#name");
+      error = checkInput("#name");
       error     = checkInput("#dob")    || error;
       error     = checkInput("#health") || error;
       if (!error) {
@@ -119,8 +121,8 @@ function next() {
       parent_name   = $("#parent_name").val();
       parent_phone  = $("#parent_phone").val();
       parent_email  = $("#parent_email").val();
-      parent_drive  = $("#parent_drive").is(':checked');
-      var error = checkInput("#parent_name");
+      parent_drive  = $("#parent_drive").is(":checked");
+      error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
       error     = validateEmail("#parent_email") || error;
@@ -187,8 +189,8 @@ function next() {
       });
       break;
     case 8:
-      week1 = $("#week-1").is(':checked');
-      week2 = $("#week-2").is(':checked');
+      week1 = $("#week-1").is(":checked");
+      week2 = $("#week-2").is(":checked");
       if (!week1 && !week2) {
         break;
       }
