@@ -3,7 +3,6 @@
   declare(strict_types=1);
 
   require_once("www/config.php");
-  //require_once("www/libs/session.php");
 
   use PHPUnit\Framework\TestCase;
 

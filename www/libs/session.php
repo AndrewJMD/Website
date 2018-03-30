@@ -1,6 +1,6 @@
 <?php
 
-  if((@include "vendor/autoload.php") === false) {}
+  if ((@include "vendor/autoload.php") === false) {}
 
   use function Cekurte\Environment\env;
   use Cekurte\Environment\Environment;

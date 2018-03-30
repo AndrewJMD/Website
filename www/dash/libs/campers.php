@@ -100,7 +100,6 @@
       if (!$stmt = $link->prepare(($filter == "all") ? Campers::USER_ALL_STMT : Campers::USER_SIMPLE_STMT )) {
         return Result::MYSQLPREPARE;
       }
-      //TODO Prepared Statements
       if ($stmt->execute(array($username))) {
         if ($stmt->rowCount() == 1)
           return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
