@@ -16,22 +16,26 @@
       $this->first          = $this->name;
       $this->username       = $row['username'];
 
-      if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
-        $this->first        = explode(" ", $row['name'])[0];
-        foreach(get_class_vars("Camper") as $key=>$value) {
-          if (array_key_exists($key, $row))
-            $this->$key = $row[$key];
+      if (class_exists("Session")) {
+        if (Session::Allowed($_SESSION['level'],Level::ADMIN)) {
+          $this->first        = explode(" ", $row['name'])[0];
+          foreach(get_class_vars("Camper") as $key=>$value) {
+            if (array_key_exists($key, $row))
+              $this->$key = $row[$key];
+          }
         }
       }
 
-      if (!Environment::get("CIRCLECI", false)) {
-        //Not in a CircleCI Test
-        //TODO In the future it would be nice to test data retrieving in CircleCI.
-        $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-        $this->weeks_attended = $link->query("SELECT _id FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
-        $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+      if (class_exists("Environment")) {
+        if (!Environment::get("CIRCLECI", false)) {
+          //Not in a CircleCI Test
+          //TODO In the future it would be nice to test data retrieving in CircleCI.
+          $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+          $this->weeks_attended = $link->query("SELECT _id FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+          $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
+        }
       }
-
+      
     }
   }
 

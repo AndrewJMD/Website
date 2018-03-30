@@ -62,35 +62,6 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="far fa-envelope"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a onclick="">
-                      <div class="pull-left">
-                        <img src="" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-              </li>
-              <li class="footer"><a onclick="">See All Messages</a></li>
-            </ul>
-          </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a onclick="" class="dropdown-toggle" data-toggle="dropdown">
@@ -212,6 +183,10 @@
 <script src="<?php echo DASH; ?>libs/fastclick/fastclick.js"></script>
 <!-- PACE -->
 <script src="<?php echo DASH; ?>libs/pace/pace.min.js"></script>
+<!-- FLOT -->
+<script src="<?php echo DASH; ?>libs/flot/jquery.flot.js"></script>
+<script src="<?php echo DASH; ?>libs/flot/jquery.flot.tooltip.min.js"></script>
+<script src="<?php echo DASH; ?>libs/flot/jquery.flot.resize.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo DASH; ?>js/adminlte.min.js"></script>
 <script src="<?php echo DASH; ?>js/dash.js"></script>
