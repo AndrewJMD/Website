@@ -3,13 +3,12 @@
   if (isset($SERVER['DOCUMENT_ROOT'])) {
     require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
   } else {
-    if ((@include "vendor/autoload.php") === false) {}
+    if ((@include "vendor/autoload.php") === false) {die("noload");}
   }
 
-  use function Cekurte\Environment\env;
   use Cekurte\Environment\Environment;
 
-  if (!class_exists("Environment") || !Environment::get("CIRCLECI", false)) {
+  if (!class_exists("Cekurte\Environment\Environment") || !Environment::get("CIRCLECI", false)) {
     session_start();
 
     if (!isset($_SESSION['id'])) {

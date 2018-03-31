@@ -16,7 +16,7 @@
       $this->first          = $this->name;
       $this->username       = $row['username'];
 
-      if (class_exists("Environment")) {
+      if (class_exists("Cekurte\Environment\Environment")) {
         if (!Environment::get("CIRCLECI", false) && class_exists("Session")) {
           if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
             $this->first        = explode(" ", $row['name'])[0];
