@@ -1,7 +1,7 @@
 <?php
 
   require_once("../config.php");
-  require_once("../session.php");
+  require_once("../libs/session.php");
   require_once("../secrets.php");
 
   use League\OAuth2\Client\Provider\Github;
@@ -71,7 +71,7 @@
             $_SESSION['username'] = $user->getNickname();
             echo "<script>window.close();</script>";
           }
-          
+
       } catch (Exception $e) {
 
           // Failed to get user details

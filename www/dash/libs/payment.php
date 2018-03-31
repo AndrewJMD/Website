@@ -18,13 +18,10 @@
         if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',')>0) {
           $addr = explode(",",$_SERVER['HTTP_X_FORWARDED_FOR']);
           return trim($addr[0]);
-        } else {
-          return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
       }
-      else {
-        return $_SERVER['REMOTE_ADDR'];
-      }
+      return $_SERVER['REMOTE_ADDR'];
     }
 
     function charge($token, $description, $amount, $camper, $email, $phone) {
@@ -55,32 +52,32 @@
           "id"    => $charge->id,
           "live"  => $charge->livemode
         );
-      } catch(\Stripe\Error\Card $e) { // Failed to charge card
-        return _error($e);
-      } catch (\Stripe\Error\RateLimit $e) { // Too many requests recently
-        return _error($e);
-      } catch (\Stripe\Error\InvalidRequest $e) { // Invalid parameters
-        return _error($e);
-      } catch (\Stripe\Error\Authentication $e) { // Authentication failed
-        return _error($e);
-      } catch (\Stripe\Error\ApiConnection $e) { // Network communication failed
-        return _error($e);
-      } catch (\Stripe\Error\Base $e) { //Generic Error
-        return _error($e);
-      } catch (Exception $e) { //Non-stripe error
-        return _error($e);
+      } catch (\Stripe\Error\Card $err) { // Failed to charge card
+        return _error($err);
+      } catch (\Stripe\Error\RateLimit $err) { // Too many requests recently
+        return _error($err);
+      } catch (\Stripe\Error\InvalidRequest $err) { // Invalid parameters
+        return _error($err);
+      } catch (\Stripe\Error\Authentication $err) { // Authentication failed
+        return _error($err);
+      } catch (\Stripe\Error\ApiConnection $err) { // Network communication failed
+        return _error($err);
+      } catch (\Stripe\Error\Base $err) { //Generic Error
+        return _error($err);
+      } catch (Exception $err) { //Non-stripe error
+        return _error($err);
       }
     }
 
-    function _error($e) {
-      $err = $e->getJsonBody()['error'];
+    function _error($err) {
+      $error = $err->getJsonBody()['error'];
       return array(
-        "code" => Result::INVALID,
-        "status" => $error->getHttpStatus(),
-        "type" => $err['type'],
-        "ecode" => $err['code'],
-        "param" => $err['param'],
-        "message" => $err['message']
+        "code"    => Result::INVALID,
+        "status"  => $err->getHttpStatus(),
+        "type"    => $error['type'],
+        "ecode"   => $error['code'],
+        "param"   => $error['param'],
+        "message" => $error['message']
       );
     }
 

@@ -10,14 +10,14 @@ var camperApp = new Vue({
   methods: {
     loadCampers: function () {
       var vm = this;
-      var urlToGet = window.location.protocol + '//' + window.location.host + '/dash/api/campers/year/' + this.year + '/simple';
+      var urlToGet = window.location.protocol + "//" + window.location.host + "/dash/api/campers/year/" + this.year + "/simple";
       axios.get(urlToGet)
         .then(function (response) {
           vm.campers = response["data"].data;
           // double data because it is the request's data and the camper list is named data
         })
         .catch(function (error) {
-          alert('Sorry! An error occurred: ' + error);
+          alert("Sorry! An error occurred: " + error);
         });
     },
     camperSrc: function (src) {

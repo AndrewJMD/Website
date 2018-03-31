@@ -9,7 +9,7 @@
     case 'signout':
       $_SESSION['id'] = -1;
       $_SESSION['username'] = "";
-      $_SESSION['level'] = 0;
+      $_SESSION['level'] = -1;
       $_SESSION['name'] = "";
       echo json_encode(
         array(

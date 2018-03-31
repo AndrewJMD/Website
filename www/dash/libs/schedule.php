@@ -19,9 +19,8 @@
             (`camp` = '$camp');"
       )) {
         return $result->fetch_all(MYSQLI_ASSOC);
-      } else {
-        return Result::INVALID;
       }
+      return Result::INVALID;
     }
 
     public static function GetLength($start, $end)

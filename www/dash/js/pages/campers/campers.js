@@ -24,8 +24,9 @@ $(function(){
       if (
         name.toLowerCase().includes(query) ||
         id.includes(query) ||
-        username.toLowerCase().includes(query)) {
-          $(this).show();
+        username.toLowerCase().includes(query)
+      ) {
+        $(this).show();
       } else {
         $(this).hide();
       }

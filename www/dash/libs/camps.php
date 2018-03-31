@@ -3,10 +3,11 @@
   class Camps
   {
 
-    const ALL_STMT      = "SELECT * FROM `camps` ORDER BY `year` DESC";
-    const ID_STMT       = "SELECT * FROM `camps` WHERE `_id` = ?";
-    const YEAR_STMT     = "SELECT * FROM `camps` WHERE `year` = ?";
-    const CURRENT_STMT  = "SELECT * FROM `camps` WHERE (`year` = DATE_FORMAT(CURRENT_DATE, \"%Y\")) AND (`month` >= DATE_FORMAT(CURRENT_DATE, \"%m\")) AND (`month` > DATE_FORMAT(CURRENT_DATE, \"%m\") OR `day` + 5 >= DATE_FORMAT(CURRENT_DATE, \"%d\")) ORDER BY `month`, `day` ASC LIMIT 1";
+    const ALL_STMT          = "SELECT * FROM `camps` ORDER BY `year` DESC";
+    const ID_STMT           = "SELECT * FROM `camps` WHERE `_id` = ?";
+    const YEAR_STMT         = "SELECT * FROM `camps` WHERE `year` = ?";
+    const CURRENT_STMT      = "SELECT * FROM `camps` WHERE (`year` = DATE_FORMAT(CURRENT_DATE, \"%Y\")) AND (`month` >= DATE_FORMAT(CURRENT_DATE, \"%m\")) AND (`month` > DATE_FORMAT(CURRENT_DATE, \"%m\") OR `day` + 5 >= DATE_FORMAT(CURRENT_DATE, \"%d\")) ORDER BY `month`, `day` ASC LIMIT 1";
+    const CAMPERS_YEAR_STMT = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year` = ?))";
 
     public static function GetCamps()
     {
@@ -36,7 +37,7 @@
       return Camps::_FetchToCampArray($stmt);
     }
 
-    public static function GetCamp($id)
+    public static function GetCamp($camp)
     {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return Result::MYSQLERROR;
@@ -44,7 +45,7 @@
       if (!$stmt = $link->prepare(Camps::ID_STMT)) {
         return Result::MYSQLERROR;
       }
-      if (!$stmt->execute(array($id))) {
+      if (!$stmt->execute(array($camp))) {
         return Result::MYSQLERROR;
       }
       $stmt->setFetchMode(PDO::FETCH_INTO, new Camp);
@@ -101,7 +102,13 @@
 
   class Camp
   {
-    public $_id, $year, $month, $day, $week, $theme;
+    public $_id, $year, $month, $day, $week, $theme, $campers;
+
+    function __construct()
+    {
+      $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+      $this->campers = $link->query("SELECT _id FROM `attend` WHERE `camp` = '".$this->_id."'")->num_rows;
+    }
   }
 
 ?>

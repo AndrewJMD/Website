@@ -1,4 +1,4 @@
-state = 1;
+var state = 1;
 
 var camper_id = -1;
 
@@ -20,6 +20,8 @@ var github_username = "";
 
 var week1 = false;
 var week2 = false;
+
+var error = null;
 
 function first() {
   $("#start").slideUp();
@@ -75,8 +77,8 @@ function prev() {
 }
 
 function validateEmail(id) {
-    email = $(id).val();
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var email = $(id).val();
+    var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
     if (!re.test(String(email).toLowerCase())) {
       $(id).parent().addClass("has-error");
       return true;
@@ -86,7 +88,7 @@ function validateEmail(id) {
 }
 
 function checkInput(id) {
-  if ($(id).val() == "") {
+  if ($(id).val() === "") {
     $(id).parent().addClass("has-error");
     return true;
   }
@@ -105,7 +107,7 @@ function next() {
       medical = $("#medical").val();
       shirt   = $("#shirt").val();
       hear    = $("#hear").val();
-      var error = checkInput("#name");
+      error = checkInput("#name");
       error     = checkInput("#dob")    || error;
       error     = checkInput("#health") || error;
       if (!error) {
@@ -119,8 +121,8 @@ function next() {
       parent_name   = $("#parent_name").val();
       parent_phone  = $("#parent_phone").val();
       parent_email  = $("#parent_email").val();
-      parent_drive  = $("#parent_drive").is(':checked');
-      var error = checkInput("#parent_name");
+      parent_drive  = $("#parent_drive").is(":checked");
+      error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
       error     = validateEmail("#parent_email") || error;
@@ -159,7 +161,7 @@ function next() {
       $.ajax({
         method: "POST",
         url: "ajax/register.php",
-        dataType: 'json',
+        dataType: "json",
         data: {
           name: name,
           username: github_username,
@@ -175,20 +177,15 @@ function next() {
           parent_email: parent_email,
           parent_drive: parent_drive
       }}).done(function(data){
-        if (data.code == Dash.Result.VALID) {
+        if (data.code === Dash.Result.VALID) {
           state = 8;
           camper_id = data.id;
-        } else {
-          alert("Error");
         }
-      }).fail(function( jqXHR, textStatus ) {
-        console.log(jqXHR);
-        console.log("fail", textStatus);
-      });
+      }).fail(function( jqXHR, textStatus ) { return; });
       break;
     case 8:
-      week1 = $("#week-1").is(':checked');
-      week2 = $("#week-2").is(':checked');
+      week1 = $("#week-1").is(":checked");
+      week2 = $("#week-2").is(":checked");
       if (!week1 && !week2) {
         break;
       }
@@ -209,7 +206,7 @@ function next() {
         $.ajax({
           method: "POST",
           url: "ajax/attend.php",
-          dataType: 'json',
+          dataType: "json",
           data : {
             camper: camper_id,
             camp: 17
@@ -220,7 +217,7 @@ function next() {
         $.ajax({
           method: "POST",
           url: "ajax/attend.php",
-          dataType: 'json',
+          dataType: "json",
           data : {
             camper: camper_id,
             camp: 18
@@ -241,7 +238,7 @@ function next() {
         request: "get/"+github_username,
         success(d) {
           $("#github-done").slideUp();
-          if (d.code == Dash.Result.VALID) {
+          if (d.code === Dash.Result.VALID) {
             $("#camper-name").html(d.data.name);
             $("#confirm-info").slideDown();
             state = 200;
@@ -262,17 +259,20 @@ function next() {
 }
 
 var interval;
+var popup;
 var github_finish_state = 7;
 
-function github(finish_state) {
-  popup = window.open('github-js.php','GitHub Registration','width=600,height=800');
-  $("#github-select").slideUp();
-  $("#github-create").slideUp();
-  $("#returning").slideUp();
-  $("#buttons").slideUp();
-  $("#github-wait").show();
-  interval = setInterval(githubCheck, 500);
-  github_finish_state = finish_state;
+function githubDone(username) {
+  github_username = username;
+  clearInterval(interval);
+  $("#prev-button").hide();
+  $("#github-button").hide();
+  $("#next-button").show();
+  $("#buttons").show();
+  $("#github-wait").slideUp();
+  $("#github-done").slideDown();
+  $("#github-username").html(username);
+  state = github_finish_state;
 }
 
 function githubCheck() {
@@ -290,15 +290,13 @@ function githubCheck() {
   }
 }
 
-function githubDone(username) {
-  github_username = username;
-  clearInterval(interval);
-  $("#prev-button").hide();
-  $("#github-button").hide();
-  $("#next-button").show()
-  $("#buttons").show()
-  $("#github-wait").slideUp();
-  $("#github-done").slideDown();
-  $("#github-username").html(username);
-  state = github_finish_state;
+function github(finish_state) {
+  popup = window.open("github-js.php","GitHub Registration","width=600,height=800");
+  $("#github-select").slideUp();
+  $("#github-create").slideUp();
+  $("#returning").slideUp();
+  $("#buttons").slideUp();
+  $("#github-wait").show();
+  interval = setInterval(githubCheck, 500);
+  github_finish_state = finish_state;
 }

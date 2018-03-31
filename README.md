@@ -1,4 +1,4 @@
-# Offical Compcamps Site.
+# Official Compcamps Site.
 
 The official website for MSI CompCamps hosted at: [www.compcamps.com](http://www.compcamps.com)
 

@@ -1,14 +1,21 @@
 <?php
-  session_start();
 
-  if (isset($SERVER['DOCUMENT_ROOT'])) {
-    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-  }
+  if ((@include "vendor/autoload.php") === false) {}
 
-  if (!isset($_SESSION['id']))
-  {
-    $_SESSION['id'] = -1;
-    $_SESSION['level'] = Level::GUEST;
+  use function Cekurte\Environment\env;
+  use Cekurte\Environment\Environment;
+
+  if (!Environment::get("CIRCLECI", false)) {
+    session_start();
+
+    if (isset($SERVER['DOCUMENT_ROOT'])) {
+      require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+    }
+
+    if (!isset($_SESSION['id'])) {
+      $_SESSION['id'] = -1;
+      $_SESSION['level'] = Level::GUEST;
+    }
   }
 
   class Session
@@ -26,12 +33,13 @@
       This is scalable to PHP_INT_MAX, usually 2147483647
       This only works with powers of 2 (1, 2, 4, 8, 16, 32) as the role value
     */
+
     public static function Allowed($user, $required) {
-      $r = decbin($required);
-      $u = decbin($user);
-      if (strlen($u) > strlen($r))
+      $req  = decbin($required);
+      $usr = decbin($user);
+      if (strlen($usr) > strlen($req))
         return False;
-      return ($r[strlen($r) - strlen(decbin($user))] == 1);
+      return ($req[strlen($req) - strlen(decbin($user))] == 1);
     }
 
   }

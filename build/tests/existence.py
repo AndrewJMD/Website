@@ -5,7 +5,6 @@ File Existence Check
 
 Errors:
  - Linked file does not exist
-
 """
 
 rIMG    = r"<img(?:.+?)(?<!:)src=\"(.+?)\"(?:.+?)>"
@@ -15,7 +14,7 @@ rSCRIPT = r"<script(?:.+?)src=\"(.+?)\"(?:.+?)>"
 scandir = ""
 try:
     scandir = sys.argv[1]
-except:
+except IndexError:
     scandir = "."
 
 ret = 0
@@ -33,8 +32,8 @@ def check(text, regex):
                     print "File not found:",os.path.join(root,file),src
 
 for root, dirs, files in os.walk(scandir):
-    for file in files:
-        with open(os.path.join(root,file)) as f:
+    for f in files:
+        with open(os.path.join(root,f)) as f:
             check(f.read(), rIMG)
             check(f.read(), rLINK)
             check(f.read(), rSCRIPT)

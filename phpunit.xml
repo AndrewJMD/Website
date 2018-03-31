@@ -2,11 +2,13 @@
   <testsuites>
     <testsuite>
        <directory suffix="Test.php">./build/phpunit/Campers</directory>
+       <directory suffix="Test.php">./build/phpunit/Session</directory>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
       <file>./www/dash/libs/campers.php</file>
+      <file>./www/libs/session.php</file>
     </whitelist>
   </filter>
 </phpunit>
