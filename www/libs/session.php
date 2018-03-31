@@ -3,7 +3,7 @@
   if (isset($SERVER['DOCUMENT_ROOT'])) {
     require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
   } else {
-    if ((@include "vendor/autoload.php") === false) {die("noload");}
+    if ((@include "vendor/autoload.php") === false) {}
   }
 
   use Cekurte\Environment\Environment;
