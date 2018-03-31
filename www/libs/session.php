@@ -1,16 +1,16 @@
 <?php
 
-  if ((@include "vendor/autoload.php") === false) {}
+  if (isset($SERVER['DOCUMENT_ROOT'])) {
+    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+  } else {
+    if ((@include "vendor/autoload.php") === false) {}
+  }
 
   use function Cekurte\Environment\env;
   use Cekurte\Environment\Environment;
 
-  if (!Environment::get("CIRCLECI", false)) {
+  if (!class_exists("Environment") || !Environment::get("CIRCLECI", false)) {
     session_start();
-
-    if (isset($SERVER['DOCUMENT_ROOT'])) {
-      require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-    }
 
     if (!isset($_SESSION['id'])) {
       $_SESSION['id'] = -1;
