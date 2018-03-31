@@ -5,6 +5,7 @@ var handler = StripeCheckout.configure({
   image: "https://stripe.com/img/documentation/checkout/marketplace.png",
   locale: "auto",
   allowRememberMe: false,
+  currency: "CAD",
   token: function(token) {
     $.ajax({
       method: "POST",
