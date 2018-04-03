@@ -79,7 +79,7 @@
 
     public function testAddGitHub()
     {
-      $result = Campes::AddGithub(3, "procode");
+      $result = Campers::AddGithub(3, "procode");
       $this->assertEquals(1, $result['code']);
     }
 
