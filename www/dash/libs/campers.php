@@ -133,6 +133,21 @@
       return array("code" => Result::VALID, "id" => $link->lastInsertId());
     }
 
+    public static function AddGithub($id, $username) {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return array("code" => Result::MYSQLERROR);
+      }
+      if (!$stmt = $link->prepare("UPDATE `users` SET `username` = :username WHERE `_id` = :id")){
+        return array("code" => Result::MYSQLPREPARE);
+      }
+      $stmt->bindParam(":id",       $id);
+      $stmt->bindParam(":username", $username);
+      if (!$stmt->execute()) {
+        return array("code" => Result::MYSQLEXECUTE);
+      }
+      return array("code" => Result::VALID);
+    }
+
     static function _FetchToCamperArray($stmt)
     {
       $campers = array();

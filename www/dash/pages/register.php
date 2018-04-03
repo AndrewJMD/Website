@@ -52,9 +52,9 @@
               <div id="first">
                 <?php include("includes/registration/first.html"); ?>
               </div>
-              <div id="returning" style="display:none">
-                <?php include("includes/registration/returning.html"); ?>
-              </div>
+              <!--<div id="returning" style="display:none">
+                <?php /*include("includes/registration/returning.html");*/ ?>
+              </div>-->
               <div id="parent" style="display:none">
                 <?php include("includes/registration/parent.html"); ?>
               </div>
@@ -79,9 +79,9 @@
               <div id="github-invalid" style="display:none">
                 <?php include("includes/registration/github-invalid.html"); ?>
               </div>
-              <div id="confirm-info" style="display:none">
-                <?php include("includes/registration/confirm-info.html"); ?>
-              </div>
+              <!--<div id="confirm-info" style="display:none">
+                <?php /*include("includes/registration/confirm-info.html");*/ ?>
+              </div>-->
               <div id="week-select" style="display:none">
                 <?php include("includes/registration/week-select.html"); ?>
               </div>

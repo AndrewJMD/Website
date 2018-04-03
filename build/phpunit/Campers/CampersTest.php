@@ -45,6 +45,14 @@
 
       $this->assertEquals(2, $link->insert_id);
 
+      //Create Fake Camper without username
+      $link->query("
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
+        VALUES (NULL, 'John Doe', '', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Doe', 0, 'jane@doe.ca', '', 2, 'Youth Medium');
+      ");
+
+      $this->assertEquals(3, $link->insert_id);
+
       //Create Fake 2018 Camp
       $link->query("
         INSERT INTO `camps` (`_id`, `year`, `month`, `day`, `week`, `theme`)
@@ -69,10 +77,23 @@
       $this->assertEquals(1, $camper['code']);
     }
 
+    public function testAddGitHub()
+    {
+      $result = Campes::AddGithub(3, "procode");
+      $this->assertEquals(1, $result['code']);
+    }
+
+    public function testGetCamperByUsernameAfterGitHub()
+    {
+      $camper = Campers::GetFromUsername("procode");
+      $this->expectOutputString("John");
+      print $camper->first;
+    }
+
     public function testAllCampers()
     {
       $campers = count(Campers::GetAllCampers());
-      $this->assertEquals(2, $campers);
+      $this->assertEquals(3, $campers);
     }
   }
 ?>
