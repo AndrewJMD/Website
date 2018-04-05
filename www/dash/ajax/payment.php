@@ -5,7 +5,7 @@
   $email  = $_POST['email'];
   $phone  = $_POST['phone'];
 
-  require("../libs/payment.php");
+  require("../libs/payments.php");
 
   $stripe = new Stripe();
 
