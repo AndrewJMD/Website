@@ -1,3 +1,4 @@
+var Dash;
 Dash.get({
   api: "campers",
   request: "year/"+(new Date()).getFullYear(),
