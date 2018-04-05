@@ -47,7 +47,13 @@
           default:
             echo json_encode(array("code" => Result::INVALID));
         }
-      } else { deny(); }
-    } else { deny(); }
-  } else { deny(); }
+      } else {
+        deny();
+      }
+    } else {
+      deny();
+    }
+  } else {
+    deny();
+  }
 ?>
