@@ -119,6 +119,7 @@ function next() {
       error     = checkInput("#parent_email") || error;
       error     = validateEmail("#parent_email") || error;
       if (!error) {
+        $("#complete-email").html(parent_email);
         $("#parent").slideUp();
         $("#week-select").slideDown();
         $.ajax({
