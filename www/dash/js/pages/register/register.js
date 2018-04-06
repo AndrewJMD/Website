@@ -189,6 +189,7 @@ function next() {
       $("#prev-button").hide();
       $("#github").slideDown();
       $("#github-button").show();
+      $("#close-button").show();
       state = 5;
       break;
     case 5:
@@ -204,6 +205,7 @@ function next() {
       $("#prev-button").hide();
       $("#github-button").hide();
       $("#next-button").show();
+      $("#close-button").hide();
       state = 7;
       break;
     case 7:
@@ -240,6 +242,12 @@ function cheque() {
       dataType: "json",
       data: { amount: ((week1 ? 350 : 0) + (week2 ? 350 : 0)) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
     });
+  }
+}
+
+function close() {
+  if (state === 5) {
+    window.location.href = "../";
   }
 }
 
