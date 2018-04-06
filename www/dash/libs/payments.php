@@ -60,7 +60,6 @@
           return Result::MYSQLEXECUTE;
         }
       }
-
       return Payments::_FetchToPaymentArray($stmt);
     }
 
@@ -74,11 +73,14 @@
       if ($stmt->execute(array($transaction_id))) {
         if ($stmt->rowCount() == 1) {
           $results = $stmt->fetch(PDO::FETCH_ASSOC);
+          if ($results['method'] != 1) {
+            return Result::INVALID;
+          }
           if (explode("-", $results['paid_date'])[0] == date("Y")) {
             //Only update payments a max of once per day per transaction, to avoid abusing stripe API
             if (strtotime($results['checked']) < strtotime('-1 days')) {
               $stripe = new Stripe();
-              $stripe->update();
+              $stripe->update($transaction_id);
             }
           }
           return Result::VALID;
@@ -93,6 +95,7 @@
       $payments = array();
       $raw = $stmt->fetchAll(PDO::FETCH_ASSOC);
       foreach ($raw as &$payment) {
+        Payments::_update($payment['transaction_id']);
         array_push($payments, new Payment($payment));
       }
       return $payments;
@@ -119,16 +122,17 @@
     function charge($token, $description, $amount, $camper, $email, $phone) {
       try {
         $charge = \Stripe\Charge::create(array(
-          "amount"      => $amount,
-          "currency"    => "cad",
-          "source"      => $token,
-          "description" => $description
+          "amount"        => $amount,
+          "currency"      => "cad",
+          "source"        => $token,
+          "description"   => $description,
+          "receipt_email" => $email
         ));
 
         $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
         $stmt = $link->prepare(
-          "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`)
-          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL);"
+          "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
+          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL, NULL);"
         );
 
         $live = $charge->livemode ? '1' : '0';
@@ -147,19 +151,19 @@
           "live"  => $charge->livemode
         );
       } catch (\Stripe\Error\Card $err) { // Failed to charge card
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\RateLimit $err) { // Too many requests recently
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\InvalidRequest $err) { // Invalid parameters
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Authentication $err) { // Authentication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\ApiConnection $err) { // Network communication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Base $err) { //Generic Error
-        return _error($err);
+        return Stripe::_error($err);
       } catch (Exception $err) { //Non-stripe error
-        return _error($err);
+        return Stripe::_error($err);
       }
     }
 
@@ -169,25 +173,35 @@
         if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
           return array("code" => Result::MYSQLERROR);
         }
-        if (!$stmt = $link->prepare("UPDATE `payments` SET `status` = ?, `checked` = '".date("Y-m-d H:i:s")."' WHERE `transaction_id` = ?")) {
+        if (!$stmt = $link->prepare("UPDATE `payments` SET `status` = ?, `raw` = ?, `checked` = '".date("Y-m-d H:i:s")."' WHERE `transaction_id` = ?")) {
           return Result::MYSQLPREPARE;
         }
-        if (!$stmt->execute(array($charge->status, $transaction_id))) {
+        $status = $charge->status;
+        if ($status == "succeeded") {
+          if ($charge->paid) {
+            $status = "paid";
+          }
+          if ($charge->refunded) {
+            $status = "refunded";
+          }
+        }
+        $raw = json_encode($charge);
+        if (!$stmt->execute(array($status, $raw, $transaction_id))) {
           return Result::MYSQLEXECUTE;
         }
-        return Result::Valid;
+        return Result::VALID;
       } catch (\Stripe\Error\RateLimit $err) { // Too many requests recently
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\InvalidRequest $err) { // Invalid parameters
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Authentication $err) { // Authentication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\ApiConnection $err) { // Network communication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Base $err) { //Generic Error
-        return _error($err);
+        return Stripe::_error($err);
       } catch (Exception $err) { //Non-stripe error
-        return _error($err);
+        return Stripe::_error($err);
       }
     }
 
