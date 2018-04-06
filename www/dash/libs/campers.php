@@ -34,7 +34,7 @@
       $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
 
     }
-    
+
   }
 
   class Campers {
@@ -150,6 +150,23 @@
       if (!$stmt->execute()) {
         return array("code" => Result::MYSQLEXECUTE);
       }
+
+      if (defined("DISCORD_WEBHOOK")) {
+        $postData = array(
+          "content" => "New Registration: ".$info['name']
+        );
+        $ch = curl_init(DISCORD_WEBHOOK);
+        curl_setopt_array($ch, array(
+            CURLOPT_POST => TRUE,
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_HTTPHEADER => array(
+              "Content-Type: application/json"
+            ),
+            CURLOPT_POSTFIELDS => json_encode($postData)
+        ));
+        curl_exec($ch);
+      }
+
       return array("code" => Result::VALID, "id" => $link->lastInsertId());
     }
 
