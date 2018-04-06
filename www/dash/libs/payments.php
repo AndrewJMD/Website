@@ -73,6 +73,9 @@
       if ($stmt->execute(array($transaction_id))) {
         if ($stmt->rowCount() == 1) {
           $results = $stmt->fetch(PDO::FETCH_ASSOC);
+          if ($results['method'] !== 1) {
+            return Result::INVALID;
+          }
           if (explode("-", $results['paid_date'])[0] == date("Y")) {
             //Only update payments a max of once per day per transaction, to avoid abusing stripe API
             if (strtotime($results['checked']) < strtotime('-1 days')) {
@@ -148,19 +151,19 @@
           "live"  => $charge->livemode
         );
       } catch (\Stripe\Error\Card $err) { // Failed to charge card
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\RateLimit $err) { // Too many requests recently
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\InvalidRequest $err) { // Invalid parameters
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Authentication $err) { // Authentication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\ApiConnection $err) { // Network communication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Base $err) { //Generic Error
-        return _error($err);
+        return Stripe::_error($err);
       } catch (Exception $err) { //Non-stripe error
-        return _error($err);
+        return Stripe::_error($err);
       }
     }
 
@@ -176,19 +179,19 @@
         if (!$stmt->execute(array($charge->status, $transaction_id))) {
           return Result::MYSQLEXECUTE;
         }
-        return Result::Valid;
+        return Result::VALID;
       } catch (\Stripe\Error\RateLimit $err) { // Too many requests recently
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\InvalidRequest $err) { // Invalid parameters
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Authentication $err) { // Authentication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\ApiConnection $err) { // Network communication failed
-        return _error($err);
+        return Stripe::_error($err);
       } catch (\Stripe\Error\Base $err) { //Generic Error
-        return _error($err);
+        return Stripe::_error($err);
       } catch (Exception $err) { //Non-stripe error
-        return _error($err);
+        return Stripe::_error($err);
       }
     }
 
