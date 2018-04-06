@@ -17,11 +17,12 @@ Dash.get({
       $("#live").html((d.live === "0") ? "No" : "Yes");
 
       $("#raw").html(JSON.stringify(JSON.parse(d.raw), null, 2));
-      hljs.initHighlightingOnLoad();
-
+      
       if (d.method === 1) {
         $("#btn-update").show();
       }
+      
+      hljs.initHighlightingOnLoad();
     }
   }
 });
