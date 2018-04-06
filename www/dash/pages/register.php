@@ -96,6 +96,7 @@
               </div>
             </div>
             <div class="box-footer" id="buttons">
+              <button type="button" class="btn btn-default" onclick="close()" style="display:none" id="close-button">Close (Complete GitHub at Camp)</button>
               <button type="button" class="btn btn-default" style="display:none" onclick="prev()" id="prev-button">Back</button>
               <button type="button" class="btn btn-info pull-right" onclick="next()" id="next-button">Next</button>
               <a class="btn btn-social btn-github pull-right" onclick="next()" id="github-button" style="display:none">

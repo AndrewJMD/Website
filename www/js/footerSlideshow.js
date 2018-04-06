@@ -23,11 +23,6 @@ var footerSlideshow = new Vue({
         name: "Innovation Place"
       },
       {
-        src: "capital.png",
-        link: "http://capitalautomall.ca/",
-        name: "Capital"
-      },
-      {
         src: "uofrlogo.png",
         link: "https://www.uregina.ca/",
         name: "University of Regina"
