@@ -66,8 +66,8 @@ $(document).on("click", "a", function(e) {
 });
 
 $(document).ready(function(){
-  $('body').tooltip({
-    selector: '[data-toggle=tooltip]',
-    content: function() { return $(this).attr('data-title'); },
+  $("body").tooltip({
+    selector: "[data-toggle=tooltip]",
+    content: function() { return $(this).attr("data-title"); },
   });
 });

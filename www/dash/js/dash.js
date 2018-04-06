@@ -107,7 +107,7 @@ Dash.Template.prototype.exec = function(d) {
     }
     var source = d;
     var prop = m[1];
-    while (prop !== undefined && prop.indexOf('.') !== -1) {
+    while (typeof prop !== "undefined" && prop.indexOf(".") !== -1) {
       var tmp = prop.split(".");
       source = source[tmp[0]];
       prop = tmp.slice(1).join(".");

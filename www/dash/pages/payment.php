@@ -4,7 +4,7 @@
   function OutputPage() { ?>
     <section class="content">
       <script>
-        var transaction_id = "<?php echo GetFromURL("b",""); ?>";
+        var transaction_id = "<?php echo addslashes(GetFromURL("b","")); ?>";
       </script>
       <div class="row">
         <div class="col-md-5">

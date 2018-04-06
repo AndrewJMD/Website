@@ -19,7 +19,7 @@ Dash.get({
       $("#raw").html(JSON.stringify(JSON.parse(d.raw), null, 2));
       hljs.initHighlightingOnLoad();
 
-      if (d.method == 1) {
+      if (d.method === 1) {
         $("#btn-update").show();
       }
     }

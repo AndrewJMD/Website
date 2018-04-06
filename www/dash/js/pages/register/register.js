@@ -183,7 +183,7 @@ function next() {
         });
       }
       $("#payment").slideUp();
-      $("#cheque").slideUp()
+      $("#cheque").slideUp();
       $("#next-button").hide();
       $("#prev-button").hide();
       $("#github").slideDown();
@@ -228,7 +228,7 @@ function next() {
 }
 
 function cheque() {
-  if (state == 4) {
+  if (state === 4) {
     $("#payment").slideUp();
     $("#cheque").slideDown();
     $("#prev-button").slideUp();
@@ -238,7 +238,7 @@ function cheque() {
       url: "ajax/cheque.php",
       dataType: "json",
       data: { amount: ((week1 ? 350 : 0) + (week2 ? 350 : 0)) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
-    })
+    });
   }
 }
 

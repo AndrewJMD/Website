@@ -30,7 +30,7 @@ Dash.get({
                   }
                   $("#campers-list tr:last").after(t.exec(i));
                 }
-              })
+              });
             }
           }
         });
