@@ -73,7 +73,7 @@
       if ($stmt->execute(array($transaction_id))) {
         if ($stmt->rowCount() == 1) {
           $results = $stmt->fetch(PDO::FETCH_ASSOC);
-          if ($results['method'] !== 1) {
+          if ($results['method'] != 1) {
             return Result::INVALID;
           }
           if (explode("-", $results['paid_date'])[0] == date("Y")) {
@@ -180,7 +180,8 @@
         if ($status == "succeeded") {
           if ($charge->paid) {
             $status = "paid";
-          } elseif ($charge->refunded) {
+          }
+          if ($charge->refunded) {
             $status = "refunded";
           }
         }
