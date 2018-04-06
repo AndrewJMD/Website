@@ -19,6 +19,7 @@
     const INSUFFICIENT  = 3;
     const NOTFOUND      = 4;
     const REDIRECT      = 5;
+    const FAILED        = 6;
 
     //MYSQL
     const MYSQLERROR    = 50; //TODO Change to MYSQLCONNECT
