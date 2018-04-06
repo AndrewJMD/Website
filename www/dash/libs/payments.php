@@ -60,7 +60,6 @@
           return Result::MYSQLEXECUTE;
         }
       }
-
       return Payments::_FetchToPaymentArray($stmt);
     }
 
@@ -93,6 +92,7 @@
       $payments = array();
       $raw = $stmt->fetchAll(PDO::FETCH_ASSOC);
       foreach ($raw as &$payment) {
+        Payments::_update($payment['transaction_id']);
         array_push($payments, new Payment($payment));
       }
       return $payments;
@@ -119,10 +119,11 @@
     function charge($token, $description, $amount, $camper, $email, $phone) {
       try {
         $charge = \Stripe\Charge::create(array(
-          "amount"      => $amount,
-          "currency"    => "cad",
-          "source"      => $token,
-          "description" => $description
+          "amount"        => $amount,
+          "currency"      => "cad",
+          "source"        => $token,
+          "description"   => $description,
+          "receipt_email" => $email
         ));
 
         $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
