@@ -12,6 +12,7 @@ Dash.get({
       $("#total").html(d.total);
       $("#status").html(d.status);
       $("#paid_date").html(d.paid_date);
+      $("#created_date").html(d.created_date);
       $("#checked").html(d.checked);
       $("#live").html((d.live === "0") ? "No" : "Yes");
 

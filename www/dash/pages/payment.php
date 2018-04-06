@@ -25,6 +25,9 @@
                   <b>Status</b> <span class="pull-right" id="status"></span>
                 </li>
                 <li class="list-group-item">
+                  <b>Date Created</b> <span class="pull-right" id="created_date"></span>
+                </li>
+                <li class="list-group-item">
                   <b>Date Paid</b> <span class="pull-right" id="paid_date"></span>
                 </li>
                 <li class="list-group-item">

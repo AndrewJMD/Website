@@ -7,7 +7,7 @@
 
   class Payment {
 
-    public $_id, $camper, $method, $method_name, $transaction_id, $cart_total, $paid_date, $ip_address, $status, $total, $live, $checked, $raw;
+    public $_id, $camper, $method, $method_name, $transaction_id, $cart_total, $paid_date, $created_date, $ip_address, $status, $total, $live, $checked, $raw;
 
     function __construct($row) {
       $this->_id = $row['_id'];
@@ -21,6 +21,7 @@
       }
       setlocale(LC_MONETARY, 'en_US.UTF-8');
       $this->total = money_format('%.2n', $this->cart_total / 100);
+      $this->created_date = $row['created_date'];
       $this->paid_date = $row['paid_date'];
       $this->ip_address = $row['ip_address'];
       $this->live = $row['live'];
@@ -141,8 +142,10 @@
     public static function AddCheque($amount, $camper, $email, $phone) {
       $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
       $stmt = $link->prepare(
-        "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
-        VALUES (NULL, :camper, '3', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, 'cq_".generateRandomString()."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, 0, 'not-received', NULL, NULL);"
+        "INSERT INTO `payments`
+        (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `created_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
+        VALUES
+        (NULL, :camper, '3', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, 'cq_".generateRandomString(24)."', NULL, :amount, NULL, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, 0, 'not-received', NULL, NULL);"
       );
       $stmt->bindParam(":camper",  $camper);
       $stmt->bindParam(":email",   $email);
@@ -182,8 +185,9 @@
 
         $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
         $stmt = $link->prepare(
-          "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
-          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL, NULL);"
+          "INSERT INTO
+          `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `created_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
+          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL, NULL);"
         );
 
         $live = $charge->livemode ? '1' : '0';

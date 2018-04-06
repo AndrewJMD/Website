@@ -185,6 +185,7 @@ function next() {
       $("#payment").slideUp();
       $("#cheque").slideUp()
       $("#next-button").hide();
+      $("#prev-button").hide();
       $("#github").slideDown();
       $("#github-button").show();
       state = 5;
