@@ -113,7 +113,7 @@ function next() {
       parent_name   = $("#parent_name").val();
       parent_phone  = $("#parent_phone").val();
       parent_email  = $("#parent_email").val();
-      parent_drive  = $("#parent_drive").is(":checked");
+      parent_drive  = ($("#parent_drive").is(":checked")) ? 1 : 0;
       error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
@@ -157,7 +157,6 @@ function next() {
       $("#cost").html("CAD $"+((week1 ? 350 : 0) + (week2 ? 350 : 0)).toString());
       $("#payment").slideDown();
       $("#next-button").slideUp();
-      $("#prev-button").slideDown();
       state = 4;
       break;
     case 4:
@@ -184,9 +183,10 @@ function next() {
         });
       }
       $("#payment").slideUp();
+      $("#cheque").slideUp()
+      $("#next-button").hide();
       $("#github").slideDown();
       $("#github-button").show();
-      $("#prev-button").slideUp();
       state = 5;
       break;
     case 5:
@@ -223,6 +223,21 @@ function next() {
       });
       state = 100;
       break;
+  }
+}
+
+function cheque() {
+  if (state == 4) {
+    $("#payment").slideUp();
+    $("#cheque").slideDown();
+    $("#prev-button").slideUp();
+    $("#next-button").slideDown();
+    $.ajax({
+      method: "POST",
+      url: "ajax/cheque.php",
+      dataType: "json",
+      data: { amount: ((week1 ? 350 : 0) + (week2 ? 350 : 0)) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
+    })
   }
 }
 

@@ -120,12 +120,10 @@
 
     public $_id, $year, $month, $day, $week, $theme, $campers;
 
-    function __construct($get_campers = True)
+    function __construct()
     {
-      if ($get_campers) {
-        $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-        $this->campers = $link->query("SELECT _id FROM `attend` WHERE `camp` = '".$this->_id."'")->num_rows;
-      }
+      $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
+      $this->campers = $link->query("SELECT _id FROM `attend` WHERE `camp` = '".$this->_id."'")->num_rows;
     }
 
   }

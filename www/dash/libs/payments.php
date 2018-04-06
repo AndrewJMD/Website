@@ -138,6 +138,19 @@
       return $payments;
     }
 
+    public static function AddCheque($amount, $camper, $email, $phone) {
+      $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
+      $stmt = $link->prepare(
+        "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
+        VALUES (NULL, :camper, '3', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, 'cq_".generateRandomString()."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, 0, 'not-received', NULL, NULL);"
+      );
+      $stmt->bindParam(":camper",  $camper);
+      $stmt->bindParam(":email",   $email);
+      $stmt->bindParam(":phone",   $phone);
+      $stmt->bindParam(":amount",  $amount);
+      $stmt->execute();
+    }
+
   }
 
   class Stripe {
@@ -146,7 +159,7 @@
       \Stripe\Stripe::setApiKey(Secrets::STRIPE_SECRET);
     }
 
-    private static function _getUserIP() {
+    public static function _getUserIP() {
       if( array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
         if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',')>0) {
           $addr = explode(",",$_SERVER['HTTP_X_FORWARDED_FOR']);
