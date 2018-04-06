@@ -20,12 +20,10 @@ Dash.get({
                 i.method = "NA";
                 i.status = "NA";
               }
-
               $("#campers-list tr:last").after(t.exec(i));
             }
           }
         });
-
       });
     }
   }

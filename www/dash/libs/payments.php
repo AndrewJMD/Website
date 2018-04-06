@@ -77,7 +77,7 @@
             //Only update payments a max of once per day per transaction, to avoid abusing stripe API
             if (strtotime($results['checked']) < strtotime('-1 days')) {
               $stripe = new Stripe();
-              $stripe->update();
+              $stripe->update($transaction_id);
             }
           }
           return Result::VALID;
