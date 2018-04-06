@@ -131,8 +131,8 @@
 
         $link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS);
         $stmt = $link->prepare(
-          "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`)
-          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL);"
+          "INSERT INTO `payments` (`_id`, `camper`, `method`, `currency`, `billing_first_name`, `billing_last_name`, `billing_city`, `billing_state`, `billing_postal`, `billing_email`, `billing_phone`, `billing_address`, `transaction_id`, `net_revenue`, `cart_total`, `paid_date`, `ip_address`, `camp`, `live`, `status`, `checked`, `raw`)
+          VALUES (NULL, :camper, '1', 'CAD', NULL, NULL, NULL, NULL, NULL, :email, :phone, NULL, '".$charge->id."', NULL, :amount, '".date("Y-m-d H:i:s")."', '".Stripe::_getUserIP()."', NULL, :live, 'submitted', NULL, NULL);"
         );
 
         $live = $charge->livemode ? '1' : '0';
@@ -173,10 +173,19 @@
         if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
           return array("code" => Result::MYSQLERROR);
         }
-        if (!$stmt = $link->prepare("UPDATE `payments` SET `status` = ?, `checked` = '".date("Y-m-d H:i:s")."' WHERE `transaction_id` = ?")) {
+        if (!$stmt = $link->prepare("UPDATE `payments` SET `status` = ?, `raw` = ?, `checked` = '".date("Y-m-d H:i:s")."' WHERE `transaction_id` = ?")) {
           return Result::MYSQLPREPARE;
         }
-        if (!$stmt->execute(array($charge->status, $transaction_id))) {
+        $status = $charge->status;
+        if ($status == "succeeded") {
+          if ($charge->paid) {
+            $status = "paid";
+          } elseif ($charge->refunded) {
+            $status = "refunded";
+          }
+        }
+        $raw = json_encode($charge);
+        if (!$stmt->execute(array($status, $raw, $transaction_id))) {
           return Result::MYSQLEXECUTE;
         }
         return Result::VALID;
