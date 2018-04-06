@@ -40,8 +40,20 @@
             output(Payments::GetFromUsername(GetFromURL('a', ''), GetFromURL('b', NULL)));
             break;
 
-          case "id":
+          case "camper":
             output(Payments::GetFromID(GetFromURL('a', ''), GetFromURL('b', NULL)));
+            break;
+
+          case "id":
+            output(Payments::GetByID(GetFromURL('a', '')), "object");
+            break;
+
+          case "year":
+            output(Payments::FromYear(GetFromURL('a', date("Y"))));
+            break;
+
+          case "update":
+            output((new Stripe())->update(GetFromURL('a', NULL)));
             break;
 
           default:

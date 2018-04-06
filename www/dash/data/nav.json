@@ -6,11 +6,22 @@
       "Dashboard" : {
         "icon" : "fas fa-tachometer-alt",
         "short" : "dashboard"
-      },
+      }
+    }
+  },
+  "Registration": {
+    "view_level" : "1",
+    "edit_level" : "1",
+    "children" : {
       "Registrations" : {
         "view-level" : "1",
         "icon" : "fa fa-user-plus",
         "short" : "registrations"
+      },
+      "Payments" : {
+        "view-level" : "1",
+        "icon": "fas fa-money-bill-alt",
+        "short" : "payments"
       }
     }
   },

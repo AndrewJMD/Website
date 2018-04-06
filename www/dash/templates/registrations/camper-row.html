@@ -1,5 +1,7 @@
 <tr>
   <td>{{ _id }}</td>
   <td><a onclick="loadPage('camper','{{ username }}')">{{ name }}</a></td>
-  <td>{{ payment }} via {{ method }} ({{ status }})</td>
+  <td><a onclick="loadPage('payment','{{ payment._id }}')">
+    {{ payment.total }} via {{ payment.method_name }} ({{ payment.status }})
+  </a></td>
 </tr>
