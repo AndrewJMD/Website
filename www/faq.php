@@ -108,7 +108,7 @@ include('includes/header.php');
   <h3>What is Mentor Systems Inc. (MSI)?</h3>
   <p class="indent">Mentor Systems Inc. is a member-based organization registered as a non-profit corporation in Saskatchewan, Canada. MSI was formed by volunteer camp-staff who were counsellors and mentors at the various annual computer camps. MSI has the mandate of providing technological opportunities for youth. The program of camps and workshops fulfills this mandate by providing youth with hands-on experience with sophisticated systems, collaboration in solving challenging problems, and improved computer skills.</p>
   <h3>Who are the camp sponsors?</h3>
-  <p class="indent">The camp program is made possible through our sponsors. We recognize the following as sponsors for the 2017 camp year: Mentor Systems Incorporated, Metric Hosting Ltd, University of Regina, University of Regina Department of Computer Science, Innovation Place, Information Services Corporation, Strategy Lab, Telus, and Capital.</p>
+  <p class="indent">The camp program is made possible through our sponsors. We recognize the following as sponsors for the 2017 camp year: Mentor Systems Incorporated, Metric Hosting Ltd, University of Regina, University of Regina Department of Computer Science, Innovation Place, Information Services Corporation, Strategy Lab, and Telus.</p>
   <p class="indent">As a registered non-profit corporation providing technical opportunities for youth, MSI’s program welcomes donations and sponsored bursaries. Contact us at <a href="mailto:computercamps@gmail.com">computercamps@gmail.com</a></p>
 </section>
 <section class="faq-section">
