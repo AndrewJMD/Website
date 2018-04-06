@@ -88,6 +88,9 @@
               <div id="payment" style="display:none">
                 <?php include("includes/registration/payment.html"); ?>
               </div>
+              <div id="cheque" style="display:none">
+                <?php include("includes/registration/cheque.html"); ?>
+              </div>
               <div id="complete" style="display:none">
                 <?php include("includes/registration/complete.html"); ?>
               </div>

@@ -1,26 +1,36 @@
 var Dash;
 Dash.get({
   api: "campers",
-  request: "year/"+(new Date()).getFullYear(),
-  success(d) {
+  request: "year/"+Dash.Week.year,
+  success: function(d) {
     if(d.code === Dash.Result.VALID) {
       var t = new Dash.Template("registrations/camper-row.html");
       d.data.forEach(function(i){
         Dash.get({
           api: "payments",
-          request: "id/"+i._id+"/"+(new Date()).getFullYear(),
-          success(p) {
+          request: "camper/"+i._id+"/"+Dash.Week.year,
+          success: function(p) {
             if(p.code === Dash.Result.VALID) {
               if (p.data.length !== 0) {
-                i.payment = p.data[0].total;
-                i.method = p.data[0].method_name;
-                i.status = p.data[0].status;
+                i.payment = p.data[0];
               } else {
-                i.payment = "NA";
-                i.method = "NA";
-                i.status = "NA";
+                i.payment = {};
               }
-              $("#campers-list tr:last").after(t.exec(i));
+              Dash.get({
+                api: "camps",
+                request: "camper/"+i._id+"/"+Dash.Week.year,
+                success: function(c) {
+                  i.camps = c.data;
+                  console.log(c.data);
+                  i.weeks = c.data[0].week;
+                  if (c.data.length > 1) {
+                    c.data.splice(1).forEach(function (w) {
+                      i.weeks += ", "+w.week;
+                    });
+                  }
+                  $("#campers-list tr:last").after(t.exec(i));
+                }
+              });
             }
           }
         });

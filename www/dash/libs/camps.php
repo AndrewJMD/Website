@@ -8,6 +8,8 @@
     const YEAR_STMT         = "SELECT * FROM `camps` WHERE `year` = ?";
     const CURRENT_STMT      = "SELECT * FROM `camps` WHERE (`year` = DATE_FORMAT(CURRENT_DATE, \"%Y\")) AND (`month` >= DATE_FORMAT(CURRENT_DATE, \"%m\")) AND (`month` > DATE_FORMAT(CURRENT_DATE, \"%m\") OR `day` + 5 >= DATE_FORMAT(CURRENT_DATE, \"%d\")) ORDER BY `month`, `day` ASC LIMIT 1";
     const CAMPERS_YEAR_STMT = "SELECT * FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`year` = ?))";
+    const CAMPER_STMT       = "SELECT `camps`.* FROM `attend` JOIN `camps` ON `camps`.`_id` = `attend`.`camp` WHERE `attend`.`camper` = ? ORDER BY `camps`.`week` ASC";
+    const CAMPER_YEAR_STMT  = "SELECT `camps`.* FROM `attend` JOIN `camps` ON `camps`.`_id` = `attend`.`camp` WHERE `attend`.`camper` = ? AND `camps`.`year` = ? ORDER BY `camps`.`week` ASC";
 
     public static function GetCamps()
     {
@@ -67,6 +69,19 @@
       return $stmt->fetch();
     }
 
+    public static function GetCamperCamps($camper, $year = NULL) {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt = $link->prepare(($year == NULL) ? Camps::CAMPER_STMT : Camps::CAMPER_YEAR_STMT)) {
+        return Result::MYSQLERROR;
+      }
+      if (!$stmt->execute(($year == NULL) ? array($camper) : array($camper, $year))) {
+        return Result::MYSQLERROR;
+      }
+      return Camps::_FetchToCampArray($stmt);
+    }
+
     static function _FetchToCampArray($stmt)
     {
       $camps = array();
@@ -102,6 +117,7 @@
 
   class Camp
   {
+
     public $_id, $year, $month, $day, $week, $theme, $campers;
 
     function __construct()
@@ -109,6 +125,7 @@
       $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
       $this->campers = $link->query("SELECT _id FROM `attend` WHERE `camp` = '".$this->_id."'")->num_rows;
     }
+
   }
 
 ?>

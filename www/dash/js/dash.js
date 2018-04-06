@@ -102,10 +102,17 @@ Dash.Template.prototype.exec = function(d) {
   var o = this.t;
   var r = /{{\s?(.+?)\s?}}/g;
   while ((m = r.exec(this.t)) !== null) {
-      if (m.index === r.lastIndex) {
-          r.lastIndex++;
-      }
-      o = o.replace(m[0],d[(m[1])]);
+    if (m.index === r.lastIndex) {
+      r.lastIndex++;
+    }
+    var source = d;
+    var prop = m[1];
+    while (typeof prop !== "undefined" && prop.indexOf(".") !== -1) {
+      var tmp = prop.split(".");
+      source = source[tmp[0]];
+      prop = tmp.slice(1).join(".");
+    }
+    o = o.replace(m[0], source[prop]);
   }
   return o;
 };
