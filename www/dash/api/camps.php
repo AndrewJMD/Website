@@ -42,6 +42,10 @@
       output(Camps::GetCurrentCamp(), "object");
       break;
 
+    case "camper":
+      output(Camps::GetCamperCamps(GetFromURL('a', NULL), GetFromURL('b', NULL)));
+      break;
+
     default:
       echo json_encode(array("code" => Result::INVALID));
   }

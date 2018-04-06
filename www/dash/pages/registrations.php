@@ -13,6 +13,7 @@
                   <th style="width: 10px">#</th>
                   <th>Name</th>
                   <th>Payment</th>
+                  <th>Weeks</th>
                 </tr>
               </table>
             </div>

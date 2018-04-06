@@ -16,7 +16,9 @@
     $points = array();
 
     $link = new mysqli(MYSQL_SERVER, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
-    foreach (range(2016, intval(date("Y"))) as $year) {
+    $minyear = intval(date("Y")) - 5;
+    $minyear = ($minyear >= 2016) ? $minyear : 2016;
+    foreach (range($minyear, intval(date("Y"))) as $year) {
       $qpayment = $link->query("SELECT `camper`,`paid_date` FROM `payments` WHERE `paid_date` LIKE '$year%' GROUP BY `camper`, `paid_date` ORDER BY `paid_date`");
       $total = 0;
       $data = array();

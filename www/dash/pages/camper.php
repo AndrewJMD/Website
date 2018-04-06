@@ -4,7 +4,7 @@
   function OutputPage() { ?>
     <section class="content">
       <script>
-        var camper = "<?php echo GetFromURL("b",""); ?>";
+        var camper = "<?php echo addslashes(GetFromURL("b","")); ?>";
       </script>
       <div class="row">
         <div id='userbadge'></div>

@@ -34,6 +34,7 @@
       $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
 
     }
+    
   }
 
   class Campers {
@@ -46,6 +47,8 @@
     const CAMP_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
     const USER_ALL_STMT     = "SELECT * from `users` WHERE `username` = ?";
     const USER_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` from `users` WHERE `username` = ?";
+    const ID_ALL_STMT     = "SELECT * from `users` WHERE `_id` = ?";
+    const ID_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` from `users` WHERE `_id` = ?";
 
     public static function GetAllCampers($filter = "all")
     {
@@ -98,6 +101,22 @@
         return Result::MYSQLPREPARE;
       }
       if ($stmt->execute(array($username))) {
+        if ($stmt->rowCount() == 1)
+          return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
+        return Result::NOTFOUND;
+      }
+      return Result::INVALID;
+    }
+
+    public static function GetFromID($cid, $filter = "all")
+    {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return array("code" => Result::MYSQLERROR);
+      }
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::ID_ALL_STMT : Campers::ID_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
+      }
+      if ($stmt->execute(array($cid))) {
         if ($stmt->rowCount() == 1)
           return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
         return Result::NOTFOUND;
