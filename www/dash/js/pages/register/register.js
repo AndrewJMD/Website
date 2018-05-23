@@ -245,7 +245,7 @@ function cheque() {
   }
 }
 
-function close() {
+function home() {
   if (state === 5) {
     window.location.href = "../";
   }
