@@ -15,7 +15,7 @@
     "children" : {
       "Registrations" : {
         "view-level" : "1",
-        "icon" : "fa fa-user-plus",
+        "icon" : "fas fa-user-plus",
         "short" : "registrations"
       },
       "Payments" : {
@@ -34,11 +34,11 @@
         "short" : "camps"
       },
       "Schedule" : {
-        "icon" : "fa fa-calendar",
+        "icon" : "fas fa-calendar",
         "short" : "schedule"
       },
       "Campers" : {
-        "icon" : "fa fa-users",
+        "icon" : "fas fa-users",
         "short" : "campers",
         "children" : {
           "Camper" : {
