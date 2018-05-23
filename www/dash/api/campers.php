@@ -96,6 +96,11 @@
       output($raw, "object");
       break;
 
+    case "fetch":
+      $raw = Campers::GetFromID(GetFromURL("a",""), GetFromURL("b","simple"));
+      output($raw, "object");
+      break;
+
     default:
       echo json_encode(array("code" => Result::INVALID));
   }

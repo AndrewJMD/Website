@@ -21,7 +21,6 @@ Dash.get({
                 request: "camper/"+i._id+"/"+Dash.Week.year,
                 success: function(c) {
                   i.camps = c.data;
-                  console.log(c.data);
                   i.weeks = c.data[0].week;
                   if (c.data.length > 1) {
                     c.data.splice(1).forEach(function (w) {

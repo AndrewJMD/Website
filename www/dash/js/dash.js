@@ -44,6 +44,11 @@ Dash.get = function(f) {
       } else if ("error" in f) {
         f.error(d);
       }
+    },
+    error(e) {
+      if ("error" in f) {
+        f.error(e);
+      }
     }
   });
 };

@@ -21,7 +21,7 @@
           if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
             $this->name         = $row['name'];
             $this->first        = explode(" ", $row['name'])[0];
-            foreach (get_class_vars("Camper") as $key) {
+            foreach (get_class_vars("Camper") as $key => $value) {
               if (array_key_exists($key, $row))
                 $this->$key = $row[$key];
             }
