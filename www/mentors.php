@@ -18,7 +18,7 @@ include('includes/header.php');
   <div class="mentor-card">
     <img src="img/mentors/cole.jpg" width="150" height="150" />
     <div class="name">Cole Novak</div>
-    <div class="position">Financial Manager</div>
+    <div class="position">Treasurer</div>
   </div>
 </section>
 <section class="mentor-section text-center">
