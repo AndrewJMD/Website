@@ -1,0 +1,17 @@
+DirectoryIndex index.php
+DirectoryIndex index.html
+
+ErrorDocument 404 index.php?a=404
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI}
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([\-a-zA-Z0-9.]+)/([\-a-zA-Z0-9.]+)(/.+)/?$ index.php?a=$1&b=$2&c=$3 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([\-a-zA-Z0-9.]+)/([\-a-zA-Z0-9.]+)/?$ index.php?a=$1&b=$2 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([\-a-zA-Z0-9.]+)/?$ index.php?a=$1 [L,QSA]
