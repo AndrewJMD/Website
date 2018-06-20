@@ -95,8 +95,8 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
       - run: cd www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/
-      - run: cd www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/
-      - run: cd www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/dash
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r .htaccess.live mentor@compcamps.com:/home/mentor/public_html/.htaccess
+      - run: cd www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess.live mentor@compcamps.com:/home/mentor/public_html/dash/.htaccess
 
 workflows:
   version: 2
