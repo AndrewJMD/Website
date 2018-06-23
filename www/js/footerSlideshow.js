@@ -23,11 +23,6 @@ var footerSlideshow = new Vue({
         name: "Innovation Place"
       },
       {
-        src: "capital.png",
-        link: "http://capitalautomall.ca/",
-        name: "Capital"
-      },
-      {
         src: "uofrlogo.png",
         link: "https://www.uregina.ca/",
         name: "University of Regina"
@@ -38,9 +33,14 @@ var footerSlideshow = new Vue({
         name: "Metric Hosting"
       },
       {
-        src: "isc.png",
-        link: "https://www.isc.ca/Pages/default.aspx",
-        name: "ISC"
+        src: "saskpower.png",
+        link: "https://saskpower.com",
+        name: "SaskPower"
+      },
+      {
+        src: "ohmedia.png",
+        link: "http://ohmedia.ca/",
+        name: "OH! Media"
       }
     ],
     item: 0,

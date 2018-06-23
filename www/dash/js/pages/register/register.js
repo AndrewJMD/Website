@@ -55,23 +55,15 @@ function prev() {
       break;
     case 3:
       $("#parent").slideDown();
-      $("#github").slideUp();
-      $("#github-button").hide();
+      $("#week-select").slideUp();
       $("#next-button").show();
+      state = 2;
       break;
-    case 9:
+    case 4:
       $("#week-select").slideDown();
       $("#payment").slideUp();
       $("#next-button").slideDown();
-      $("#prev-button").slideUp();
-      state = 8;
-      break;
-
-    case 102:
-      $("#buttons").slideUp();
-      $("#github-forgot").slideUp();
-      $("#returning").slideDown();
-      state = 100;
+      state = 3;
       break;
   }
 }
@@ -121,69 +113,42 @@ function next() {
       parent_name   = $("#parent_name").val();
       parent_phone  = $("#parent_phone").val();
       parent_email  = $("#parent_email").val();
-      parent_drive  = $("#parent_drive").is(":checked");
+      parent_drive  = ($("#parent_drive").is(":checked")) ? 1 : 0;
       error = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
       error     = validateEmail("#parent_email") || error;
       if (!error) {
+        $("#complete-email").html(parent_email);
         $("#parent").slideUp();
-        $("#github").slideDown();
-        $("#github-button").show();
-        $("#next-button").hide();
+        $("#week-select").slideDown();
+        $.ajax({
+          method: "POST",
+          url: "ajax/register.php",
+          dataType: "json",
+          data: {
+            name: name,
+            username: github_username,
+            dob: dob,
+            phone: phone,
+            health: health,
+            prov: prov,
+            medical: medical,
+            shirt: shirt,
+            hear: hear,
+            parent_name: parent_name,
+            parent_phone: parent_phone,
+            parent_email: parent_email,
+            parent_drive: parent_drive
+        }}).done(function(data){
+          if (data.code === Dash.Result.VALID) {
+            camper_id = data.id;
+          }
+        }).fail(function( jqXHR, textStatus ) { return; });
         state = 3;
       }
       break;
     case 3:
-      $("#github").slideUp();
-      $("#github-select").slideDown();
-      $("#buttons").slideUp();
-      state = 4;
-      break;
-    case 4:
-      $("#github-select").slideUp();
-      $("#github-create").slideDown();
-      $("#buttons").slideDown();
-      $("#prev-button").hide();
-      $("#github-button").hide();
-      $("#next-button").show();
-      state = 5;
-      break;
-    case 5:
-      github(7);
-      state = 6;
-      break;
-    case 200:
-    case 7:
-      $("#week-select").slideDown();
-      $("#github-done").slideUp();
-      $("#confirm-info").slideUp();
-      $.ajax({
-        method: "POST",
-        url: "ajax/register.php",
-        dataType: "json",
-        data: {
-          name: name,
-          username: github_username,
-          dob: dob,
-          phone: phone,
-          health: health,
-          prov: prov,
-          medical: medical,
-          shirt: shirt,
-          hear: hear,
-          parent_name: parent_name,
-          parent_phone: parent_phone,
-          parent_email: parent_email,
-          parent_drive: parent_drive
-      }}).done(function(data){
-        if (data.code === Dash.Result.VALID) {
-          state = 8;
-          camper_id = data.id;
-        }
-      }).fail(function( jqXHR, textStatus ) { return; });
-      break;
-    case 8:
       week1 = $("#week-1").is(":checked");
       week2 = $("#week-2").is(":checked");
       if (!week1 && !week2) {
@@ -193,15 +158,9 @@ function next() {
       $("#cost").html("CAD $"+((week1 ? 350 : 0) + (week2 ? 350 : 0)).toString());
       $("#payment").slideDown();
       $("#next-button").slideUp();
-      $("#prev-button").slideDown();
-      state = 9;
+      state = 4;
       break;
-    case 9:
-      $("#complete-email").html(parent_email);
-      $("#complete").slideDown();
-      $("#payment").slideUp();
-      $("#buttons").slideUp();
-      state = 1000;
+    case 4:
       if (week1) {
         $.ajax({
           method: "POST",
@@ -224,37 +183,71 @@ function next() {
           }
         });
       }
+      $("#payment").slideUp();
+      $("#cheque").slideUp();
+      $("#next-button").hide();
+      $("#prev-button").hide();
+      $("#github").slideDown();
+      $("#github-button").show();
+      $("#close-button").show();
+      state = 5;
       break;
-
-    case 100:
-      $("#returning").slideUp();
-      $("#github-forgot").slideDown();
+    case 5:
+      $("#github").slideUp();
+      $("#github-select").slideDown();
+      $("#buttons").slideUp();
+      state = 6;
+      break;
+    case 6:
+      $("#github-select").slideUp();
+      $("#github-create").slideDown();
       $("#buttons").slideDown();
-      state = 102;
+      $("#prev-button").hide();
+      $("#github-button").hide();
+      $("#next-button").show();
+      $("#close-button").hide();
+      state = 7;
       break;
-    case 101:
-      Dash.get({
-        api: "campers",
-        request: "get/"+github_username,
-        success(d) {
-          $("#github-done").slideUp();
-          if (d.code === Dash.Result.VALID) {
-            $("#camper-name").html(d.data.name);
-            $("#confirm-info").slideDown();
-            state = 200;
-          } else {
-            $("#github-invalid").slideDown();
-            state = 400;
-          }
+    case 7:
+      github(8);
+      state = 6;
+      break;
+    case 8:
+      $("#complete").slideDown();
+      $("#github-done").slideUp();
+      $("#buttons").slideUp();
+      $.ajax({
+        method: "POST",
+        url: "ajax/github.php",
+        dataType: "json",
+        data : {
+          camper: camper_id,
+          github: github_username
         }
       });
+      state = 100;
       break;
-    case 102:
-    case 400:
-      $("#github-invalid").slideUp();
-      $("#github-forgot").slideUp();
-      first();
-      break;
+  }
+}
+
+function cheque() {
+  if (state === 4) {
+    $("#payment").slideUp();
+    $("#cheque").slideDown();
+    $("#prev-button").slideUp();
+    $("#next-button").slideDown();
+    $.ajax({
+      method: "POST",
+      url: "ajax/cheque.php",
+      dataType: "json",
+      data: { amount: ((week1 ? 350 : 0) + (week2 ? 350 : 0)) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
+    });
+  }
+}
+
+function home() {
+  if (state === 5) {
+    window.location.href = "../";
   }
 }
 

@@ -19,8 +19,9 @@
       if (class_exists("Cekurte\Environment\Environment")) {
         if (!Environment::get("CIRCLECI", false) && class_exists("Session")) {
           if (Session::Allowed($_SESSION['level'], Level::ADMIN)) {
+            $this->name         = $row['name'];
             $this->first        = explode(" ", $row['name'])[0];
-            foreach (get_class_vars("Camper") as $key) {
+            foreach (array_keys(get_class_vars("Camper")) as $key) {
               if (array_key_exists($key, $row))
                 $this->$key = $row[$key];
             }
@@ -33,6 +34,7 @@
       $this->camps_attended = $link->query("SELECT DISTINCT(SELECT `year` FROM `camps` WHERE `camps`.`_id` = `attend`.`camp`) FROM `attend` WHERE `camper` = '".$this->_id."'")->num_rows;
 
     }
+
   }
 
   class Campers {
@@ -45,6 +47,8 @@
     const CAMP_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` FROM `users` WHERE `users`.`_id` IN (SELECT `attend`.`camper` FROM `attend` WHERE `attend`.`camp` IN (SELECT `camps`.`_id` FROM `camps` WHERE `camps`.`_id`= ?)) ORDER BY `name` ASC";
     const USER_ALL_STMT     = "SELECT * from `users` WHERE `username` = ?";
     const USER_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` from `users` WHERE `username` = ?";
+    const ID_ALL_STMT     = "SELECT * from `users` WHERE `_id` = ?";
+    const ID_SIMPLE_STMT  = "SELECT `_id`,`name`,`username` from `users` WHERE `_id` = ?";
 
     public static function GetAllCampers($filter = "all")
     {
@@ -104,6 +108,22 @@
       return Result::INVALID;
     }
 
+    public static function GetFromID($cid, $filter = "all")
+    {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return array("code" => Result::MYSQLERROR);
+      }
+      if (!$stmt = $link->prepare(($filter == "all") ? Campers::ID_ALL_STMT : Campers::ID_SIMPLE_STMT )) {
+        return Result::MYSQLPREPARE;
+      }
+      if ($stmt->execute(array($cid))) {
+        if ($stmt->rowCount() == 1)
+          return new Camper($stmt->fetch(PDO::FETCH_ASSOC));
+        return Result::NOTFOUND;
+      }
+      return Result::INVALID;
+    }
+
     public static function Register($info) {
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return array("code" => Result::MYSQLERROR);
@@ -130,7 +150,39 @@
       if (!$stmt->execute()) {
         return array("code" => Result::MYSQLEXECUTE);
       }
+
+      if (defined("DISCORD_WEBHOOK")) {
+        $postData = array(
+          "content" => "New Registration: ".$info['name']
+        );
+        $ch = curl_init(DISCORD_WEBHOOK);
+        curl_setopt_array($ch, array(
+            CURLOPT_POST => TRUE,
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_HTTPHEADER => array(
+              "Content-Type: application/json"
+            ),
+            CURLOPT_POSTFIELDS => json_encode($postData)
+        ));
+        curl_exec($ch);
+      }
+
       return array("code" => Result::VALID, "id" => $link->lastInsertId());
+    }
+
+    public static function AddGithub($id, $username) {
+      if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
+        return array("code" => Result::MYSQLERROR);
+      }
+      if (!$stmt = $link->prepare("UPDATE `users` SET `username` = :username WHERE `_id` = :id")){
+        return array("code" => Result::MYSQLPREPARE);
+      }
+      $stmt->bindParam(":id",       $id);
+      $stmt->bindParam(":username", $username);
+      if (!$stmt->execute()) {
+        return array("code" => Result::MYSQLEXECUTE);
+      }
+      return array("code" => Result::VALID);
     }
 
     static function _FetchToCamperArray($stmt)

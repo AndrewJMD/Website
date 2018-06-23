@@ -52,9 +52,9 @@
               <div id="first">
                 <?php include("includes/registration/first.html"); ?>
               </div>
-              <div id="returning" style="display:none">
-                <?php include("includes/registration/returning.html"); ?>
-              </div>
+              <!--<div id="returning" style="display:none">
+                <?php /*include("includes/registration/returning.html");*/ ?>
+              </div>-->
               <div id="parent" style="display:none">
                 <?php include("includes/registration/parent.html"); ?>
               </div>
@@ -79,20 +79,24 @@
               <div id="github-invalid" style="display:none">
                 <?php include("includes/registration/github-invalid.html"); ?>
               </div>
-              <div id="confirm-info" style="display:none">
-                <?php include("includes/registration/confirm-info.html"); ?>
-              </div>
+              <!--<div id="confirm-info" style="display:none">
+                <?php /*include("includes/registration/confirm-info.html");*/ ?>
+              </div>-->
               <div id="week-select" style="display:none">
                 <?php include("includes/registration/week-select.html"); ?>
               </div>
               <div id="payment" style="display:none">
                 <?php include("includes/registration/payment.html"); ?>
               </div>
+              <div id="cheque" style="display:none">
+                <?php include("includes/registration/cheque.html"); ?>
+              </div>
               <div id="complete" style="display:none">
                 <?php include("includes/registration/complete.html"); ?>
               </div>
             </div>
             <div class="box-footer" id="buttons">
+              <input type="button" class="btn btn-default" onclick="home()" style="display:none" id="close-button" value="Close (Complete GitHub at Camp)" />
               <button type="button" class="btn btn-default" style="display:none" onclick="prev()" id="prev-button">Back</button>
               <button type="button" class="btn btn-info pull-right" onclick="next()" id="next-button">Next</button>
               <a class="btn btn-social btn-github pull-right" onclick="next()" id="github-button" style="display:none">

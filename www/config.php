@@ -19,6 +19,7 @@
     const INSUFFICIENT  = 3;
     const NOTFOUND      = 4;
     const REDIRECT      = 5;
+    const FAILED        = 6;
 
     //MYSQL
     const MYSQLERROR    = 50; //TODO Change to MYSQLCONNECT
@@ -79,5 +80,15 @@
     $PAGE_TYPE = "NORMAL";
     $PAGE_GUEST_ALLOWED = False;
     $PAGE_TITLE = "No Page";
+  }
+
+  function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
   }
 ?>

@@ -1,3 +1,4 @@
+*.bac
 /.vagrant/*
 *.log
 /.sass-cache/*
