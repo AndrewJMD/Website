@@ -47,7 +47,6 @@ and more flexability than object-fit -->
       <a class="twitter" href="https://twitter.com/compcamps"><i class="fab fa-3x fa-twitter"></i></a>
       <a class="steam" href="http://steamcommunity.com/groups/msicompcamps"><i class="fab fa-3x fa-steam"></i></a>
       <a class="facebook" href="https://www.facebook.com/compcamps"><i class="fab fa-3x fa-facebook"></i></a>
-      <a class="reddit" href="https://www.reddit.com/r/compcamps/"><i class="fab fa-3x fa-reddit></i></a>
     </p>
     <br/>
   </div>
