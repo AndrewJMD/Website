@@ -10,7 +10,7 @@
 
   $a = GetFromURL('a','dashboard');
 
-  if ($_SESSION['id'] == -1 && ($a != "login" && $a != "register")) {
+  if ($_SESSION['id'] == -1 && ($a != "login" && $a != "register" && $a != "checkin")) {
     header("Location: login");
   }
 
