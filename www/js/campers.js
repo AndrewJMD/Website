@@ -2,7 +2,8 @@ var camperApp = new Vue({
   el: "#camper-app",
   data: {
     year: 2018,
-    campers: []
+    campers: [],
+    names: [],
   },
   created: function () {
     this.loadCampers(this.year);
@@ -13,8 +14,19 @@ var camperApp = new Vue({
       var urlToGet = window.location.protocol + "//" + window.location.host + "/dash/api/campers/year/" + this.year + "/simple";
       axios.get(urlToGet)
         .then(function (response) {
-          vm.campers = response["data"].data;
-          // double data because it is the request's data and the camper list is named data
+          console.log(response);
+          console.log(response["data"].data);
+          response["data"].data.forEach(function(camper){
+            console.log(camper);
+            if (!vm.names.includes(camper.name)) {
+              console.log("camper not in names");
+              if('username' in camper){
+                console.log("has a user name, camper pushed");
+                vm.campers.push(camper);
+                vm.names.push(camper.name);
+              }
+            }
+          });
         })
         .catch(function (error) {
           alert("Sorry! An error occurred: " + error);
