@@ -13,7 +13,12 @@ var camperApp = new Vue({
       var urlToGet = window.location.protocol + "//" + window.location.host + "/dash/api/campers/year/" + this.year + "/simple";
       axios.get(urlToGet)
         .then(function (response) {
-          vm.campers = response["data"].data;
+          response["data"].data.forEach(function(camper){
+            if (!vm.campers.includes(camper.name) && "username" in camper) {
+              vm.campers.push(camper);
+            }
+          });
+
           // double data because it is the request's data and the camper list is named data
         })
         .catch(function (error) {
