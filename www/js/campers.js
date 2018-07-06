@@ -1,7 +1,7 @@
 var camperApp = new Vue({
   el: "#camper-app",
   data: {
-    year: 2017,
+    year: 2018,
     campers: []
   },
   created: function () {
@@ -21,7 +21,7 @@ var camperApp = new Vue({
         });
     },
     camperSrc: function (src) {
-      return "http://compcamps.com/2017%20Pictures/" + src + ".jpg";
+      return "http://compcamps.com/img/campers/" + this.year + "/" + src.toLowerCase() + ".jpg";
     }
   }
 });
