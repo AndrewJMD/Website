@@ -1,7 +1,7 @@
 new Vue({
   el: '#slider',
   data: {
-    images: <?php require_once("../libs/gphotos.php"); $images=GooglePhotos::albumsArray("https://goo.gl/photos/1FuaFb5m5JjJGh919","https://goo.gl/photos/XYfr2fnv1nqZHDB37");shuffle($images);echo json_encode($images);?>,
+    images: <?php require_once("../libs/gphotos.php"); $images=GooglePhotos::albumsArray("https://photos.app.goo.gl/EK6CFdXEc1hJYmgr8");shuffle($images);echo json_encode($images);?>,
     currentNumber: 0
   },
 
