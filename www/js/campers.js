@@ -18,7 +18,8 @@ var camperApp = new Vue({
           console.log(response["data"].data);
           response["data"].data.forEach(function(camper){
             console.log(camper);
-            if (!vm.names.includes(camper.name) && "username" in camper) {
+            if (!vm.names.includes(camper.name) && 'username' in camper) {
+              console.log(camper + "added");
               vm.campers.push(camper);
               vm.names.push(camper.name);
             }
