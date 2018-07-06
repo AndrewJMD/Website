@@ -9,7 +9,7 @@ include('includes/header.php');
   <section class="camper-section">
     <div class="camper" v-for="camper in campers">
       <img width="178" :src="camperSrc(camper.first)" /><br />
-      <a href="#">{{ camper.first }}</a>
+      <a :href="github(camper.username)">{{ camper.first }}</a>
     </div>
   </section>
 </div>
