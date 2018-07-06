@@ -14,14 +14,9 @@ var camperApp = new Vue({
       var urlToGet = window.location.protocol + "//" + window.location.host + "/dash/api/campers/year/" + this.year + "/simple";
       axios.get(urlToGet)
         .then(function (response) {
-          console.log(response);
-          console.log(response["data"].data);
           response["data"].data.forEach(function(camper){
-            console.log(camper);
             if (!vm.names.includes(camper.name)) {
-              console.log("camper not in names");
-              if('username' in camper){
-                console.log("has a user name, camper pushed");
+              if("username" in camper){
                 vm.campers.push(camper);
                 vm.names.push(camper.name);
               }
