@@ -11,9 +11,6 @@ include('includes/header.php');
   <h3>$350</h3>
   <h3>First week: <b>CLOSED</b></h3>
   <h3>Second week: <b>CLOSED</b></h3>
-  <form method="get" action="dash/register">
-  <button type="button" disabled>Register</button>
-  </form>
 </section>
 
 <?php include('includes/footer.php'); ?>
