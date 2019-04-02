@@ -16,8 +16,6 @@ var parent_phone  = "";
 var parent_email  = "";
 var parent_drive  = false;
 
-var github_username = "";
-
 var week1 = false;
 var week2 = false;
 
@@ -114,10 +112,12 @@ function next() {
       parent_phone  = $("#parent_phone").val();
       parent_email  = $("#parent_email").val();
       parent_drive  = ($("#parent_drive").is(":checked")) ? 1 : 0;
-      error = checkInput("#parent_name");
+      error     = checkInput("#parent_name");
       error     = checkInput("#parent_phone") || error;
       error     = checkInput("#parent_email") || error;
       error     = validateEmail("#parent_email") || error;
+      error     = checkInput("#address") || error;
+      console.log("Ajax");
       if (!error) {
         $("#complete-email").html(parent_email);
         $("#parent").slideUp();
@@ -128,7 +128,7 @@ function next() {
           dataType: "json",
           data: {
             name: name,
-            username: github_username,
+            username: "",
             dob: dob,
             phone: phone,
             health: health,
@@ -144,6 +144,19 @@ function next() {
           if (data.code === Dash.Result.VALID) {
             camper_id = data.id;
           }
+          $.ajax({
+            method: "POST",
+            url: "ajax/checkin.php",
+            dataType: "json",
+            data: {
+              camper: data.id,
+              street_number: $("#street_number").val(),
+              street: $("#route").val(),
+              locality: $("#locality").val(),
+              province: $("#administrative_area_level_1").val(),
+              postal_code: $("#postal_code").val(),
+              country: $("#country").val()
+          }});
         }).fail(function( jqXHR, textStatus ) { return; });
         state = 3;
       }
@@ -155,7 +168,7 @@ function next() {
         break;
       }
       $("#week-select").slideUp();
-      $("#cost").html("CAD $"+((week1 ? 350 : 0) + (week2 ? 350 : 0)).toString());
+      $("#cost").html("CAD $"+((week1 && week2) ? 500 : 300).toString());
       $("#payment").slideDown();
       $("#next-button").slideUp();
       state = 4;
@@ -168,7 +181,7 @@ function next() {
           dataType: "json",
           data : {
             camper: camper_id,
-            camp: 17
+            camp: 19
           }
         });
       }
@@ -179,7 +192,7 @@ function next() {
           dataType: "json",
           data : {
             camper: camper_id,
-            camp: 18
+            camp: 20
           }
         });
       }
@@ -187,44 +200,8 @@ function next() {
       $("#cheque").slideUp();
       $("#next-button").hide();
       $("#prev-button").hide();
-      $("#github").slideDown();
-      $("#github-button").show();
       $("#close-button").show();
-      state = 5;
-      break;
-    case 5:
-      $("#github").slideUp();
-      $("#github-select").slideDown();
-      $("#buttons").slideUp();
-      state = 6;
-      break;
-    case 6:
-      $("#github-select").slideUp();
-      $("#github-create").slideDown();
-      $("#buttons").slideDown();
-      $("#prev-button").hide();
-      $("#github-button").hide();
-      $("#next-button").show();
-      $("#close-button").hide();
-      state = 7;
-      break;
-    case 7:
-      github(8);
-      state = 6;
-      break;
-    case 8:
       $("#complete").slideDown();
-      $("#github-done").slideUp();
-      $("#buttons").slideUp();
-      $.ajax({
-        method: "POST",
-        url: "ajax/github.php",
-        dataType: "json",
-        data : {
-          camper: camper_id,
-          github: github_username
-        }
-      });
       state = 100;
       break;
   }
@@ -240,7 +217,7 @@ function cheque() {
       method: "POST",
       url: "ajax/cheque.php",
       dataType: "json",
-      data: { amount: ((week1 ? 350 : 0) + (week2 ? 350 : 0)) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
+      data: { amount: ((week1 && week2) ? 500 : 300) * 100, camper: camper_id, phone: parent_phone, email: parent_email }
     });
   }
 }
@@ -253,43 +230,3 @@ function home() {
 
 var interval;
 var popup;
-var github_finish_state = 7;
-
-function githubDone(username) {
-  github_username = username;
-  clearInterval(interval);
-  $("#prev-button").hide();
-  $("#github-button").hide();
-  $("#next-button").show();
-  $("#buttons").show();
-  $("#github-wait").slideUp();
-  $("#github-done").slideDown();
-  $("#github-username").html(username);
-  state = github_finish_state;
-}
-
-function githubCheck() {
-  if (popup.opener === null) {
-    clearInterval(interval);
-    setTimeout(function(){
-      $.get("includes/registration/github.php",function(data){
-        if (data !== "__") {
-          githubDone(data);
-        } else {
-          github(github_finish_state);
-        }
-      });
-    }, 1000);
-  }
-}
-
-function github(finish_state) {
-  popup = window.open("github-js.php","GitHub Registration","width=600,height=800");
-  $("#github-select").slideUp();
-  $("#github-create").slideUp();
-  $("#returning").slideUp();
-  $("#buttons").slideUp();
-  $("#github-wait").show();
-  interval = setInterval(githubCheck, 500);
-  github_finish_state = finish_state;
-}

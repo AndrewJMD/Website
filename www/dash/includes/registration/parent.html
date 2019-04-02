@@ -15,6 +15,37 @@
   <input class="form-control" type="text" id="parent_email"></input>
 </div>
 <div class="form-group">
+  <label for="address">Address</label>
+  <input class="form-control" id="address" onFocus="geolocate()" id="address"/>
+  <table id="addressdata" style="display:none">
+    <tr>
+      <td class="label">Street address</td>
+      <td class="slimField"><input class="field" id="street_number"
+            disabled="true"></input></td>
+      <td class="wideField" colspan="2"><input class="field" id="route"
+            disabled="true"></input></td>
+    </tr>
+    <tr>
+      <td class="label">City</td>
+      <td class="wideField" colspan="3"><input class="field" id="locality"
+            disabled="true"></input></td>
+    </tr>
+    <tr>
+      <td class="label">State</td>
+      <td class="slimField"><input class="field"
+            id="administrative_area_level_1" disabled="true"></input></td>
+      <td class="label">Zip code</td>
+      <td class="wideField"><input class="field" id="postal_code"
+            disabled="true"></input></td>
+    </tr>
+    <tr>
+      <td class="label">Country</td>
+      <td class="wideField" colspan="3"><input class="field"
+            id="country" disabled="true"></input></td>
+    </tr>
+  </table>
+</div>
+<div class="form-group">
   <div class="checkbox-inline">
     <label for="parent_drive">
       <input type="checkbox" value="" id="parent_drive" />
@@ -22,3 +53,60 @@
     </label>
   </div>
 </div>
+<script>
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'short_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('address')),
+      {types: ['geocode']}
+    );
+    autocomplete.setComponentRestrictions({"country":["ca"]});
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
+
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+      document.getElementById(component).value = '';
+      document.getElementById(component).disabled = false;
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+  }
+
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Secrets::GOOGLE_MAPS_PLATFORM; ?>&libraries=places&callback=initAutocomplete" async defer></script>
