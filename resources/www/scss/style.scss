@@ -42,7 +42,6 @@ body {
   background-image: url('../img/homebanner.png');
   max-width: 1280px;
   height: 400px;
-  margin-top: 25px;
 }
 
 @media only screen and (max-width: 640px) {
@@ -84,7 +83,7 @@ body {
 section {
   background-color: $section-background-color;
   max-width: 1280px;
-  margin: 10px auto;
+  margin: 0px auto;
 
   a {
     color: inherit;
