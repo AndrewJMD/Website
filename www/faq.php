@@ -91,7 +91,7 @@ include('includes/header.php');
 </section>
 <section class="faq-section">
   <h2 class="text-center">What are the camp fees?</h2>
-  <p class="indent">The camp fees are $350 per registration. Fees include T-shirts, all camp activities, and biobreak refreshments. No discounts are offered for 2-week campers or campers from the same family. A $100 administration fee will apply for any cancellation of camp participation after one month prior to the first camp.</p>
+  <p class="indent">The camp fees are $300 per registration or $500 for both weeks. Fees include T-shirts, all camp activities, and biobreak refreshments. No discounts are offered for 2-week campers or campers from the same family. A $100 administration fee will apply for any cancellation of camp participation after one month prior to the first camp.</p>
   <h3>Paying by Credit Card</h3>
   <p class="indent">Simply navigate to the registration page by clicking ‘Register’ and choose which week you would like to sign up for. You will then need to fill out your billing information and camper information. Online registration is secured using SSL encryption and all payments are processed using Stripe.</p>
   <h3>Paying by Cash or Cheque</h3>
