@@ -43,9 +43,9 @@ jobs:
           at: /tmp/project/workspace
 
       - run: sudo docker-php-ext-install mysqli pdo pdo_mysql
-      - run: cd /tmp/project/repo && php build/phpunit/mysql_setup.php
-      - run: cd /tmp/project/repo && php vendor/bin/phpunit --coverage-clover build/coverage/xml
-      - run: cd /tmp/project/repo && php vendor/bin/codacycoverage clover build/coverage/xml
+      - run: cd ./build-output && php build/phpunit/mysql_setup.php
+      - run: cd ./build-output && php vendor/bin/phpunit --coverage-clover build/coverage/xml
+      - run: cd ./build-output && php vendor/bin/codacycoverage clover build/coverage/xml
 
   python-test:
     machine:
@@ -57,9 +57,9 @@ jobs:
       - attach_workspace:
           at: /tmp/project/workspace
 
-      - run: cd /tmp/project/repo && python2.7 ./build/tests/filenames.py www
-      - run: cd /tmp/project/repo && python2.7 ./build/tests/existence.py www
-      - run: cd /tmp/project/repo && sh ./build/tests/line-endings.sh
+      - run: cd ./build-output && python2.7 ./build/tests/filenames.py www
+      - run: cd ./build-output && python2.7 ./build/tests/existence.py www
+      - run: cd ./build-output && sh ./build/tests/line-endings.sh
 
   deploy-testing:
     machine:
@@ -71,9 +71,9 @@ jobs:
       - attach_workspace:
           at: /tmp/project/workspace
 
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/testing
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/testing/dash
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/testing
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r .htaccess mentor@compcamps.com:/home/mentor/public_html/testing
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess mentor@compcamps.com:/home/mentor/public_html/testing/dash
 
   deploy-live:
     machine:
@@ -85,9 +85,9 @@ jobs:
       - attach_workspace:
           at: /tmp/project/workspace
 
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r .htaccess.live mentor@compcamps.com:/home/mentor/public_html/.htaccess
-      - run: cd /tmp/project/repo/www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess.live mentor@compcamps.com:/home/mentor/public_html/dash/.htaccess
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r * mentor@compcamps.com:/home/mentor/public_html/
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r .htaccess.live mentor@compcamps.com:/home/mentor/public_html/.htaccess
+      - run: cd ./build-output/www/ && scp -oStrictHostKeyChecking=no -r dash/.htaccess.live mentor@compcamps.com:/home/mentor/public_html/dash/.htaccess
 
 workflows:
   version: 2
