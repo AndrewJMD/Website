@@ -18,7 +18,7 @@ jobs:
       - run: cd /tmp/project/repo/www/ && composer install
       - run: mkdir /tmp/project/repo/www/css
       - run: cd /tmp/project/repo && sass --update resources/www/scss:www/css
-      - run: python3 build/compile/minify.py
+      - run: cd /tmp/project/repo && python3 build/compile/minify.py
       - run: mkdir /tmp/project/workspace
       - run: cp /tmp/project/repo /tmp/project/workspace/build-output -r
 
