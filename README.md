@@ -1,4 +1,4 @@
-# Official Compcamps Site.
+# Official CompCamps Website
 
 The official website for MSI CompCamps hosted at: [www.compcamps.com](http://www.compcamps.com)
 
@@ -7,3 +7,5 @@ The official website for MSI CompCamps hosted at: [www.compcamps.com](http://www
 ## Vagrant Setup
 
 `$ vagrant up`
+
+Then navigate to http://10.0.0.10
