@@ -17,16 +17,16 @@ and more flexability than object-fit -->
     <p>The topics covered over the course of the week long session include:</p>
     <br/>
     <ul>
-      <li>Core programming fundamentals (C++)</li>
-      <li>Graphic design (Adobe Photoshop)</li>
-      <li>Video production (Adobe Premiere Pro)</li>
+      <li>Game Development</li>
+      <li>Machine Learning</li>
+      <li>Web Development</li>
     </ul>
     <p>... and more!</p>
     <br/>
     <p>
-      The 2018 Computer Camps will consist of two weeks:<br/>
-      Week One: from <strong>July 2nd to July 6th</strong><br/>
-      Week Two: from <strong>July 9th to July 13th</strong>
+      The 2019 Computer Camps will consist of two weeks:<br/>
+      Week One: from <strong>July 8th to July 12th</strong><br/>
+      Week Two: from <strong>July 15th to July 19th</strong>
     </p>
   </div>
   <div class="col-50 home-section text-center">
