@@ -8,10 +8,14 @@ include('includes/header.php');
 
 <section class="register-section">
   <h2>Registration Open</h2>
+  <br/>
   <p>
     $300 for 1 Week<br/>
     $500 for 2 Weeks
   </p>
+  <br/>
+  <p>Both weeks are the same. Signing up for both weeks is for refining skills and projects, or to focus on a new project.</p>
+  <br/>
   <a class="button" href="dash/register">Register</a>
 </section>
 
