@@ -200,7 +200,6 @@ function next() {
       $("#cheque").slideUp();
       $("#next-button").hide();
       $("#prev-button").hide();
-      $("#close-button").show();
       $("#complete").slideDown();
       state = 100;
       break;
