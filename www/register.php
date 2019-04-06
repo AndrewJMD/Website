@@ -16,6 +16,8 @@ include('includes/header.php');
   <br/>
   <p>Both weeks are the same. Signing up for both weeks is for refining skills and projects, or to focus on a new project.</p>
   <br/>
+  <p><b>Make sure to read the <a href="/policy">Code of Conduct and Refund Policy</a> before registering</b></p>
+  <br/>
   <a class="button" href="dash/register">Register</a>
 </section>
 
