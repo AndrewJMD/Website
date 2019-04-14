@@ -9,7 +9,7 @@ include('includes/header.php');
 <section class="faq-section">
   <p class="indent">TL;DR. Be respectful. Harassment and abuse are never tolerated. If you are in a situation at camp that makes you uncomfortable, if the event itself is creating an unsafe or inappropriate environment, or if interacting with an MSI representative or another camper makes you uncomfortable, please report it using the procedures included in this document.</p>
   <br />
-  <p class="indent">Harassment includes but is not limited to offensive verbal or written comments related to gender, age, sexual orientation, disability, physical appearance, body size, race, religion, social class, economic status, veteran status, sexual images, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention. If what you’re doing is making someone feel uncomfortable, that counts as harassment and is enough reason to stop doing it. </p>
+  <p class="indent">Harassment includes but is not limited to offensive verbal or written comments related to gender, age, sexual orientation, disability, physical appearance, body size, race, religion, social class, economic status, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks, or any other events that are considered as harassment and is enough reason to stop doing it. </p>
   <br />
   <p class="indent">Campers asked to stop any harassing behavior are expected to comply immediately.</p>
   <br />
