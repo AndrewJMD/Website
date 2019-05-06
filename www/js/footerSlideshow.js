@@ -8,9 +8,9 @@ var footerSlideshow = new Vue({
         name: "U of R Computer Science"
       },
       {
-        src: "strategylab.png",
-        link: "http://strategylab.ca/",
-        name: "Strategy Lab"
+        src: "innovationsask.png",
+        link: "http://www.innovationsask.ca/",
+        name: "Innovation Saskatchewan"
       },
       {
         src: "telus.png",
