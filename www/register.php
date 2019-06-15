@@ -8,10 +8,11 @@ include('includes/header.php');
 
 <section class="register-section">
   <h2>Registration Open</h2>
+  <p>Week 1 Sold Out</p>
   <br/>
   <p>
     $300 for 1 Week<br/>
-    $500 for 2 Weeks
+    <strike>$500 for 2 Weeks</strike>
   </p>
   <br/>
   <p>Both weeks are the same. Signing up for both weeks is for refining skills and projects, or to focus on a new project.</p>
