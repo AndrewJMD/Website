@@ -31,6 +31,11 @@ var footerSlideshow = new Vue({
         src: "conexus.png",
         link: "https://www.conexus.ca/",
         name: "Conexus"
+      },
+      {
+        src: "audiowarehouse.png",
+        link: "http://audiowarehouse.ca/",
+        name: "Audio Warehouse"
       }
     ],
     item: 0,
