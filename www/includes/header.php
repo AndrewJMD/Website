@@ -8,6 +8,7 @@
               <li><a href="./">Home</a></li>
               <li><a href="./campers">Campers</a></li>
               <li><a href="./faq">FAQ</a></li>
+              <li><a href="./schedule.pdf">Schedule</a></li>
               <li><a href="./mentors">Mentors</a></li>
               <li><a href="./register">Register</a></li>
             </ul>
