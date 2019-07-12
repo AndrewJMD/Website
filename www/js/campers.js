@@ -1,7 +1,7 @@
 var camperApp = new Vue({
   el: "#camper-app",
   data: {
-    year: 2018,
+    year: 2019,
     campers: [],
     names: [],
   },
