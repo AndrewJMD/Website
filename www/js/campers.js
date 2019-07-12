@@ -31,7 +31,7 @@ var camperApp = new Vue({
       return "http://compcamps.com/img/campers/" + this.year + "/" + src.toLowerCase() + ".jpg";
     },
     github: function(username) {
-      return "http://" + username + ".github.io/CompCamps2018";
+      return "http://" + username + ".github.io/compcamps2019";
     }
   }
 });
