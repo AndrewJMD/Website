@@ -17,11 +17,9 @@
       `cellphone` varchar(16) NOT NULL,
       `phone` varchar(36) DEFAULT NULL,
       `parents` varchar(64) DEFAULT NULL,
-      `drive` tinyint(1) NOT NULL,
       `email` varchar(64) DEFAULT NULL,
       `gender` varchar(6) DEFAULT NULL,
       `level` int(1) DEFAULT NULL,
-      `shirt` varchar(16) DEFAULT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
   ");
   $link->query("ALTER TABLE `users` ADD PRIMARY KEY (`_id`);");
@@ -47,6 +45,10 @@
       `_id` int(3) NOT NULL,
       `camper` int(4) DEFAULT NULL,
       `camp` int(2) DEFAULT NULL
+      `drive` tinyint(1) NOT NULL,
+      `shirt` varchar(16) DEFAULT NULL,
+      `pizza` varchar(32) DEFAULT NULL,
+      `hear` text DEFAULT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
   ");
   $link->query("ALTER TABLE `attend` ADD PRIMARY KEY (`_id`);");

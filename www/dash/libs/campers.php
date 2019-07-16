@@ -131,8 +131,8 @@
       $link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
       if (!$stmt = $link->prepare("
       INSERT INTO `users`
-          (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `level`, `shirt`)
-          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :drive, :email, '".Level::CAMPER."', :shirt);")) {
+          (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `level`)
+          VALUES (NULL, :name, :username, :dob, :health, :prov, :medical, :cellphone, :phone, :parents, :email, '".Level::CAMPER."');")) {
         return array("code" => Result::MYSQLPREPARE);
       }
       $stmt->bindParam(":name",       $info['name']);
@@ -145,8 +145,6 @@
       $stmt->bindParam(":phone",      $info['parent_phone']);
       $stmt->bindParam(":parents",    $info['parent_name']);
       $stmt->bindParam(":email",      $info['parent_email']);
-      $stmt->bindParam(":drive",      $info['parent_drive']);
-      $stmt->bindParam(":shirt",      $info['shirt']);
       if (!$stmt->execute()) {
         return array("code" => Result::MYSQLEXECUTE);
       }

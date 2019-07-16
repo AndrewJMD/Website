@@ -92,21 +92,25 @@
       return $camps;
     }
 
-    static function Attend($camper, $camp) {
-      if (gettype($camp) == "object") {
-        $camp = $camp->_id;
+    static function Attend($info) {
+      if (gettype($info['camp']) == "object") {
+        $info['camp'] = $info['camp']->_id;
       }
-      if (gettype($camper) == "object") {
-        $camper = $camper->_id;
+      if (gettype($info['camper']) == "object") {
+        $info['camper'] = $info['camper']->_id;
       }
       if (!$link = new PDO("mysql:host=".MYSQL_SERVER.";dbname=".MYSQL_DATABASE, MYSQL_USER, MYSQL_PASS)) {
         return Result::MYSQLERROR;
       }
-      if (!$stmt = $link->prepare("INSERT INTO `attend` (`camper`, `camp`) VALUES (:camper, :camp)")) {
+      if (!$stmt = $link->prepare("INSERT INTO `attend` (`camper`, `camp`, `drive`, `shirt`, `pizza`, `hear`) VALUES (:camper, :camp, :drive, :shirt, :pizza, :hear)")) {
         return Result::MYSQLERROR;
       }
-      $stmt->bindParam(":camper", $camper);
-      $stmt->bindParam(":camp",   $camp);
+      $stmt->bindParam(":camper", $info['camper']);
+      $stmt->bindParam(":camp",   $info['camp']);
+      $stmt->bindParam(":drive",  $info['drive']);
+      $stmt->bindParam(":shirt",  $info['shirt']);
+      $stmt->bindParam(":pizza",  $info['pizza']);
+      $stmt->bindParam(":hear",   $info['hear']);
       if (!$stmt->execute()) {
         return Result::MYSQLERROR;
       }

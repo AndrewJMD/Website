@@ -3,5 +3,13 @@
   require("../../secrets.php");
   require("../libs/camps.php");
 
-  echo json_encode(array("code" => Camps::Attend($_POST['camper'], $_POST['camp'])));
+  $info = array(
+    "camper"    => $_POST["camper"],
+    "camp"      => $_POST["camp"],
+    "drive"     => $_POST['drive'],
+    "shirt"     => $_POST['shirt'],
+    "pizza"     => $_POST['pizza'],
+    "hear"      => $_POST['hear']
+  );
+  echo json_encode(array("code" => Camps::Attend($info)));
 ?>

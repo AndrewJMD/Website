@@ -23,8 +23,6 @@
       "parent_phone" => "(306) 555-6789",
       "parent_name" => "Jake Doe",
       "parent_email" => "jake@doe.com",
-      "parent_drive" => "1",
-      "shirt" => "Youth Medium",
     );
 
     public function testCreateStartData()
@@ -33,22 +31,22 @@
 
       //Create Fake Admin
       $link->query("
-        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
-        VALUES (NULL, 'John Smith', 'jsmith', '', '', '', '', '', '', '', 0, '', '', 1, 'Adult Large');
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `gender`, `level`)
+        VALUES (NULL, 'John Smith', 'jsmith', '', '', '', '', '', '', '', '', '', 1);
       ");
 
       //Create Fake Camper
       $link->query("
-        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
-        VALUES (NULL, 'Joe Baker', 'codekid', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Baker', 0, 'jane@baker.ca', '', 2, 'Youth Medium');
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `gender`, `level`)
+        VALUES (NULL, 'Joe Baker', 'codekid', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Baker', 'jane@baker.ca', '', 2);
       ");
 
       $this->assertEquals(2, $link->insert_id);
 
       //Create Fake Camper without username
       $link->query("
-        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `drive`, `email`, `gender`, `level`, `shirt`)
-        VALUES (NULL, 'John Doe', '', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Doe', 0, 'jane@doe.ca', '', 2, 'Youth Medium');
+        INSERT INTO `users` (`_id`, `name`, `username`, `dob`, `health`, `prov`, `medical`, `cellphone`, `phone`, `parents`, `email`, `gender`, `level`)
+        VALUES (NULL, 'John Doe', '', '12/01/2000', '123456789', 'SK', 'Fake', '(306) 555-1234', '(306) 555-4321', 'Jane Doe', 'jane@doe.ca', '', 2);
       ");
 
       $this->assertEquals(3, $link->insert_id);

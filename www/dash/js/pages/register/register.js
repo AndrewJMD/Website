@@ -10,6 +10,7 @@ var prov    = "";
 var medical = "";
 var shirt   = "";
 var hear    = "";
+var pizza   = "";
 
 var parent_name   = "";
 var parent_phone  = "";
@@ -97,9 +98,10 @@ function next() {
       medical = $("#medical").val();
       shirt   = $("#shirt").val();
       hear    = $("#hear").val();
-      error = checkInput("#name");
-      error     = checkInput("#dob")    || error;
-      error     = checkInput("#health") || error;
+      pizza   = $("#pizza").val();
+      error   = checkInput("#name");
+      error   = checkInput("#dob")    || error;
+      error   = checkInput("#health") || error;
       if (!error) {
         $("#first").slideUp();
         $("#parent").slideDown();
@@ -136,14 +138,16 @@ function next() {
             medical: medical,
             shirt: shirt,
             hear: hear,
+            pizza: pizza,
             parent_name: parent_name,
             parent_phone: parent_phone,
             parent_email: parent_email,
-            parent_drive: parent_drive
+            drive: parent_drive
         }}).done(function(data){
           if (data.code === Dash.Result.VALID) {
             camper_id = data.id;
           }
+          
           $.ajax({
             method: "POST",
             url: "ajax/checkin.php",
@@ -181,7 +185,11 @@ function next() {
           dataType: "json",
           data : {
             camper: camper_id,
-            camp: 19
+            camp: 19,
+            drive: parent_drive,
+            shirt: shirt,
+            pizza: pizza,
+            hear: hear
           }
         });
       }
@@ -192,7 +200,11 @@ function next() {
           dataType: "json",
           data : {
             camper: camper_id,
-            camp: 20
+            camp: 20,
+            drive: parent_drive,
+            shirt: shirt,
+            pizza: pizza,
+            hear: hear            
           }
         });
       }
