@@ -189,7 +189,7 @@ function next() {
             drive: parent_drive,
             shirt: shirt,
             pizza: pizza,
-            hear: hear
+            hear: hear,
           }
         });
       }
@@ -204,7 +204,7 @@ function next() {
             drive: parent_drive,
             shirt: shirt,
             pizza: pizza,
-            hear: hear            
+            hear: hear,         
           }
         });
       }
